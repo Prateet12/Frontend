@@ -15,6 +15,7 @@ import createStore from "react-auth-kit/createStore";
 import AuthProvider from "react-auth-kit";
 import createRefresh from "react-auth-kit/createRefresh";
 import axios from "axios";
+import Inbox from "./inbox/inbox";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(
@@ -92,6 +93,7 @@ function App() {
                 <Route path="/upload-document" element={<UploadDocument />} />
                 <Route path="/dashboard" element={<Dashboard user={user} />} />
                 <Route path="/approvals-inbox" element={<Approval />} />
+                <Route path="/inbox" element={<Inbox />} />
                 <Route
                   path="/logout"
                   element={
