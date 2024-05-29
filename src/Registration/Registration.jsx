@@ -71,7 +71,6 @@ const Registration = ({ setCurrRole, setUser, setLoggedIn }) => {
       const new_user = await response.json();
       if (new_user) {
         console.log("New user:", new_user);
-        localStorage.setItem("user", JSON.stringify({ user: new_user }));
         window.alert("Registration successful, please wait for an email to be verified");
       }
     } catch (error) {

@@ -1,11 +1,46 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ApprovalTable from "./ApprovalTable";
-import "./Approval.css"; 
+import "./Approval.css";
 
 const Approval = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("");
+
+  const [registrationRequests, setRegistrationRequests] = useState([]);
+
+  const getUserRegistrationRequests = async (institutionName) => {
+    const response = await fetch(
+      "http://localhost:3001/v1/admin/registrationRequests",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ institution: institutionName }),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const requests = data.requests.map((request) => ({
+      id: request.id,
+      user: request.user,
+      createdAt: new Date(request.created_at).toLocaleDateString(),
+    }));
+
+    setRegistrationRequests(requests);
+  };
+
+  useEffect(() => {
+    // Replace 'Your Institution Name' with the actual institution name
+    getUserRegistrationRequests("Your Institution Name").catch((error) => {
+      console.error("Failed to fetch registration requests:", error);
+    });
+  }, []);
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -58,7 +93,7 @@ const Approval = () => {
       </div>
 
       <div className="approval-table">
-        <ApprovalTable />
+        <ApprovalTable registrationRequests={registrationRequests}/>
       </div>
     </div>
   );
