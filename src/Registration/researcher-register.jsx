@@ -11,7 +11,7 @@ const ResearcherRegistration = ({ registerCallback }) => {
   const [resume, setResume] = useState(null);
   const [instituteName, setInstituteName] = useState("");
   const [instituteAddress, setInstituteAddress] = useState("");
-  const [instituteType, setInstituteType] = useState(null);
+  const [instituteType, setInstituteType] = useState("");
 
   const InstituteOptions = [
     { value: "Government", label: "Government" },
@@ -25,7 +25,8 @@ const ResearcherRegistration = ({ registerCallback }) => {
   }
 
   const handleInstituteTypeChange = (selectedOption) => {
-    setInstituteType(selectedOption.value);
+    console.log("Selected option: ", selectedOption);
+    setInstituteType(selectedOption);
     // setSelectedOption(selectedOption);
   };
 
@@ -41,7 +42,7 @@ const ResearcherRegistration = ({ registerCallback }) => {
     const fieldDetails = {
       highest_degree_earned: highestDegreeObtained,
       institution_name: instituteName,
-      institution_type: instituteType,
+      institution_type: instituteType.value,
       institution_address: instituteAddress,
     };
     if (areasOfStudy.length > 0) {
@@ -112,6 +113,7 @@ const ResearcherRegistration = ({ registerCallback }) => {
           options={InstituteOptions}
           value={instituteType}
           onChange={handleInstituteTypeChange}
+          isMulti={false}
           required
         />
       </div>
@@ -134,15 +136,6 @@ const ResearcherRegistration = ({ registerCallback }) => {
           required
         />
       </div>
-      {/* <div className="form-group">
-        <label htmlFor="resume">Resume:</label>
-        <input
-          className="upload_input"
-          type="file"
-          onChange={handleFileChange}
-        />
-      </div> */}
-
       <div className="form-group">
         <div className="submit-container">
           <button type="submit" className="submit">
