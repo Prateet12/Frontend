@@ -49,8 +49,11 @@ const Approval = () => {
                 onChange={handleFilterChange}
               >
                 <option value="">All</option>
-                <option value="job_seeker">Approved </option>
-                <option value="employer">Pending</option>
+                <option >Admin Approved </option>
+                <option >Pending</option>
+                <option>Rejected</option>
+                <option >Super Admin Approved </option>
+                <option >Fully Approved </option>
               </select>
             </div>
           </div>
