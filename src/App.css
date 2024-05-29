@@ -1,0 +1,16 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar-container {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000; /* Ensure the navbar is above other content */
+}
+
+.page-container {
+  margin-top: 10vh; /* Adjust based on the height of your navbar */
+  padding: 20vh;
+}

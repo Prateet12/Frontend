@@ -1,0 +1,25 @@
+const axios = require("axios");
+const createRefresh = require("react-auth-kit/createRefresh");
+
+export default createRefresh({
+  interval: 10, // The time in sec to refresh the Access token,
+  refreshApiCallback: async (param) => {
+    try {
+      const response = await axios.post("/v1/auth/refresh-tokens", param, {
+        headers: { Authorization: `Bearer ${param.authToken}` },
+      });
+      console.log("Refreshing");
+      return {
+        isSuccess: true,
+        newAuthToken: response.data.token,
+        newAuthTokenExpireIn: 10,
+        newRefreshTokenExpiresIn: 60,
+      };
+    } catch (error) {
+      console.error(error);
+      return {
+        isSuccess: false,
+      };
+    }
+  },
+});
