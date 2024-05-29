@@ -94,6 +94,7 @@ function App() {
                 <Route path="/dashboard" element={<Dashboard user={user} />} />
                 <Route path="/approvals-inbox" element={<Approval />} />
                 <Route path="/inbox" element={<Inbox />} />
+                <Route path="/approval" element={<Approval />} />
                 <Route
                   path="/logout"
                   element={
