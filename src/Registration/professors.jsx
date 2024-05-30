@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Select from "react-select";
 
 const ProfessorRegistration = ({ registerCallback }) => {
-
   const [institutionName, setInstitutionName] = useState("");
   const [teachingExperience, setTeachingExperience] = useState("");
   const [selectedOptions, setSelectedOptions] = useState([]);

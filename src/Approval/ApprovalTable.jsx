@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -35,28 +35,63 @@ function Row(props) {
   );
 }
 
-const rows = [
-  createData("2023-01-15", "John Doe", "Document Approval"),
-  createData("2023-01-20", "Emily Johnson", "User Approval"),
-  createData("2023-02-05", "Alice Johnson", "Document Approval"),
-  createData("2023-02-10", "Michael Brown", "User Approval"),
-  createData("2023-02-15", "Charlie Davis", "Document Approval"),
-  createData("2023-03-01", "Sarah Smith", "User Approval"),
-  createData("2023-03-05", "Emma Wilson", "Document Approval"),
-  createData("2023-03-10", "William Johnson", "User Approval"),
-];
-
-export default function ApprovalTable() {
+export default function ApprovalTable({ registrationRequests }) {
   const [hoveredRowIndex, setHoveredRowIndex] = useState(null);
+  const [rows, setRows] = useState([]);
 
-  const handleApprove = (row) => {
-    // Implement logic to handle approval
-    console.log("Approved:", row);
+  useEffect(() => {
+    const newRows = registrationRequests.map((request) =>
+      createData(request.id, request.createdAt, request.user, "User Approval")
+    );
+    setRows(newRows);
+  }, [registrationRequests]);
+
+  const approveUser = async (userId, adminId) => {
+    const response = await fetch(
+      "http://localhost:3001/v1/admin/approveRegistration",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user: userId,
+          admin: adminId,
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    // Check if the response is empty
+    const text = await response.text();
+    if (!text) {
+      // If the response is empty, return null
+      return null;
+    }
+
+    // If the response is not empty, parse it as JSON
+    return text;
+  };
+
+  const handleApprove = async (row) => {
+    try {
+      const adminId = JSON.parse(localStorage.getItem("user")).user.id;
+      await approveUser(row.user_id, adminId);
+      setRows(rows.filter((r) => r.user_id !== row.user_id));
+      alert("User approved successfully");
+    } catch (error) {
+      console.error("Failed to approve user:", error);
+    }
   };
 
   const handleReject = (row) => {
     // Implement logic to handle rejection
-    console.log("Rejected:", row);
+    setRows(rows.filter((r) => r.user_id !== row.user_id));
+    alert("User rejected successfully");
+    // TODO: Attach email service to notify user of rejection
   };
 
   return (

@@ -1,13 +1,9 @@
 import React, { useState } from "react";
 import "./Registration.css";
 import Select from "react-select";
-import { useNavigate } from "react-router-dom"; // Use useNavigate for redirection
 
 const PractitionersRegistration = ({ registerCallback }) => {
-  const navigate = useNavigate();
-
   const [yearsOfExperience, setYearsOfExperience] = useState("");
-  const [organizationType, setOrganizationType] = useState("");
   const [selectedOrganizationOption, setSelectedOrganizationOption] = useState(null);
   const [selectedSectorOption, setSelectedSectorOption] = useState(null);
   const [organizationName, setOrganizationName] = useState("");
@@ -33,7 +29,6 @@ const PractitionersRegistration = ({ registerCallback }) => {
   };
 
   const handleOrganizationTypeChange = (selectedOption) => {
-    setOrganizationType(selectedOption.value);
     setSelectedOrganizationOption(selectedOption);
   };
 
