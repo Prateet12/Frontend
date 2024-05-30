@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import "./Registration.css";
 import Select from "react-select";
-import { useNavigate } from "react-router-dom";
 
 const InstitutesRegistration = ({ registerCallback }) => {
-  const navigate = useNavigate();
-
   const [instituteName, setInstituteName] = useState("");
   const [instituteType, setInstituteType] = useState("");
   const [instituteAddress, setInstituteAddress] = useState("");

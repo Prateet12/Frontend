@@ -10,6 +10,7 @@ import ResearchAssistantRegistration from "./researchAssistants";
 import ProfessorRegistration from "./professors";
 import Button from "@mui/material/Button";
 import { BASE_URL } from "../utils/baseUrl";
+import { useNavigate } from "react-router-dom";
 
 const Registration = ({ setCurrRole, setUser, setLoggedIn }) => {
   const [name, setName] = useState("");
@@ -19,11 +20,11 @@ const Registration = ({ setCurrRole, setUser, setLoggedIn }) => {
   const [roles, setRoles] = useState(
     () => JSON.parse(localStorage.getItem("roles")) || []
   );
+  const navigate = useNavigate();
 
   let roleNames = roles.map((role) => role.role);
   console.log("Role names: ", roleNames);
 
-  // getAllRoles from API and set it in the state for user to use
   const getAllRoles = async () => {
     try {
       const response = await fetch(`${BASE_URL}/v1/role`);
@@ -41,14 +42,12 @@ const Registration = ({ setCurrRole, setUser, setLoggedIn }) => {
   };
 
   useEffect(() => {
-    // Pre fetch all the roles and store it in the local storage
     console.log("Roles from local storage", roles);
     if (!roles || roles.length <= 1) {
-      // TODO(team): check, this is re rendering on reload
       console.log("Fetching roles from API");
       getAllRoles();
     }
-  }, []);
+  }, [roles]);
 
   const register = async (formDetails) => {
     try {
@@ -71,7 +70,10 @@ const Registration = ({ setCurrRole, setUser, setLoggedIn }) => {
       const new_user = await response.json();
       if (new_user) {
         console.log("New user:", new_user);
-        window.alert("Registration successful, please wait for an email to be verified");
+        navigate("/");
+        window.alert(
+          "Registration successful, please wait for an email to be verified"
+        );
       }
     } catch (error) {
       console.error("Registration Error:", error);
@@ -98,7 +100,6 @@ const Registration = ({ setCurrRole, setUser, setLoggedIn }) => {
   const [showInstituteOptions, setShowInstituteOptions] = useState(false);
   const [showAssistantOptions, setShowAssistantOptions] = useState(false);
   const [showProfessorOptions, setShowProfessorOptions] = useState(false);
-  const [showAdminOptions, setShowAdminOptions] = useState(false);
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -111,8 +112,6 @@ const Registration = ({ setCurrRole, setUser, setLoggedIn }) => {
   const handleRoleChange = (event) => {
     const value = event.target.value;
     setSelectedRole(value);
-
-    setShowAdminOptions(value === "admin");
     setShowGraduateOptions(value === "graduate");
     setShowResearcherOptions(value === "researcher");
     setShowPractitionerOptions(value === "practitioner");
@@ -177,40 +176,16 @@ const Registration = ({ setCurrRole, setUser, setLoggedIn }) => {
             className="input_main"
           >
             <option value="">Select your Role</option>
-
-            {/* <option value="Practitioners">Practitioners</option>
-            <option value="Researchers">Researchers</option>
-            <option value="Recent Graduates">Recent Graduates</option>
-            <option value="Research Assistants">Research Assistants</option>
-            <option value="Professor">Professor</option>
-            <option value="Institution level Admins">
-              Institution level Admins
-            </option> */}
-
-            {roleNames.map((roleName, index) => (
-              <option key={index} value={roleName}>
-                {roleName?.toUpperCase()}
-              </option>
-            ))}
+            {roleNames.map(
+              (roleName, index) =>
+                roleName !== "admin" && (
+                  <option key={index} value={roleName}>
+                    {roleName?.toUpperCase()}
+                  </option>
+                )
+            )}
           </select>
         </div>
-        {showAdminOptions && (
-          // Just show register button and add callback
-          <form
-            onSubmit={(event) => {
-              event.preventDefault();
-              registerCallback({});
-            }}
-          >
-            <div className="form-group">
-              <div className="submit-container">
-                <button className="submit " type="submit">
-                  Register
-                </button>
-              </div>
-            </div>
-          </form>
-        )}
 
         {showGraduateOptions && (
           <GraduateRegistration registerCallback={registerCallback} />
