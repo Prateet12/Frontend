@@ -11,8 +11,8 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 
 
-function createData(date_of_request, user, type) {
-  return { date_of_request, user, type };
+function createData(user_id, date_of_request, user, type) {
+  return { user_id, date_of_request, user, type };
 }
 
 function Row(props) {
