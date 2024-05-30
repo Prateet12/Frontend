@@ -194,22 +194,24 @@ const handleInstitutionChange = (event) => {
             </div>
 
             <div className="row">
-              <div className="col-md-6">
-                <div>
-                  <label>
-                    Degree/Program <span className="required-field">*</span>
-                  </label>
-                  <select
-                    className="upload_input"
-                    {...register("degreeProgram", { required: true })}
-                  >
-                    <option value="PhD">PhD</option>
-                    <option value="Masters">Master's</option>
-                    <option value="Bachelors">Bachelor's</option>
-                  </select>
-                  {errors.degreeProgram && <span className="error-message">This field is required</span>}
-                </div>
-              </div>
+  <div className="col-md-6">
+    <div>
+      <label>
+        Degree/Program <span className="required-field">*</span>
+      </label>
+      <select
+        className="upload_input"
+        {...register("degreeProgram", { required: true })}
+      >
+        <option value="" disabled selected>Select your degree</option>
+        <option value="PhD">PhD</option>
+        <option value="Masters">Master's</option>
+        <option value="Bachelors">Bachelor's</option>
+      </select>
+      {errors.degreeProgram && <span className="error-message">This field is required</span>}
+    </div>
+  </div>
+
 
               <div className="col-md-6">
     <label htmlFor="institution">Institution</label>
