@@ -9,6 +9,7 @@ import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import Link from "@mui/material/Link";
+import { FaEnvelope } from 'react-icons/fa';
 
 function createData(
   date_of_joining,
@@ -35,23 +36,15 @@ function Row(props) {
     <React.Fragment>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
         <TableCell>{row.date_of_joining}</TableCell>
-        <TableCell>
-          <div className="name-cell">
-            {row.name}
-            <div className="mailto-container">
-              <Link
-                href={`mailto:${row.email}`}
-                className="mailto-link"
-                target="_blank"
-              >
-                📧 Connect with {row.name}
-              </Link>
-            </div>
-          </div>
-        </TableCell>
+        <TableCell>{row.name}</TableCell>
         <TableCell>{row.organization}</TableCell>
         <TableCell>{row.position}</TableCell>
         <TableCell>{row.specialization}</TableCell>
+        <TableCell align="center">
+          <Link href={`mailto:${row.email}`} target="_blank">
+            <FaEnvelope size={20} /> {/* Increased size to 20 */}
+          </Link>
+        </TableCell>
       </TableRow>
     </React.Fragment>
   );
@@ -111,6 +104,7 @@ export default function CollapsibleTable() {
             <TableCell>Organization</TableCell>
             <TableCell>Position</TableCell>
             <TableCell>Specialization</TableCell>
+            <TableCell align="center">Connect</TableCell> {/* Center aligned header */}
           </TableRow>
         </TableHead>
         <TableBody>

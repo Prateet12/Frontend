@@ -2,6 +2,7 @@ import "./GraduateRepo.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import GraduateTable from "./GraduateTable";
+import { FaEnvelope } from 'react-icons/fa'; // Import the email icon component
 
 const GraduateRepo = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -20,11 +21,15 @@ const GraduateRepo = () => {
     setSelectedFilter(event.target.value);
   };
 
+  const handleEmailClick = (email) => {
+    window.location.href = `mailto:${email}`;
+  };
+
   return (
     <div className="graduate_repo">
       <div className="container_graduate">
         <div className="header_graduate">
-          <h1>GRADUATE REPOSITORY</h1>
+          <h1>MEMBERS</h1>
           <div className="controls">
             <form onSubmit={handleSearchSubmit} className="search_form">
               <input
@@ -67,7 +72,7 @@ const GraduateRepo = () => {
         dynamic marketplace of possibilities.
       </div>
       <div className="grad-table">
-        <GraduateTable />
+        <GraduateTable onEmailClick={handleEmailClick} />
       </div>
     </div>
   );

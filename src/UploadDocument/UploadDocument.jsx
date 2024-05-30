@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import "./UploadDocument.css";
+import { Link } from 'react-router-dom';
+import Button from '@mui/material/Button';
 
 const UploadDocument = () => {
   const {
@@ -102,25 +104,11 @@ const UploadDocument = () => {
           <h1 className="header_upload">UPLOAD YOUR DOCUMENT</h1>
           <form className="form_upload" onSubmit={handleSubmit(onSubmit)}>
             {/* Resume upload section */}
-            {!showResumeUpload && (
-              <div className="row">
-                <div className="col-md-12">
-                  <button className=" resume_upload"onClick={toggleResumeUpload}>UPLOAD RESUME </button>
-                </div>
-              </div>
-            )}
-            {showResumeUpload && (
-              <div className="row">
-                <div className="col-md-12">
-                  <label>Upload Resume</label>
-                  <input
-                    className="upload_input"
-                    type="file"
-                    onChange={handleResumeChange}
-                  />
-                </div>
-              </div>
-            )}
+            <Link to="/upload-resume" style={{ textDecoration: "none" }}>
+        <Button variant="text" color="primary">
+          UPLOAD YOUR RESUME
+        </Button>
+      </Link>
 
             <div className="row">
        
@@ -225,9 +213,9 @@ const UploadDocument = () => {
                   <label>Department</label>
                   <input
                     className="upload_input"
-                    {...register("department", { required: true })}
+                    {...register("department")}
                   />
-                  {errors.department && <span className="error-message">This field is required</span>}
+                
                 </div>
               </div>
               <div className="col-md-6">
