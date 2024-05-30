@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import Table from "@mui/material/Table";
@@ -9,7 +9,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
-import Link from "@mui/material/Link";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import IconButton from '@mui/material/IconButton';
 
 function createData(
   upload_date,
@@ -33,42 +35,44 @@ function createData(
 
 function Row(props) {
   const { row } = props;
-  const [hovered, setHovered] = React.useState(false);
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [openUp, setOpenUp] = React.useState(false);
 
-  const handleMouseEnter = () => {
-    setHovered(true);
+  const toggleRow = () => {
+    setIsOpen(!isOpen);
   };
 
-  const handleMouseLeave = () => {
-    setHovered(false);
+  const toggleDirection = () => {
+    setOpenUp(!openUp);
   };
 
   return (
     <React.Fragment>
-      <TableRow
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        sx={{ cursor: "default" }}
-      >
-        <TableCell />
+      <TableRow onClick={toggleRow} sx={{ cursor: "pointer" }}>
+       
         <TableCell>{row.upload_date}</TableCell>
         <TableCell>{row.thesis_title}</TableCell>
         <TableCell>{row.author}</TableCell>
         <TableCell>{row.file_size} MB</TableCell>
+        <TableCell>
+          <IconButton size="small" onClick={toggleDirection}>
+            {openUp ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          </IconButton>
+        </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={5}>
-          <Collapse in={hovered} timeout="auto" unmountOnExit>
+          <Collapse in={isOpen} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
-              <Typography variant="h6" gutterBottom component="div">
-                Abstract & Keywords
-              </Typography>
+            
               <Table size="small" aria-label="abstract and keywords">
                 <TableBody>
                   <TableRow>
-                  <TableCell className="table-subheading">Abstract</TableCell>
+                    <TableCell className="table-subheading"><strong>Abstract</strong></TableCell>
                     <TableCell>{row.abstract}</TableCell>
-                    <TableCell className="table-subheading">Keywords</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="table-subheading"><strong>Keywords</strong></TableCell>
                     <TableCell>{row.keywords}</TableCell>
                   </TableRow>
                 </TableBody>
@@ -135,11 +139,12 @@ export default function CollapsibleTable() {
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
-            <TableCell />
+           
             <TableCell>Upload Date</TableCell>
             <TableCell>Thesis Title</TableCell>
             <TableCell>Author</TableCell>
             <TableCell>File Size (MB)</TableCell>
+            <TableCell />
           </TableRow>
         </TableHead>
         <TableBody>

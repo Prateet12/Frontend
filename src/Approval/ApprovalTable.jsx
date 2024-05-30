@@ -10,6 +10,7 @@ import IconButton from "@mui/material/IconButton";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 
+
 function createData(user_id, date_of_request, user, type) {
   return { user_id, date_of_request, user, type };
 }

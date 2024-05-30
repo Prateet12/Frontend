@@ -8,6 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
+import Tooltip from "@mui/material/Tooltip";
 
 function createData(date_of_request, document_title, status) {
   return { date_of_request, document_title, status };
@@ -16,35 +17,39 @@ function createData(date_of_request, document_title, status) {
 function Row(props) {
   const { row } = props;
 
-  const renderStatusDots = () => {
-    let dots = "";
+  const renderStatusDot = () => {
+    let dot = "";
     switch (row.status) {
       case "Pending":
-        dots = "🔴";
+        dot = "🔴";
         break;
       case "Rejected":
-        dots = "⚫️";
+        dot = "⚫️";
         break;
       case "Approved by Super Admin":
-        dots = "🔵";
+        dot = "🔵";
         break;
       case "Approved by Institute Admin":
-        dots = "🟠";
+        dot = "🟠";
         break;
       case "Fully Approved":
-        dots = "🟢";
+        dot = "🟢";
         break;
       default:
-        dots = "⚪️";
+        dot = "⚪️";
     }
-    return dots;
+    return (
+      <Tooltip title={row.status} arrow>
+        <span>{dot}</span>
+      </Tooltip>
+    );
   };
 
   return (
     <TableRow>
       <TableCell>{row.date_of_request}</TableCell>
       <TableCell>{row.document_title}</TableCell>
-      <TableCell>{renderStatusDots()}</TableCell>
+      <TableCell>{renderStatusDot()}</TableCell>
       <TableCell padding="checkbox">
         <IconButton aria-label="edit" onClick={() => alert('Edit document')}>
           <EditIcon />

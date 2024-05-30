@@ -1,114 +1,122 @@
-.container_upload{
-    max-width: 85%;
-    margin: 0 auto;
-    padding: 2rem;
-    box-sizing: border-box;
-  }
-  
-  .row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .col-md-6 {
-    flex: 0 0 50%;
-    max-width: 50%;
-    box-sizing: border-box;
-  }
-  
-  .form_upload {
-    background-color: #f8f9fa;
-    padding: 2rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    width: 100%;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  label {
-    font-weight: bold;
-    margin-bottom: 1rem;
-  }
-  
- .upload_input {
-    display: block;
-    width: 100%;
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    margin-bottom: 1.5rem;
-    box-sizing: border-box;
-  }
-  
-  input:focus,
-  textarea:focus,
-  select:focus {
-    border-color: #80bdff;
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-  }
-  
-  span {
-    color: #dc3545;
-    font-size: 0.875rem;
-    margin-top: 0.25rem;
-  }
-  
-  .header_upload {
-    margin-bottom: 30px;
-    text-align: center;
-  }
-  
-.submit_upload {
-      display: block;
-      width: 100%;
-      max-width: 200px;
-      padding: 0.75rem 1rem;
-      font-size: 1rem;
-      font-weight: 400;
-      line-height: 1.5;
-      color: #fff;
-      background-color: #007bff;
-      border-color: #007bff;
-      border-radius: 0.25rem;
-      transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-      cursor: pointer;
-      margin: 0 auto;
-    }
-    
-  
-.submit_upload:hover {
-    background-color: #0056b3;
-    border-color: #004a99;
-  }
-  
-  .checkbox-label {
-    padding-left: 0px;
-    padding-right: 0px;
-    display: flex;
-    align-items: center;
-    margin-bottom: 1.5rem;
-  }
-  .checkbox-label input[type="checkbox"] {
-    margin-right: 0.5rem;
-    margin-bottom: 0;
-  }
-  .checkbox-label span:not(:last-child) {
-    color: inherit; 
-  }
-  
-  .terms-label{
-    color:black;
-    margin-right: 5px;
-  }
+/* UploadDocument.css */
+
+.container_upload {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header_upload {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2em;
+  color: #333;
+}
+
+.form_upload {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.col-md-6, .col-md-12 {
+  flex: 1;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.col-md-6 {
+  max-width: 50%;
+}
+
+.col-md-12 {
+  max-width: 100%;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+.upload_input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.upload_input[type="file"] {
+  padding: 3px;
+}
+
+.required-field {
+  color: red;
+  margin-left: 5px;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9em;
+}
+
+.submit_upload, .resume_upload {
+  background-color: #f9f9f9;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: 2px solid black;
+}
+
+.submit_upload:hover, .resume_upload:hover {
+  background-color: rgb(192, 190, 190);
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.checkbox-label input {
+  margin-right: 10px;
+}
+
+.terms-label {
+  margin-right: 5px;
+}
+
+.submit_upload{
+  background-color: #007bff;
+  max-width: 50%;
+  justify-content: center;
+  align-items: center;
+}
+
+.resume_heading{
+  padding-bottom:30px;
+  justify-content: center;
+  align-items: center;
+}
+
+.submit_upload:hover{
+  background-color: #0056b3;
+  border-color: #004a99;
+  max-width: 50%;
+  justify-content: center;
+  align-items: center;
+}
