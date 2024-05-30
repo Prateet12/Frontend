@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import IconButton from "@mui/material/IconButton";
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
-
+import * as React from 'react';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import IconButton from '@mui/material/IconButton';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 function createData(date_of_request, user, type) {
   return { date_of_request, user, type };
@@ -25,97 +28,87 @@ function Row(props) {
       <TableCell>{row.type}</TableCell>
       <TableCell>
         <IconButton onClick={() => handleApprove(row)}>
-          <CheckCircleOutlineIcon style={{ color: "green" }} />
+          <CheckCircleOutlineIcon style={{ color: 'green' }} />
         </IconButton>
         <IconButton onClick={() => handleReject(row)}>
-          <CancelOutlinedIcon style={{ color: "red" }} />
+          <CancelOutlinedIcon style={{ color: 'red' }} />
+        </IconButton>
+        <IconButton>
+          <VisibilityIcon style={{ color: 'blue' }} />
         </IconButton>
       </TableCell>
     </TableRow>
   );
 }
 
-export default function ApprovalTable({ registrationRequests }) {
-  const [hoveredRowIndex, setHoveredRowIndex] = useState(null);
-  const [rows, setRows] = useState([]);
+const rows = [
+  createData('2023-01-15', 'John Doe', 'Document Approval'),
+  createData('2023-01-20', 'Emily Johnson', 'User Approval'),
+  createData('2023-02-05', 'Alice Johnson', 'Document Approval'),
+  createData('2023-02-10', 'Michael Brown', 'User Approval'),
+  createData('2023-02-15', 'Charlie Davis', 'Document Approval'),
+  createData('2023-03-01', 'Sarah Smith', 'User Approval'),
+  createData('2023-03-05', 'Emma Wilson', 'Document Approval'),
+  createData('2023-03-10', 'William Johnson', 'User Approval'),
+];
 
-  useEffect(() => {
-    const newRows = registrationRequests.map((request) =>
-      createData(request.id, request.createdAt, request.user, "User Approval")
-    );
-    setRows(newRows);
-  }, [registrationRequests]);
+export default function ApprovalTable() {
+  const [tabValue, setTabValue] = React.useState('userApproval');
 
-  const approveUser = async (userId, adminId) => {
-    const response = await fetch(
-      "http://localhost:3001/v1/admin/approveRegistration",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          user: userId,
-          admin: adminId,
-        }),
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    // Check if the response is empty
-    const text = await response.text();
-    if (!text) {
-      // If the response is empty, return null
-      return null;
-    }
-
-    // If the response is not empty, parse it as JSON
-    return text;
+  const handleChangeTab = (event, newValue) => {
+    setTabValue(newValue);
   };
 
-  const handleApprove = async (row) => {
-    try {
-      const adminId = JSON.parse(localStorage.getItem("user")).user.id;
-      await approveUser(row.user_id, adminId);
-      setRows(rows.filter((r) => r.user_id !== row.user_id));
-      alert("User approved successfully");
-    } catch (error) {
-      console.error("Failed to approve user:", error);
-    }
+  const handleApprove = (row) => {
+    // Implement logic to handle approval
+    console.log('Approved:', row);
   };
 
   const handleReject = (row) => {
     // Implement logic to handle rejection
-    setRows(rows.filter((r) => r.user_id !== row.user_id));
-    alert("User rejected successfully");
-    // TODO: Attach email service to notify user of rejection
+    console.log('Rejected:', row);
   };
 
   return (
-    <TableContainer component={Paper}>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Date of Request</TableCell>
-            <TableCell>User</TableCell>
-            <TableCell>Type</TableCell>
-            <TableCell>Actions</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row, index) => (
-            <Row
-              key={index}
-              row={row}
-              handleApprove={handleApprove}
-              handleReject={handleReject}
-            />
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <Box sx={{ width: '100%' }}>
+      <Tabs
+        value={tabValue}
+        onChange={handleChangeTab}
+        textColor="secondary"
+        indicatorColor="secondary"
+        aria-label="approval tabs"
+      >
+        <Tab value="userApproval" label="User Approval" />
+        <Tab value="documentApproval" label="Document Approval" />
+      </Tabs>
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Date of Request</TableCell>
+              <TableCell>User</TableCell>
+              <TableCell>Type</TableCell>
+              <TableCell>Actions</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows
+              .filter((row) =>
+                tabValue === 'userApproval'
+                  ? row.type === 'User Approval'
+                  : row.type === 'Document Approval'
+              )
+              .map((row, index) => (
+                <Row
+                  key={index}
+                  row={row}
+                  handleApprove={handleApprove}
+                  handleReject={handleReject}
+                />
+              ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Box>
   );
 }
