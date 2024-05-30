@@ -29,7 +29,7 @@ const UploadDocument = () => {
       const formData = new FormData();
       // Append data fields
       formData.append("thesisTitle", data.Title); // Use "Title" instead of "thesisTitle"
-      formData.append("authors", data.authors);
+      formData.append("author", data.authors);
       formData.append("keywords", data.keywords);
       formData.append("abstract", data.abstract);
       formData.append("publicationDate", data.publicationDate);
@@ -127,13 +127,13 @@ const UploadDocument = () => {
               <div className="col-md-6">
                 <div>
                   <label>
-                    Authors <span className="required-field">*</span>
+                    Author <span className="required-field">*</span>
                   </label>
                   <input
                     className="upload_input"
-                    {...register("authors", { required: true })}
+                    {...register("author", { required: true })}
                   />
-                  {errors.authors && <span className="error-message">This field is required</span>}
+                  {errors.author && <span className="error-message">This field is required</span>}
                 </div>
               </div>
             </div>

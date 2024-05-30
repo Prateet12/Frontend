@@ -112,3 +112,11 @@ label {
   justify-content: center;
   align-items: center;
 }
+
+.submit_upload:hover{
+  background-color: #0056b3;
+  border-color: #004a99;
+  max-width: 50%;
+  justify-content: center;
+  align-items: center;
+}
