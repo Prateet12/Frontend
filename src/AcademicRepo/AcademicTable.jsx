@@ -49,15 +49,16 @@ function Row(props) {
   return (
     <React.Fragment>
       <TableRow onClick={toggleRow} sx={{ cursor: "pointer" }}>
+       
+        <TableCell>{row.upload_date}</TableCell>
+        <TableCell>{row.thesis_title}</TableCell>
+        <TableCell>{row.author}</TableCell>
+        <TableCell>{row.file_size} MB</TableCell>
         <TableCell>
           <IconButton size="small" onClick={toggleDirection}>
             {openUp ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell>{row.upload_date}</TableCell>
-        <TableCell>{row.thesis_title}</TableCell>
-        <TableCell>{row.author}</TableCell>
-        <TableCell>{row.file_size} MB</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={5}>
@@ -138,11 +139,12 @@ export default function CollapsibleTable() {
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
-            <TableCell />
+           
             <TableCell>Upload Date</TableCell>
             <TableCell>Thesis Title</TableCell>
             <TableCell>Author</TableCell>
             <TableCell>File Size (MB)</TableCell>
+            <TableCell />
           </TableRow>
         </TableHead>
         <TableBody>
