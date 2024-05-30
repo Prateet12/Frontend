@@ -21,12 +21,12 @@ import { margin } from '@mui/system';
 // Constant data arrays
 const userRows = [
   { user_id: 1, date_of_request: '2023-01-15', user_name: 'John Doe', user_type: 'Practitioner', yearsOfExperience:' 5', organizationType:'Private',industrySector: 'Metereology',associatedOrganizationName:' XYZ Ltd.' },
-  { user_id: 2, date_of_request: '2023-01-20', user_name: 'Emily Johnson', user_type: 'Graduate', degreeProgram: 'Electrical Engineering', graduationYear: 2023 ,institutionName: 'ABC Institute' },
-  { user_id: 3, date_of_request: '2023-02-05', user_name: 'Alice Johnson', user_type: 'Researcher', highestDegree: 'PhD', researchAreas: 'Machine Learning', organizationType: 'Research Institute', organizationName: 'Research Institute A' },
-  { user_id: 4, date_of_request: '2023-02-10', user_name: 'Michael Brown', user_type: 'Research Assistant', highestDegree: 'Master', researchAreas: 'Computer Vision', organizationType: 'University', organizationName: 'University B' },
+  { user_id: 2, date_of_request: '2023-01-20', user_name: 'Emily Johnson', user_type: 'Graduate', degreeProgram: 'Bachelor', field_of_study: 'Air Pollution Service',graduationYear: 2023 },
+  { user_id: 3, date_of_request: '2023-02-05', user_name: 'Alice Johnson', user_type: 'Researcher', highestDegree: 'PhD', researchAreas: 'Machine Learning', organizationType: 'Local', organizationName: 'Research Institute A' },
+  { user_id: 4, date_of_request: '2023-02-10', user_name: 'Michael Brown', user_type: 'Researcher', highestDegree: 'Master', researchAreas: 'Computer Vision', organizationType: 'Private', organizationName: 'Research Institute B' },
   { user_id: 5, date_of_request: '2023-02-15', user_name: 'Charlie Davis', user_type: 'Professor', institution: 'University C', institutionName:'ABC University',fieldOfSpecialization: 'Physics', yearsOfTeaching: 10 },
-  { user_id: 7, date_of_request: '2023-03-05', user_name: 'Emma Wilson', user_type: 'Graduate', degreeProgram: 'Computer Science', graduationYear: 2024, institutionName: "XYZ Institute" },
-  { user_id: 8, date_of_request: '2023-03-10', user_name: 'William Johnson', user_type: 'Researcher', highestDegree: 'PhD', researchAreas: 'Artificial Intelligence', organizationType: 'Company', organizationName: 'Company X' },
+  { user_id: 7, date_of_request: '2023-03-05', user_name: 'Emma Wilson', user_type: 'Graduate', degreeProgram: 'Masters',field_of_study: 'Climate Science', graduationYear: 2024 },
+  { user_id: 8, date_of_request: '2023-03-10', user_name: 'William Johnson', user_type: 'Researcher', highestDegree: 'PhD', researchAreas: 'Artificial Intelligence', organizationType: 'Government', organizationName: 'Company X' },
 ];
 
 const documentRows = [
@@ -118,11 +118,12 @@ function UserDetailsModal({ open, handleClose, user }) {
             <strong>Degree Program:</strong> {user.degreeProgram}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <strong>Graduation Year:</strong> {user.graduationYear}
+            <strong>Field Of Study :</strong> {user.field_of_study}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <strong>Institution Name:</strong> {user.institutionName}
+            <strong>Graduation Year:</strong> {user.graduationYear}
           </Typography>
+          <Button onClick={handleClose} sx={{ mt: 2 }}>Close</Button>
         </Box>
       );
       break;
@@ -144,7 +145,7 @@ function UserDetailsModal({ open, handleClose, user }) {
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             <strong>Associated Organization Name:</strong> {user.associatedOrganizationName}
           </Typography>
-       
+          <Button onClick={handleClose} sx={{ mt: 2 }}>Close</Button>
         </Box>
       );
       break;
@@ -163,6 +164,7 @@ function UserDetailsModal({ open, handleClose, user }) {
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             <strong>Years of Teaching:</strong> {user.yearsOfTeaching}
           </Typography>
+          <Button onClick={handleClose} sx={{ mt: 2 }}>Close</Button>
         </Box>
       );
       break;
@@ -178,32 +180,17 @@ function UserDetailsModal({ open, handleClose, user }) {
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             <strong>Research Areas:</strong> {user.researchAreas}
           </Typography>
-        
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            <strong>Organization Type:</strong> {user.organizationType}
+          </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             <strong>Organization Name:</strong> {user.organizationName}
           </Typography>
+          <Button onClick={handleClose} sx={{ mt: 2 }}>Close</Button>
         </Box>
       );
       break;
-    case 'Research Assistant':
-      modalContent = (
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Research Assistant Details
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <strong>Highest Degree:</strong> {user.highestDegree}
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <strong>Research Areas:</strong> {user.researchAreas}
-          </Typography>
-       
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <strong>Organization Name:</strong> {user.organizationName}
-          </Typography>
-        </Box>
-      );
-      break;
+    
     default:
       modalContent = null;
   }
