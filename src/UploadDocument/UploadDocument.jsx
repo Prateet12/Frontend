@@ -252,24 +252,6 @@ const UploadDocument = () => {
               </div>
             </div>
 
-            <div className="row">
-              <div className="col-md-6">
-                <div>
-                  <label>Language</label>
-                  <select className="upload_input" {...register("language")}>
-                    <option value="English">English</option>
-                    <option value="Spanish">Spanish</option>
-                    <option value="French">French</option>
-                  </select>
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div>
-                  <label>Date</label>
-                  <input type="date" className="upload_input" {...register("date")} />
-                </div>
-              </div>
-            </div>
 
             <div className="row">
               <div className="col-md-6">
