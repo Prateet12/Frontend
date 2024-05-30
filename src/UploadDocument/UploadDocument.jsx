@@ -11,6 +11,20 @@ const UploadDocument = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const [selectedInstitution, setSelectedInstitution] = useState('');
+const [registeredInstitutes, setRegisteredInstitutes] = useState([
+  "Institute A",
+  "Institute B",
+  "Institute C",
+  "Institute D"
+]);
+
+const handleInstitutionChange = (event) => {
+  setSelectedInstitution(event.target.value);
+};
+
+  
   const [thesisFile, setThesisFile] = useState(null);
   const [synopsisFile, setSynopsisFile] = useState(null);
   const [resumeFile, setResumeFile] = useState(null); // State for resume file
@@ -196,16 +210,25 @@ const UploadDocument = () => {
                   {errors.degreeProgram && <span className="error-message">This field is required</span>}
                 </div>
               </div>
+
               <div className="col-md-6">
-                <div>
-                  <label>Institution</label>
-                  <input
-                    className="upload_input"
-                    {...register("institution")}
-                  />
-                </div>
-              </div>
-            </div>
+    <label htmlFor="institution">Institution</label>
+    <select
+      id="institution"
+      className="upload_input"
+      value={selectedInstitution}
+      onChange={handleInstitutionChange}
+    >
+      <option value="">Select an institution</option>
+      {registeredInstitutes.map((institution, index) => (
+        <option key={index} value={institution}>
+          {institution}
+        </option>
+      ))}
+    </select>
+  </div>
+</div>
+
 
             <div className="row">
               <div className="col-md-6">
@@ -260,6 +283,7 @@ const UploadDocument = () => {
                   <input className="upload_input" {...register("fundingSources")} />
                 </div>
               </div>
+
               <div className="col-md-6">
                 <div>
                   <label>Acknowledgements</label>
