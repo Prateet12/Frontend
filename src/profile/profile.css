@@ -1,0 +1,26 @@
+.profile-card {
+    width: 100%;
+  }
+  
+  .profile-name {
+    font-size: 2rem;
+  }
+  
+  .profile-email {
+    font-size: 1.25rem;
+  }
+  
+  .profile-user-type {
+    font-size: 1.125rem;
+  }
+  
+  .profile-details p {
+    font-size: 1.125rem;
+    margin: 0.5em 0;
+  }
+
+  .profile-field {
+    font-size: 28px; 
+  }
+  
+  

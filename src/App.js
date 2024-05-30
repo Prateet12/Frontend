@@ -17,6 +17,7 @@ import createRefresh from "react-auth-kit/createRefresh";
 import axios from "axios";
 import Inbox from "./inbox/inbox";
 import Upload_Resume from "./UploadDocument/upload-resume";
+import Profile from "./profile/profile";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(
@@ -97,6 +98,7 @@ function App() {
                 <Route path="/inbox" element={<Inbox />} />
                 <Route path="/approval" element={<Approval />} />
                 <Route path="/upload-resume" element={<Upload_Resume />} />
+                <Route path="/profile" element={<Profile />} />
                 <Route
                   path="/logout"
                   element={
