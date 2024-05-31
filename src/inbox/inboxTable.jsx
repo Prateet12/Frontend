@@ -10,53 +10,16 @@ import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 import Tooltip from "@mui/material/Tooltip";
 
+import {
+  MDBTable, 
+  MDBTableHead, 
+  MDBTableBody, 
+  MDBIcon, 
+  MDBBadge,
+} from 'mdb-react-ui-kit';
+
 function createData(date_of_request, document_title, status) {
   return { date_of_request, document_title, status };
-}
-
-function Row(props) {
-  const { row } = props;
-
-  const renderStatusDot = () => {
-    let dot = "";
-    switch (row.status) {
-      case "Pending":
-        dot = "🔴";
-        break;
-      case "Rejected":
-        dot = "⚫️";
-        break;
-      case "Approved by Super Admin":
-        dot = "🔵";
-        break;
-      case "Approved by Institute Admin":
-        dot = "🟠";
-        break;
-      case "Fully Approved":
-        dot = "🟢";
-        break;
-      default:
-        dot = "⚪️";
-    }
-    return (
-      <Tooltip title={row.status} arrow>
-        <span>{dot}</span>
-      </Tooltip>
-    );
-  };
-
-  return (
-    <TableRow>
-      <TableCell>{row.date_of_request}</TableCell>
-      <TableCell>{row.document_title}</TableCell>
-      <TableCell>{renderStatusDot()}</TableCell>
-      <TableCell padding="checkbox">
-        <IconButton aria-label="edit" onClick={() => alert('Edit document')}>
-          <EditIcon />
-        </IconButton>
-      </TableCell>
-    </TableRow>
-  );
 }
 
 const rows = [
@@ -72,24 +35,70 @@ const rows = [
 
 export default function ApprovalTable() {
   const [rowsState, setRowsState] = useState(rows);
-
+  const renderStatusColor = (status) => {
+    let color = "danger";
+    switch (status) {
+      case "Pending":
+        color = "danger";
+        break;
+      case "Rejected":
+        color = "dark";
+        break;
+      case "Approved by Super Admin":
+        color = "primary";
+        break;
+      case "Approved by Institute Admin":
+        color = "orange-900";
+        break;
+      case "Fully Approved":
+        color = "success";
+        break;
+      default:
+        color = "danger";
+    }
+    return (
+      color
+    );
+  };
   return (
-    <TableContainer component={Paper}>
-      <h3>YOUR UPLOAD HISTORY</h3>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Date of Request</TableCell>
-            <TableCell>Document Title</TableCell>
-            <TableCell>Current Status</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rowsState.map((row, index) => (
-            <Row key={index} row={row} />
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <section className="mt-5">
+      <div className="rounded-2 overflow-hidden">
+        <MDBTable responsive striped>
+          <MDBTableHead light>
+            <tr>
+              <th>Document Title</th>
+              <th>Date of Request</th>
+              <th>Current Status</th>
+              <th></th>
+            </tr>
+          </MDBTableHead>
+          <MDBTableBody style={{ verticalAlign: 'middle' }}>
+            {rowsState.map((row, index) => (
+              <tr key={index}>
+                <td>
+                  <p className="fw-normal mb-1">{row.document_title}</p>
+                </td>
+                <td>
+                  <p className="fw-normal mb-1">{row.date_of_request}</p>
+                </td>
+                <td>
+                  <MDBBadge dark color={renderStatusColor(row.status)} pill>
+                    {row.status} 
+                  </MDBBadge>
+                </td>
+                <td>
+                <MDBIcon
+                    far
+                    icon="edit"
+                    style={{ cursor: 'pointer', color: '#0d6efd', fontSize: '1.5rem' }}
+                    onClick={() => alert('Edit document')}
+                  />
+                </td>
+              </tr>
+            ))}
+          </MDBTableBody>
+        </MDBTable>
+      </div>
+    </section>
   );
 }

@@ -1,61 +1,33 @@
 import React, { useState } from "react";
-import "./NavBar.css";
-import PropTypes from "prop-types";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
+import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
+import "./NavBar.css";
 import { useNavigate } from "react-router-dom";
+import logo from "../../Assets/dummy-logo.png";
 
-
-function CustomTabPanel(props) {
-  const { children, value, index, ...other } = props;
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-CustomTabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-}
-
-function NavBar({setLoggedIn }) {
+function NavBar({ setLoggedIn }) {
   const navigate = useNavigate();
-  const [value, setValue] = useState(0);
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
   let permissions = [
     {
       route: "/dashboard",
       title: "Dashboard",
     },
     {
-      route: "/upload-document",
-      title: "Upload Document",
-    },
-    {
       route: "/graduate-repo",
-      title: "Graduate Repository",
+      title: "Members",
     },
     {
       route: "/academic-repo",
@@ -63,65 +35,218 @@ function NavBar({setLoggedIn }) {
     },
     {
       route: "/approvals-inbox",
-      title: "Inbox",
+      title: "Approve Requests",
     },
   ];
 
+  let settings = [
+    {
+      route: "/profile",
+      title: "Profile",
+    },
+    {
+      route: "/",
+      title: "Logout",
+    },
+  ];
+
+  if (localStorage.getItem("role")) {
+    let role = JSON.parse(localStorage.getItem("role"));
+    if (role.permissions.includes("uploadThesis")) {
+      // at 1st index of settings put
+      const uploadDocAllowed = {
+        route: "/upload-document",
+        title: "Upload Document",
+      };
+      settings.splice(1, 0, uploadDocAllowed);
+    }
+    if (role.permissions.includes("uploadResume")) {
+      const uploadResumeAllowed = {
+        route: "/upload-resume",
+        title: "Upload Resume",
+      };
+      // Set it 2nd from the bottom
+      settings.splice(settings.length - 1, 0, uploadResumeAllowed);
+    }
+  }
+
   console.log("localStorage.getItem('role')", localStorage.getItem("role"));
-  let currPermissions = JSON.parse(localStorage.getItem("role"))?.navPermissions;
+  let currPermissions = JSON.parse(
+    localStorage.getItem("role")
+  )?.navPermissions;
   console.log("currPermissions", currPermissions);
   if (currPermissions) {
     permissions = currPermissions;
   }
 
-
-
-  const handleLogout = () => {
-    console.log("Logging out");
-    localStorage.clear();
-    setLoggedIn(false);
-    navigate("/");
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
   };
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+  const handleSettingNavigation = (route, title) => {
+    if (title == "Logout") {
+      localStorage.clear();
+      setLoggedIn(false);
+      navigate("/");
+    } else {
+      navigate(route);
+    }
+    handleCloseUserMenu();
+  };
+
+  const imageStyle = {
+    maxWidth: "150px",
+    filter: "invert(1)",
   };
 
   return (
-    <Box sx={{ width: "100%" }} className="navContainer">
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="basic tabs example"
-          centered
-        >
-          {permissions.map((permission, index) => (
-            <Tab
-              label={permission.title}
-              {...a11yProps(index)}
-              key={index}
-              onClick={() => {
-                navigate(permission.route);
+    <AppBar position="static">
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="#app-bar-with-responsive-menu"
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
+              fontWeight: 700,
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            <img src={logo} alt="logo" style={imageStyle} />
+          </Typography>
+
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
               }}
-            />
-          ))}
-        </Tabs>
-      </Box>
-      {permissions.map((permission, index) => (
-        <CustomTabPanel
-          value={value}
-          index={index}
-          key={index}
-          onClick={() => {
-            navigate(permission.route);
-          }}
-        ></CustomTabPanel>
-      ))}
-      <Button variant="contained" onClick={handleLogout}>
-        Logout
-      </Button>
-    </Box>
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: "block", md: "none" },
+              }}
+            >
+              {permissions.map((permission, index) => (
+                <MenuItem
+                  key={index}
+                  onClick={() => {
+                    navigate(permission.route);
+                  }}
+                >
+                  <Typography textAlign="center">{permission.title}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+          <Typography
+            variant="h5"
+            noWrap
+            component="a"
+            href="#app-bar-with-responsive-menu"
+            sx={{
+              mr: 2,
+              display: { xs: "flex", md: "none" },
+              flexGrow: 1,
+              fontFamily: "monospace",
+              fontWeight: 700,
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            <img src={logo} alt="logo" style={imageStyle} />
+          </Typography>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            {permissions.map((permission, index) => (
+              <Button
+                key={index}
+                onClick={() => {
+                  navigate(permission.route);
+                }}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                {permission.title}
+              </Button>
+            ))}
+          </Box>
+
+          <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: "45px" }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              {settings.map((settingpage, index) => (
+                <MenuItem
+                  key={index}
+                  onClick={() =>
+                    handleSettingNavigation(
+                      settingpage.route,
+                      settingpage.title
+                    )
+                  }
+                >
+                  <Typography textAlign="center">
+                    {settingpage.title}
+                  </Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
 }
 

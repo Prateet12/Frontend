@@ -1,8 +1,5 @@
 .container_approval {
     max-width: 100%;
-    margin: 0 auto;
-    padding: 20px;
-    margin: 20px;
   }
   
 .header_approval {
@@ -78,8 +75,8 @@ h1 {
 
 
 .approval-table {
-    margin: 20px;
-    padding: 20px;
+    /* margin: 20px;
+    padding: 20px; */
 }
 
 .row-transition {

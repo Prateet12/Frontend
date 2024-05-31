@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Registration.css";
 import Select from "react-select";
+import { MDBIcon, MDBBtn } from 'mdb-react-ui-kit';
 
 const PractitionersRegistration = ({ registerCallback }) => {
   const [yearsOfExperience, setYearsOfExperience] = useState("");
@@ -63,6 +64,7 @@ const PractitionersRegistration = ({ registerCallback }) => {
           id="yearsOfExperience"
           value={yearsOfExperience}
           onChange={handleExperienceChange}
+          className="input_field"
           required
         />
       </div>
@@ -90,14 +92,12 @@ const PractitionersRegistration = ({ registerCallback }) => {
           placeholder="Organization Name"
           value={organizationName}
           onChange={handleOrgNameChange}
-          className="input_main"
+          className="input_field"
         />
       </div>
       <div className="form-group">
         <div className="submit-container">
-          <button type="submit" className="submit">
-            Register
-          </button>
+          <MDBBtn className='me-1 submit'>Register</MDBBtn>
         </div>
       </div>
     </form>

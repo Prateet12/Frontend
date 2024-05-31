@@ -3,6 +3,8 @@ import "./App.css";
 import LoginSignup from "./LoginSignup/LoginSignup";
 import AcademicRepo from "./AcademicRepo/AcademicRepo";
 import UploadDocument from "./UploadDocument/UploadDocument";
+import UploadResume from "./UploadResume/UploadResume";
+import Profile from "./Profile/Profile";
 import Registration from "./Registration/Registration";
 import Dashboard from "./Dashboard/Dashboard";
 import { useState, useEffect } from "react";
@@ -16,15 +18,31 @@ import AuthProvider from "react-auth-kit";
 import createRefresh from "react-auth-kit/createRefresh";
 import axios from "axios";
 import Inbox from "./inbox/inbox";
-import Upload_Resume from "./UploadDocument/upload-resume";
-import Profile from "./profile/profile";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(
-    () => JSON.parse(localStorage.getItem("loggedIn")) || false
+    () => sessionStorage.getItem("loggedIn") || false
   );
   const [user, setUser] = useState({});
   const [currRole, setCurrRole] = useState({});
+
+  const handleLogout = (e) => {
+    // Clear local storage
+    if (!loggedIn) {
+      console.log("Logging out");
+      localStorage.clear();
+      sessionStorage.clear();
+      setUser({});
+      setCurrRole({});
+    }
+  };
+
+  useEffect(() => {
+    // When loggedIn state changes, update sessionStorage
+    sessionStorage.setItem("loggedIn", JSON.stringify(loggedIn));
+    handleLogout();
+  }, [loggedIn]);
+
 
   const refresh = createRefresh({
     interval: 10, // The time in sec to refresh the Access token,
@@ -93,12 +111,11 @@ function App() {
                 />
                 <Route path="/graduate-repo" element={<GraduateRepo />} />
                 <Route path="/upload-document" element={<UploadDocument />} />
+                <Route path="/upload-resume" element={<UploadResume />} />
+                <Route path="/profile" element={<Profile />} />
                 <Route path="/dashboard" element={<Dashboard user={user} />} />
                 <Route path="/approvals-inbox" element={<Approval />} />
                 <Route path="/inbox" element={<Inbox />} />
-                <Route path="/approval" element={<Approval />} />
-                <Route path="/upload-resume" element={<Upload_Resume />} />
-                <Route path="/profile" element={<Profile />} />
                 <Route
                   path="/logout"
                   element={

@@ -1,94 +1,89 @@
 .registration-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem;
-    background-color: #f5f5f5;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 10%;
-  }
-  
-  .header_main {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-  
-  .header_main .text {
-    font-size: 2rem;
-    font-weight: bold;
-  }
-  
-  .header_main .underline {
-    width: 100px;
-    height: 4px;
-    background-color: #007bff;
-    margin: 0.5rem auto 0;
-  }
-  
-  .inputs {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  
-  .input {
-    display: flex;
-    align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 0.5rem;
-  }
-  
-  .input img {
-    width: 24px;
-    height: 24px;
-    margin-right: 0.5rem;
-  }
+  max-width: 425px;
+  margin: 25px auto;
+  padding: 2rem;
+}
 
-  .input_img{
-    margin-right: 10px;
-  }
-  
-  .input input,
-  .input select {
-    flex-grow: 1;
-    border: none;
-    outline: none;
-    font-size: 1rem;
-    padding: 0.5rem;
-  }
-  
-  .submit-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 2rem;
-  }
-  
-  .submit {
-    display: block;
-    width: 100%;
-    max-width: 200px;
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
-    border-radius: 0.25rem;
-    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-      border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    cursor: pointer;
-    margin-right: 25px;
-  }
+.header_main {
+  text-align: center;
+  margin-bottom: 2rem;
+}
 
-  .errorLabel {
-    color: red;
-    font-size: 12px;
-  }
-  
-  .submit:hover {
-    background-color: #0056b3;
-    border-color: #004a99;
-  }
-  
+.header_main .text {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.header_main .underline {
+  width: 100px;
+  height: 4px;
+  background-color: #007bff;
+  margin: 0.5rem auto 0;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.input {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.5rem;
+}
+
+.input img {
+  width: 24px;
+  height: 24px;
+  margin-right: 0.5rem;
+}
+
+.input_img{
+  margin-right: 10px;
+}
+
+.input input,
+.input select {
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+
+.submit-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.submit {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #fff;
+  background-color: #4396f0;
+  border-color: #4396f0;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  cursor: pointer;
+  margin-right: 25px;
+}
+
+.errorLabel {
+  color: red;
+  font-size: 12px;
+}
+
+.submit:hover {
+  background-color: #0056b3;
+  border-color: #004a99;
+}

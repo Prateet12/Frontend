@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./researcher-register.css";
 import Select from "react-select";
+import { MDBIcon, MDBBtn } from 'mdb-react-ui-kit';
 
 const ResearcherRegistration = ({ registerCallback }) => {
   const [highestDegreeObtained, setHighestDegreeObtained] = useState("");
@@ -131,7 +132,7 @@ const ResearcherRegistration = ({ registerCallback }) => {
           placeholder="Name of Institute"
           value={instituteName}
           onChange={handleInstituteNameChange}
-          className="input_main"
+          className="input_field"
         />
       </div>
       {/* <div className="form-group">
@@ -145,9 +146,7 @@ const ResearcherRegistration = ({ registerCallback }) => {
       </div> */}
       <div className="form-group">
         <div className="submit-container">
-          <button type="submit" className="submit">
-            Register
-          </button>
+          <MDBBtn className='me-1 submit'>Register</MDBBtn>
         </div>
       </div>
     </form>

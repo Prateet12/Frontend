@@ -1,10 +1,21 @@
 import "./GraduateRepo.css";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React,  { useEffect, useState } from "react";
 import GraduateTable from "./GraduateTable";
-import { FaEnvelope } from 'react-icons/fa'; // Import the email icon component
+import {
+  MDBContainer,
+  MDBBtn,
+  MDBIcon
+} from 'mdb-react-ui-kit';
 
 const GraduateRepo = () => {
+
+  const [title] = useState("Members");
+
+  useEffect(() => {
+    // This will run when the page first loads and whenever the title changes
+    document.title = title;
+  }, [title]);
+
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("");
 
@@ -26,55 +37,51 @@ const GraduateRepo = () => {
   };
 
   return (
-    <div className="graduate_repo">
-      <div className="container_graduate">
-        <div className="header_graduate">
-          <h1>MEMBERS</h1>
-          <div className="controls">
-            <form onSubmit={handleSearchSubmit} className="search_form">
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={handleSearchChange}
-                placeholder="Search here"
-                className="search_input"
-              />
-              <button type="submit" className="search_button">
-                Search
-              </button>
-            </form>
-            <div className="sort_by">
-              <label htmlFor="filter" className="filter_label">
-                Sort By:
-              </label>
-              <select
-                id="filter"
-                className="filter-dropdown"
-                value={selectedFilter}
-                onChange={handleFilterChange}
-              >
-                <option value="">All</option>
-                <option value="job_seeker">Job Seeker</option>
-                <option value="employer">Employer</option>
-              </select>
-            </div>
+    <MDBContainer>
+      <section className="m-4">
+        <h2 className="mb-4">Members</h2>
+        <p>Explore a diverse array of skilled job seekers and eager employers, all
+          poised to embark on their professional journeys. Whether you're seeking
+          fresh talent or new career avenues, our repository is your gateway to a
+          dynamic marketplace of possibilities.
+        </p>
+      </section>
+      <div className="graduate_repo">
+        <div className="controls m-4">
+          <form onSubmit={handleSearchSubmit} className="search_form">
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={handleSearchChange}
+              placeholder="Search here"
+              className="search_input"
+            />
+            <MDBBtn className=''>
+              <MDBIcon fas icon="search"/>
+              Search
+            </MDBBtn>
+          </form>
+          <div className="sort_by">
+            <label htmlFor="filter" className="filter_label">
+              Sort By:
+            </label>
+            <select
+              id="filter"
+              className="filter-dropdown"
+              value={selectedFilter}
+              onChange={handleFilterChange}
+            >
+              <option value="">All</option>
+              <option value="job_seeker">Job Seeker</option>
+              <option value="employer">Employer</option>
+            </select>
           </div>
         </div>
+        <div className="grad-table">
+          <GraduateTable onEmailClick={handleEmailClick} />
+        </div>
       </div>
-
-      <div className="about">
-        <h3>
-          Welcome to our Graduate Repository, where talent meets opportunity!
-        </h3>{" "}
-        Explore a diverse array of skilled job seekers and eager employers, all
-        poised to embark on their professional journeys. Whether you're seeking
-        fresh talent or new career avenues, our repository is your gateway to a
-        dynamic marketplace of possibilities.
-      </div>
-      <div className="grad-table">
-        <GraduateTable onEmailClick={handleEmailClick} />
-      </div>
-    </div>
+    </MDBContainer>
   );
 };
 

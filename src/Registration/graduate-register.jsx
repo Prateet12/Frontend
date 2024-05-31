@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./graduate-register.css";
 import Select from "react-select";
 import { set } from "react-hook-form";
+import { MDBIcon, MDBBtn } from 'mdb-react-ui-kit';
 
 const GraduateRegistration = ({ registerCallback }) => {
 
@@ -126,9 +127,7 @@ const GraduateRegistration = ({ registerCallback }) => {
       */}
       <div className="form-group">
           <div className="submit-container">
-            <button className="submit " type="submit">
-              Register
-            </button>
+            <MDBBtn className='me-1 submit'>Register</MDBBtn>
           </div>
         </div>
     </form>

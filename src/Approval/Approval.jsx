@@ -2,6 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ApprovalTable from "./ApprovalTable";
 import "./Approval.css";
+import {
+  MDBContainer,
+  MDBBtn,
+  MDBIcon
+} from 'mdb-react-ui-kit';
 
 const Approval = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -56,46 +61,46 @@ const Approval = () => {
   };
 
   return (
-    <div className="approval">
+    <MDBContainer>
+      <section className="m-4 approval">
+        <h2 className="mb-4">Approve Requests</h2>
+      </section>
       <div className="container_approval">
-        <div className="header_approval">
-          <h1>APPROVAL PAGE</h1>
-          <div className="controls">
-            <form onSubmit={handleSearchSubmit} className="search_form">
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={handleSearchChange}
-                placeholder="Search here"
-                className="search_input"
-              />
-              <button type="submit" className="search_button">
-                Search
-              </button>
-            </form>
-            <div className="sort_by">
-              <label htmlFor="filter" className="filter_label">
-                Sort By:
-              </label>
-              <select
-                id="filter"
-                className="filter-dropdown"
-                value={selectedFilter}
-                onChange={handleFilterChange}
-              >
-                <option value="">All</option>
-                <option value="job_seeker">Document Approval</option>
-                <option value="employer">User Approval</option>
-              </select>
-            </div>
+        <div className="controls m-4">
+          <form onSubmit={handleSearchSubmit} className="search_form">
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={handleSearchChange}
+              placeholder="Search here"
+              className="search_input"
+            />
+            <MDBBtn className=''>
+              <MDBIcon fas icon="search"/>
+              Search
+            </MDBBtn>
+          </form>
+          <div className="sort_by">
+            <label htmlFor="filter" className="filter_label">
+              Sort By:
+            </label>
+            <select
+              id="filter"
+              className="filter-dropdown"
+              value={selectedFilter}
+              onChange={handleFilterChange}
+            >
+              <option value="">All</option>
+              <option value="job_seeker">Document Approval</option>
+              <option value="employer">User Approval</option>
+            </select>
           </div>
         </div>
+        <div className="approval-table">
+          <ApprovalTable registrationRequests={registrationRequests}/>
+        </div>
       </div>
-
-      <div className="approval-table">
-        <ApprovalTable registrationRequests={registrationRequests}/>
-      </div>
-    </div>
+    </MDBContainer>
   );
 };
 

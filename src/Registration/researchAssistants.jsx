@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Select from "react-select";
 import { useNavigate } from "react-router-dom"; // Use useNavigate for redirection
+import { MDBIcon, MDBBtn } from 'mdb-react-ui-kit';
 
 const ResearchAssistantRegistration = ({ registerCallback }) => {
   const navigate = useNavigate();
@@ -96,9 +97,7 @@ const ResearchAssistantRegistration = ({ registerCallback }) => {
 
       <div className="form-group">
         <div className="submit-container">
-          <button type="submit" className="submit">
-            Register
-          </button>
+          <MDBBtn className='me-1 submit'>Register</MDBBtn>
         </div>
       </div>
     </form>
