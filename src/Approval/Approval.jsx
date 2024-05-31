@@ -8,7 +8,7 @@ import {
   MDBIcon
 } from 'mdb-react-ui-kit';
 
-const Approval = () => {
+const Approval = ({roles}) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("");
 
@@ -35,7 +35,10 @@ const Approval = () => {
       id: request.id,
       user: request.user,
       createdAt: new Date(request.created_at).toLocaleDateString(),
+      userDetails: request.userDetails,
     }));
+
+    console.log("Registration requests:", requests);
 
     setRegistrationRequests(requests);
   };
@@ -97,7 +100,11 @@ const Approval = () => {
           </div>
         </div>
         <div className="approval-table">
-          <ApprovalTable registrationRequests={registrationRequests}/>
+          <ApprovalTable 
+            registrationRequests={registrationRequests} 
+            setRegistrationRequests={setRegistrationRequests} 
+            roles={roles}
+          />
         </div>
       </div>
     </MDBContainer>

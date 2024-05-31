@@ -16,6 +16,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import UserApproval from './UserApproval';
 
 import {
   MDBContainer, 
@@ -116,123 +117,7 @@ const style = {
   p: 4,
 };
 
-// UserDetailsModal component
-function UserDetailsModal({ open, handleClose, user }) {
-  if (!user) return null;
 
-  let modalContent;
-  switch (user.user_type) {
-    case 'Graduate':
-      modalContent = (
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Graduate Details
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <strong>Degree Program:</strong> {user.degreeProgram}
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <strong>Graduation Year:</strong> {user.graduationYear}
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <strong>Institution Name:</strong> {user.institutionName}
-          </Typography>
-        </Box>
-      );
-      break;
-    case 'Practitioner':
-      modalContent = (
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Practitioner Details
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <strong>Years of Experience:</strong> {user.yearsOfExperience}
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <strong>Organization Type:</strong> {user.organizationType}
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <strong>Industry Sector:</strong> {user.industrySector}
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <strong>Associated Organization Name:</strong> {user.associatedOrganizationName}
-          </Typography>
-       
-        </Box>
-      );
-      break;
-    case 'Professor':
-      modalContent = (
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Professor Details
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <strong>Institution Name:</strong> {user.institutionName}
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <strong>Field of Specialization:</strong> {user.fieldOfSpecialization}
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <strong>Years of Teaching:</strong> {user.yearsOfTeaching}
-          </Typography>
-        </Box>
-      );
-      break;
-    case 'Researcher':
-      modalContent = (
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Researcher Details
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <strong>Highest Degree:</strong> {user.highestDegree}
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <strong>Research Areas:</strong> {user.researchAreas}
-          </Typography>
-        
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <strong>Organization Name:</strong> {user.organizationName}
-          </Typography>
-        </Box>
-      );
-      break;
-    case 'Research Assistant':
-      modalContent = (
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Research Assistant Details
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <strong>Highest Degree:</strong> {user.highestDegree}
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <strong>Research Areas:</strong> {user.researchAreas}
-          </Typography>
-       
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <strong>Organization Name:</strong> {user.organizationName}
-          </Typography>
-        </Box>
-      );
-      break;
-    default:
-      modalContent = null;
-  }
-
-  return (
-    <Modal
-      open={open}
-      onClose={handleClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
-      {modalContent}
-    </Modal>
-  );
-}
   // ViewDetailsModal component
   function ViewDetailsModal({ open, handleClose, document }) {
     if (!document) return null;
@@ -290,27 +175,7 @@ function UserDetailsModal({ open, handleClose, user }) {
     );
   }
   
-  // Row component for UserApproval
-  function UserRow({ row, handleApprove, handleReject, handleView }) {
-    return (
-      <TableRow>
-        <TableCell>{row.date_of_request}</TableCell>
-        <TableCell>{row.user_name}</TableCell>
-        <TableCell>{row.user_type}</TableCell>
-        <TableCell>
-          <IconButton onClick={() => handleApprove(row)}>
-            <CheckCircleOutlineIcon style={{ color: 'green' }} />
-          </IconButton>
-          <IconButton onClick={() => handleReject(row)}>
-            <CancelOutlinedIcon style={{ color: 'red' }} />
-          </IconButton>
-          <IconButton onClick={() => handleView(row)}>
-            <VisibilityIcon style={{ color: 'blue' }} />
-          </IconButton>
-        </TableCell>
-      </TableRow>
-    );
-  }
+  
   
   // Row component for DocumentApproval
   function DocumentRow({ row, handleApprove, handleReject, handleView }) {
@@ -336,55 +201,7 @@ function UserDetailsModal({ open, handleClose, user }) {
         );
       }
       
-      // UserApproval component
-      function UserApproval() {
-        const [open, setOpen] = React.useState(false);
-        const [selectedUser, setSelectedUser] = React.useState(null);
       
-        const handleOpen = (user) => {
-          setSelectedUser(user);
-          setOpen(true);
-        };
-      
-        const handleClose = () => setOpen(false);
-      
-        const handleApprove = (row) => {
-          // Implement logic to handle approval
-          console.log('Approved:', row);
-        };
-      
-        const handleReject = (row) => {
-          // Implement logic to handle rejection
-          console.log('Rejected:', row);
-        };
-      
-        return (
-          <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Date of Request</TableCell>
-                  <TableCell>User Name</TableCell>
-                  <TableCell>User Type</TableCell>
-                  <TableCell>Actions</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {userRows.map((row, index) => (
-                  <UserRow
-                    key={index}
-                    row={row}
-                    handleApprove={handleApprove}
-                    handleReject={handleReject}
-                    handleView={handleOpen}
-                  />
-                ))}
-              </TableBody>
-            </Table>
-            <UserDetailsModal open={open} handleClose={handleClose} user={selectedUser} />
-          </TableContainer>
-        );
-      }
       
       // DocumentApproval component
       function DocumentApproval() {
@@ -438,8 +255,10 @@ function UserDetailsModal({ open, handleClose, user }) {
       }
       
       // Main component to manage tabs
-      export default function ApprovalManager() {
+      export default function ApprovalManager(props) {
         const [tabValue, setTabValue] = React.useState('userApproval');
+        console.log("hi from approval manager");
+        console.log(props.registrationRequests);
       
         const handleChangeTab = (event, newValue) => {
           setTabValue(newValue);
@@ -457,7 +276,13 @@ function UserDetailsModal({ open, handleClose, user }) {
               <Tab value="userApproval" label="User Approval" />
               <Tab value="documentApproval" label="Document Approval" />
             </Tabs>
-            {tabValue === 'userApproval' ? <UserApproval /> : <DocumentApproval />}
+            {tabValue === 'userApproval' ? 
+            <UserApproval 
+              registrationRequests={props.registrationRequests} 
+              // setRegistrationRequests={props.setRegistrationRequests}
+              roles={props.roles}
+            /> 
+            : <DocumentApproval />}
           </Box>
         );
       }

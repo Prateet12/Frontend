@@ -25,6 +25,7 @@ function App() {
   );
   const [user, setUser] = useState({});
   const [currRole, setCurrRole] = useState({});
+  const [roles, setRoles] = useState(JSON.parse(localStorage.getItem("roles")) || []);
 
   const handleLogout = (e) => {
     // Clear local storage
@@ -42,6 +43,29 @@ function App() {
     sessionStorage.setItem("loggedIn", JSON.stringify(loggedIn));
     handleLogout();
   }, [loggedIn]);
+
+  const getAllRoles = async () => {
+    try {
+      const response = await fetch(`${BASE_URL}/v1/role`);
+
+      if (!response || !response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      console.log("roles from api in app.js are" + data);
+      setRoles(data);
+      localStorage.setItem("roles", JSON.stringify(roles));
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (!roles || roles.length <= 1) {
+      console.log("Fetching roles from API");
+      getAllRoles();
+    }
+  }, []);
 
 
   const refresh = createRefresh({
@@ -103,9 +127,8 @@ function App() {
                   path="/registration"
                   element={
                     <Registration
-                      setLoggedIn={setLoggedIn}
-                      setUser={setUser}
-                      setCurrRole={setCurrRole}
+                      roles={roles}
+                      
                     />
                   }
                 />
@@ -114,7 +137,7 @@ function App() {
                 <Route path="/upload-resume" element={<UploadResume />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/dashboard" element={<Dashboard user={user} />} />
-                <Route path="/approvals-inbox" element={<Approval />} />
+                <Route path="/approvals-inbox" element={<Approval roles={roles}/>} />
                 <Route path="/inbox" element={<Inbox />} />
                 <Route
                   path="/logout"

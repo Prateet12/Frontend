@@ -14,42 +14,14 @@ import { useNavigate } from "react-router-dom";
 import logo from '../Components/Assets/dummy-logo.png';
 import { MDBIcon, MDBBtn } from 'mdb-react-ui-kit';
 
-const Registration = ({ setCurrRole, setUser, setLoggedIn }) => {
+const Registration = ({ roles }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [selectedRole, setSelectedRole] = useState("");
-  const [roles, setRoles] = useState(
-    () => JSON.parse(localStorage.getItem("roles")) || []
-  );
   const navigate = useNavigate();
 
   let roleNames = roles.map((role) => role.role);
-  console.log("Role names: ", roleNames);
-
-  const getAllRoles = async () => {
-    try {
-      const response = await fetch(`${BASE_URL}/v1/role`);
-
-      if (!response || !response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data = await response.json();
-      console.log("roles from api in app.js are" + data);
-      setRoles(data);
-      localStorage.setItem("roles", JSON.stringify(roles));
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-
-  useEffect(() => {
-    console.log("Roles from local storage", roles);
-    if (!roles || roles.length <= 1) {
-      console.log("Fetching roles from API");
-      getAllRoles();
-    }
-  }, [roles]);
 
   const register = async (formDetails) => {
     try {
