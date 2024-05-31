@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./LoginSignup.css";
-import { MDBIcon, MDBBtn } from 'mdb-react-ui-kit';
-import logo from '../Components/Assets/dummy-logo.png';
+import { MDBIcon, MDBBtn } from "mdb-react-ui-kit";
+import logo from "../Components/Assets/dummy-logo.png";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL, HEADER_DATA } from "../utils/baseUrl";
 
@@ -49,54 +49,51 @@ const LoginSignup = (props) => {
   };
 
   const logIn = async () => {
-    try {
-      const response = await fetch(`${BASE_URL}/v1/auth/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+    const response = await fetch(`${BASE_URL}/v1/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
+    if (!response.ok) {
       const data = await response.json();
+      window.alert("An error occurred: " + data.error);
+      return;
+    }
 
-      if (data.user) {
-        console.log("logging in through api and data is" + data);
-        if (
-          signIn({
-            auth: {
-              token: data.tokens.access,
-              type: "Bearer",
-            },
-            refresh: data.tokens.refresh,
-            userState: data.user,
-          })
-        ) {
-          console.log("Logged in successfully");
-          console.log(data);
-          localStorage.setItem("user", JSON.stringify({ user: data.user }));
-          getRolePermissions(
-            data.user.role,
-            props.setLoggedIn,
-            props.setUser,
-            props.setCurrRole,
-            data.user
-          );
-        } else {
-          // throw an error
-          console.error("Error");
-          window.alert("An error occurred. Please try again later.");
-        }
+    const data = await response.json();
+
+    if (data.user) {
+      console.log("logging in through api and data is" + data);
+      if (
+        signIn({
+          auth: {
+            token: data.tokens.access,
+            type: "Bearer",
+          },
+          refresh: data.tokens.refresh,
+          userState: data.user,
+        })
+      ) {
+        console.log("Logged in successfully");
+        console.log(data);
+        localStorage.setItem("user", JSON.stringify({ user: data.user }));
+        getRolePermissions(
+          data.user.role,
+          props.setLoggedIn,
+          props.setUser,
+          props.setCurrRole,
+          data.user
+        );
       } else {
-        window.alert("Invalid email or password");
+        // throw an error
+        console.error("Error");
+        window.alert("An error occurred. Please try again later.");
       }
-    } catch (error) {
-      console.error("Error:", error);
-      window.alert("An error occurred. Please try again later.");
+    } else {
+      window.alert("Invalid email or password");
     }
   };
 
@@ -139,15 +136,39 @@ const LoginSignup = (props) => {
     <div className="container landingpage">
       <div className="row">
         <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-          <div className="app-logo"><img src={logo} alt="logo" /></div>
+          <div className="app-logo">
+            <img src={logo} alt="logo" />
+          </div>
           <h1 className="heading">Welcome to Urb Clinder</h1>
-          <p className="welcometext">Your comprehensive digital repository for urban research and knowledge. Just like Shodhganga, Urb Clinder serves as a one-stop portal for accessing, sharing, and preserving scholarly works and publications focused on urban studies.</p>
-          <p className="welcometext">Explore a vast collection of theses, dissertations, and research papers, and contribute to advancing our understanding of urban environments. Join us in fostering a vibrant academic community dedicated to the study of cities and their dynamics.</p>
+          <p className="welcometext">
+            Your comprehensive digital repository for urban research and
+            knowledge. Just like Shodhganga, Urb Clinder serves as a one-stop
+            portal for accessing, sharing, and preserving scholarly works and
+            publications focused on urban studies.
+          </p>
+          <p className="welcometext">
+            Explore a vast collection of theses, dissertations, and research
+            papers, and contribute to advancing our understanding of urban
+            environments. Join us in fostering a vibrant academic community
+            dedicated to the study of cities and their dynamics.
+          </p>
           <div className="app-stats">
-            <div className="stats-data"><span className="stat-title">Thesis: </span><span>145</span></div>
-            <div className="stats-data"><span className="stat-title">Synopsis: </span><span>345</span></div>
-            <div className="stats-data"><span className="stat-title">Reports: </span><span>35</span></div>
-            <div className="stats-data"><span className="stat-title">Members: </span><span>45</span></div>
+            <div className="stats-data">
+              <span className="stat-title">Thesis: </span>
+              <span>145</span>
+            </div>
+            <div className="stats-data">
+              <span className="stat-title">Synopsis: </span>
+              <span>345</span>
+            </div>
+            <div className="stats-data">
+              <span className="stat-title">Reports: </span>
+              <span>35</span>
+            </div>
+            <div className="stats-data">
+              <span className="stat-title">Members: </span>
+              <span>45</span>
+            </div>
           </div>
         </div>
         <div className="col-lg-6 col-md-6 col-sm-12 col-12 bg-teal border-radius-1">
@@ -194,8 +215,10 @@ const LoginSignup = (props) => {
                 </div>
               )}
               <div className="submit-container">
-                <MDBBtn className='me-1 submit'>Login</MDBBtn>
-                <MDBBtn className='me-1 submit' onClick={handleToggle}>Register</MDBBtn>
+                <MDBBtn className="me-1 submit">Login</MDBBtn>
+                <MDBBtn className="me-1 submit" onClick={handleToggle}>
+                  Register
+                </MDBBtn>
               </div>
             </form>
           </div>

@@ -231,6 +231,7 @@ const UserApproval = (props) => {
 
   const approveRegistration = async (userId) => {
     const adminId = JSON.parse(localStorage.getItem("user")).user.id;
+    const instituteName = JSON.parse(localStorage.getItem("user")).user.institution;
     console.log("adminId and userId: ", adminId + " ", userId);
     try {
       const response = await fetch(
@@ -243,19 +244,20 @@ const UserApproval = (props) => {
           body: JSON.stringify({
             user: userId,
             admin: adminId,
+            instituteName: instituteName,
           }),
         }
       );
       const data = await response.text();
 
       if (!response.ok) {
-        throw new Error(data.message || "Could not approve registration.");
+        window.alert("Failed to approve registration: " + data);
+        // throw new Error(data.message || "Could not approve registration.");
       }
 
       return data;
     } catch (error) {
       console.error("Failed to approve registration: " + error);
-      window.alert("Failed to approve registration: " + error);
     }
   };
 
