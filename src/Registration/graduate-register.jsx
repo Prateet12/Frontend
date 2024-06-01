@@ -1,28 +1,24 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "./graduate-register.css";
 import Select from "react-select";
-import { set } from "react-hook-form";
-import { MDBIcon, MDBBtn } from 'mdb-react-ui-kit';
+import { MDBIcon, MDBBtn } from "mdb-react-ui-kit";
 
-const GraduateRegistration = ({ registerCallback }) => {
-
+const GraduateRegistration = ({ registerCallback, institutes }) => {
   const [degreeProgram, setDegreeProgram] = useState("");
   const [fieldOfStudy, setFieldOfStudy] = useState("");
   const [graduationYear, setGraduationYear] = useState("");
+  const [selectedInstitute, setSelectedInstitute] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const fieldDetails = {
-      "highest_degree_earned": degreeProgram,
-      "field_of_study": fieldOfStudy.value,
-      // TODO(aadijain): change this to create an actual file upload object
-      "graduation_date": graduationYear,
+      highest_degree_earned: degreeProgram,
+      field_of_study: fieldOfStudy.value,
+      graduation_date: graduationYear,
+      institution_name: selectedInstitute,
     };
-
-    console.log("Field details: ", fieldDetails);
+    
     registerCallback(fieldDetails);
-    // TODO(team): navigate("/graduate-success"); - success page make
   };
 
   const handleChange = (selectedField) => {
@@ -73,6 +69,21 @@ const GraduateRegistration = ({ registerCallback }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-group">
+        <div className="form-group">
+          <label htmlFor="institute">Institute:</label>
+          <select
+            id="institute"
+            className="upload_input"
+            value={selectedInstitute}
+            onChange={(e) => setSelectedInstitute(e.target.value)}
+            required
+          >
+            <option value="">Select an institute</option>
+            {institutes.map((institute, index) => (
+              <option value={institute} key={institute}>{institute}</option>
+            ))}
+          </select>
+        </div>
         <label htmlFor="degreeProgram">Degree/Program:</label>
         <select
           id="degreeProgram"
@@ -98,15 +109,6 @@ const GraduateRegistration = ({ registerCallback }) => {
           }}
         />
       </div>
-
-      {/* <div className="form-group">
-        <label htmlFor="resume">Resume:</label>
-        <input
-          className="upload_input"
-          type="file"
-          // {...("thesisDocument", { required: true })}
-        />
-      </div> */}
       <div className="form-group">
         <label htmlFor="graduationYear">Graduation Year:</label>
         <div className="graduation-date-input">
@@ -121,15 +123,11 @@ const GraduateRegistration = ({ registerCallback }) => {
           />
         </div>
       </div>
-      {/* TODO(roshni):
-       * Make each child component have the registration and login buttons instead of parent 
-        and just call back to the parent registration page
-      */}
       <div className="form-group">
-          <div className="submit-container">
-            <MDBBtn className='me-1 submit'>Register</MDBBtn>
-          </div>
+        <div className="submit-container">
+          <MDBBtn className="me-1 submit">Register</MDBBtn>
         </div>
+      </div>
     </form>
   );
 };

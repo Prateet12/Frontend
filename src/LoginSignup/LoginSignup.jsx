@@ -24,7 +24,6 @@ const LoginSignup = (props) => {
     roleId,
     setLoggedIn,
     setUser,
-    setCurrRole,
     user
   ) => {
     try {
@@ -35,16 +34,10 @@ const LoginSignup = (props) => {
       localStorage.setItem("role", JSON.stringify(data));
       localStorage.setItem("loggedIn", true);
       setLoggedIn(true);
-      setCurrRole(data);
       setUser(user);
       navigate("/dashboard");
     } catch (error) {
       console.error("Didnt find role but logged in for now:", error);
-      // TODO(aadijain): clean this up once only users with roles are allowed
-      // ALSO remember to make role a required field in user.model
-      setLoggedIn(true);
-      setUser(user);
-      navigate("/dashboard");
     }
   };
 
@@ -66,7 +59,6 @@ const LoginSignup = (props) => {
     const data = await response.json();
 
     if (data.user) {
-      console.log("logging in through api and data is" + data);
       if (
         signIn({
           auth: {
@@ -78,13 +70,11 @@ const LoginSignup = (props) => {
         })
       ) {
         console.log("Logged in successfully");
-        console.log(data);
         localStorage.setItem("user", JSON.stringify({ user: data.user }));
         getRolePermissions(
           data.user.role,
           props.setLoggedIn,
           props.setUser,
-          props.setCurrRole,
           data.user
         );
       } else {

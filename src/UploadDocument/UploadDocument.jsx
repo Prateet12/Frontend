@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import "./UploadDocument.css";
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import { MDBBtn, MDBContainer } from "mdb-react-ui-kit";
+import { getAllInstitutes } from "../utils/apiUtils";
 
 const UploadDocument = () => {
   const {
@@ -13,13 +14,12 @@ const UploadDocument = () => {
     formState: { errors },
   } = useForm();
 
-  const [selectedInstitution, setSelectedInstitution] = useState('');
-const [registeredInstitutes, setRegisteredInstitutes] = useState([
-  "Institute A",
-  "Institute B",
-  "Institute C",
-  "Institute D"
-]);
+const [selectedInstitution, setSelectedInstitution] = useState('');
+const [registeredInstitutes, setRegisteredInstitutes] = useState([]);
+
+useEffect(() => {
+  getAllInstitutes(setRegisteredInstitutes);
+}, []);
 
 const handleInstitutionChange = (event) => {
   setSelectedInstitution(event.target.value);
