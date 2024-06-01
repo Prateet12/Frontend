@@ -15,6 +15,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { getAllRoles } from "../utils/apiUtils";
 
 // UserDetailsModal component
 function UserDetailsModal({ open, handleClose, user }) {
@@ -205,9 +206,11 @@ const UserApproval = (props) => {
   const [open, setOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [rows, setRows] = useState([]);
-  console.log("rows in user approval", rows);
-  const roles = props.roles;
-  console.log("roles in user approval", roles);
+  const [roles, setRoles] = useState([]);
+
+  useEffect(() => {
+    getAllRoles(setRoles);
+  }, []); // only pre fetching roles
 
   useEffect(() => {
     setRows(props.registrationRequests);

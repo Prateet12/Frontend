@@ -11,7 +11,6 @@ import { useState, useEffect } from "react";
 import NavBar from "../src/Components/Shared/NavBar/NavBar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import GraduateRepo from "./GraduateRepo/GraduateRepo";
-import { BASE_URL } from "./utils/baseUrl";
 import Approval from "./Approval/Approval";
 import createStore from "react-auth-kit/createStore";
 import AuthProvider from "react-auth-kit";
@@ -24,8 +23,6 @@ function App() {
     () => sessionStorage.getItem("loggedIn") || false
   );
   const [user, setUser] = useState({});
-  const [currRole, setCurrRole] = useState({});
-  const [roles, setRoles] = useState(JSON.parse(localStorage.getItem("roles")) || []);
 
   const handleLogout = (e) => {
     // Clear local storage
@@ -34,7 +31,6 @@ function App() {
       localStorage.clear();
       sessionStorage.clear();
       setUser({});
-      setCurrRole({});
     }
   };
 
@@ -43,30 +39,6 @@ function App() {
     sessionStorage.setItem("loggedIn", JSON.stringify(loggedIn));
     handleLogout();
   }, [loggedIn]);
-
-  const getAllRoles = async () => {
-    try {
-      const response = await fetch(`${BASE_URL}/v1/role`);
-
-      if (!response || !response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data = await response.json();
-      console.log("roles from api in app.js are" + data);
-      setRoles(data);
-      localStorage.setItem("roles", JSON.stringify(roles));
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-
-  useEffect(() => {
-    if (!roles || roles.length <= 1) {
-      console.log("Fetching roles from API");
-      getAllRoles();
-    }
-  }, []);
-
 
   const refresh = createRefresh({
     interval: 10, // The time in sec to refresh the Access token,
@@ -99,7 +71,6 @@ function App() {
     refresh: refresh,
   });
 
-
   return (
     <div>
       <AuthProvider store={store}>
@@ -118,26 +89,17 @@ function App() {
                     <LoginSignup
                       setLoggedIn={setLoggedIn}
                       setUser={setUser}
-                      setCurrRole={setCurrRole}
                     />
                   }
                 />
                 <Route path="/academic-repo" element={<AcademicRepo />} />
-                <Route
-                  path="/registration"
-                  element={
-                    <Registration
-                      roles={roles}
-                      
-                    />
-                  }
-                />
+                <Route path="/registration" element={<Registration />} />
                 <Route path="/graduate-repo" element={<GraduateRepo />} />
                 <Route path="/upload-document" element={<UploadDocument />} />
                 <Route path="/upload-resume" element={<UploadResume />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/dashboard" element={<Dashboard user={user} />} />
-                <Route path="/approvals-inbox" element={<Approval roles={roles}/>} />
+                <Route path="/approvals-inbox" element={<Approval />} />
                 <Route path="/inbox" element={<Inbox />} />
                 <Route
                   path="/logout"

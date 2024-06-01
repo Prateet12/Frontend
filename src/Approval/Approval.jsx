@@ -8,7 +8,7 @@ import {
   MDBIcon
 } from 'mdb-react-ui-kit';
 
-const Approval = ({roles}) => {
+const Approval = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("");
 
@@ -102,8 +102,7 @@ const Approval = ({roles}) => {
         <div className="approval-table">
           <ApprovalTable 
             registrationRequests={registrationRequests} 
-            setRegistrationRequests={setRegistrationRequests} 
-            roles={roles}
+            setRegistrationRequests={setRegistrationRequests}
           />
         </div>
       </div>

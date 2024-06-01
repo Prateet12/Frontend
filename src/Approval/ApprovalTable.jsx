@@ -279,8 +279,6 @@ const style = {
             {tabValue === 'userApproval' ? 
             <UserApproval 
               registrationRequests={props.registrationRequests} 
-              // setRegistrationRequests={props.setRegistrationRequests}
-              roles={props.roles}
             /> 
             : <DocumentApproval />}
           </Box>

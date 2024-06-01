@@ -25,15 +25,10 @@ const GraduateRepo = () => {
 
   const handleSearchSubmit = (event) => {
     event.preventDefault();
-    console.log("Search term:", searchTerm);
   };
 
   const handleFilterChange = (event) => {
     setSelectedFilter(event.target.value);
-  };
-
-  const handleEmailClick = (email) => {
-    window.location.href = `mailto:${email}`;
   };
 
   return (
@@ -78,7 +73,7 @@ const GraduateRepo = () => {
           </div>
         </div>
         <div className="grad-table">
-          <GraduateTable onEmailClick={handleEmailClick} />
+          <GraduateTable />
         </div>
       </div>
     </MDBContainer>
