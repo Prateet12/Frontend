@@ -17,6 +17,30 @@ export const getAllRoles = async (setRoles) => {
   }
 };
 
+// export const getCurrentUserRole = async (setRole) => {
+//   try {
+//     const response = await fetch(`${BASE_URL}/v1/role`);
+
+//     if (!response || !response.ok) {
+//       throw new Error(`HTTP error! status: ${response.status}`);
+//     }
+//     const roles = await response.json();
+//     // console.log("data:", data);
+//     // const roles = JSON.parse(data);
+//     console.log("roles:", roles);
+//     currentRole = localStorage.getItem("role").id;
+//     console.log("currentRole:", currentRole);
+//     for (let role of roles) {
+//       if (role.id === currentRole) {
+//         console.log("role.role:", role.role);
+//         setRole(role.role);
+//       }
+//     }
+//   } catch (error) {
+//     console.error("Error:", error);
+//   }
+// };
+
 export const getAllInstitutes = async (setRegisteredInstitutes) => {
   try {
     const response = await fetch(`${BASE_URL}/v1/admin/allInstitutions`);

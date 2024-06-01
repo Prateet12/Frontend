@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   MDBContainer,
   MDBRow,
@@ -11,8 +11,9 @@ import {
 } from 'mdb-react-ui-kit';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import './profile.css';
+import { getCurrentUserRole } from '../utils/apiUtils';
 
-const user = {
+const testUser = {
   user_name: 'John Doe',
   email: 'john.doe@example.com',
   user_type: 'Practitioner', // Changing this to 'Professor', 'Researcher', or 'Graduate' to see different fields
@@ -34,6 +35,13 @@ const user = {
 };
 
 const Profile = () => {
+  const user  = JSON.parse(localStorage.getItem('user')).user || testUser;
+  const currRole = JSON.parse(localStorage.getItem('role')).role || testUser.user_type;
+  // const [currRole, setRole] = React.useState("");
+
+  // useEffect(() => {
+  //   getCurrentUserRole(setRole);
+  // }, []);
   return (
     <MDBContainer className="my-5">
       <MDBTypography tag="h1" className="text-center mb-5">YOUR PROFILE</MDBTypography>
@@ -44,48 +52,46 @@ const Profile = () => {
               <MDBRow className="align-items-center">
                 <MDBCol md="4" className="text-center">
                   <MDBCardImage
-                    src={user.image}
+                    src={testUser.image}
                     alt="User Profile"
                     className="rounded-circle mb-3"
                     style={{ width: '150px' }}
                   />
                 </MDBCol>
                 <MDBCol md="8">
-                  <MDBTypography tag="h4" className="profile-name">{user.user_name}</MDBTypography>
-                  <MDBCardText className="profile-email">{user.email}</MDBCardText>
+                  <MDBTypography tag="h4" className="profile-name"><strong>Name:</strong> {user.name}</MDBTypography>
+                  <MDBCardText className="profile-email"><strong>Email:</strong> {user.email}</MDBCardText>
                   <MDBCardText className="profile-user-type text-muted mb-4">
-                    {user.user_type}
+                  <strong>Role:</strong> {currRole}
                   </MDBCardText>
                 </MDBCol>
               </MDBRow>
               <MDBRow className="profile-details mt-4">
-                {user.user_type === 'Practitioner' && (
+                {currRole === 'practitioner' && (
                   <>
-                    <MDBCol md="6"><p className="profile-field"><strong>Years of Experience:</strong> {user.yearsOfExperience}</p></MDBCol>
-                    <MDBCol md="6"><p className="profile-field"><strong>Organization Type:</strong> {user.organizationType}</p></MDBCol>
-                    <MDBCol md="6"><p className="profile-field"><strong>Industry Sector:</strong> {user.industrySector}</p></MDBCol>
-                    <MDBCol md="6"><p className="profile-field"><strong>Associated Organization Name:</strong> {user.associatedOrganizationName}</p></MDBCol>
+                    <MDBCol md="6"><p className="profile-field"><strong>Years of Experience:</strong> {user.years_of_experience}</p></MDBCol>
+                    {user.industrySector && <MDBCol md="6"><p className="profile-field"><strong>Industry Sector:</strong> {user.industry_sector}</p></MDBCol>}
+                    <MDBCol md="6"><p className="profile-field"><strong>Associated Organization Name:</strong> {user.company}</p></MDBCol>
                   </>
                 )}
-                {user.user_type === 'Professor' && (
+                {currRole === 'professor' && (
                   <>
-                    <MDBCol md="6"><p className="profile-field"><strong>Department:</strong> {user.department}</p></MDBCol>
-                    <MDBCol md="6"><p className="profile-field"><strong>Research Interests:</strong> {user.researchInterests}</p></MDBCol>
-                    <MDBCol md="6"><p className="profile-field"><strong>Publications:</strong> {user.publications}</p></MDBCol>
+                    <MDBCol md="6"><p className="profile-field"><strong>Institution name:</strong> {user.institution_name}</p></MDBCol>
+                    <MDBCol md="6"><p className="profile-field"><strong>Institution type:</strong> {user.institution_type}</p></MDBCol>
+                    <MDBCol md="6"><p className="profile-field"><strong>Research:</strong> {user.areas_of_study || user.areas_of_interest}</p></MDBCol>
                   </>
                 )}
-                {user.user_type === 'Researcher' && (
+                {currRole === 'researcher' && (
                   <>
-                    <MDBCol md="6"><p className="profile-field"><strong>Research Area:</strong> {user.researchArea}</p></MDBCol>
-                    <MDBCol md="6"><p className="profile-field"><strong>Projects:</strong> {user.projects}</p></MDBCol>
-                    <MDBCol md="6"><p className="profile-field"><strong>Affiliation:</strong> {user.affiliation}</p></MDBCol>
+                    <MDBCol md="6"><p className="profile-field"><strong>Research:</strong> {user.areas_of_study || user.areas_of_interest}</p></MDBCol>
+                    <MDBCol md="6"><p className="profile-field"><strong>Affiliation:</strong> {user.institution_name}</p></MDBCol>
                   </>
                 )}
-                {user.user_type === 'Graduate' && (
+                {currRole === 'graduate' && (
                   <>
-                    <MDBCol md="6"><p className="profile-field"><strong>Degree Program:</strong> {user.degreeProgram}</p></MDBCol>
-                    <MDBCol md="6"><p className="profile-field"><strong>Graduation Year:</strong> {user.graduationYear}</p></MDBCol>
-                    <MDBCol md="6"><p className="profile-field"><strong>Institution:</strong> {user.institution}</p></MDBCol>
+                    <MDBCol md="6"><p className="profile-field"><strong>Degree Program:</strong> {user.degree_program}</p></MDBCol>
+                    <MDBCol md="6"><p className="profile-field"><strong>Graduation Year:</strong> {user.graduation_year}</p></MDBCol>
+                    <MDBCol md="6"><p className="profile-field"><strong>Institution:</strong> {user.institution_name}</p></MDBCol>
                   </>
                 )}
               </MDBRow>
