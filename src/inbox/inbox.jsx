@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import ApprovalTable from "./inboxTable";
+import InboxTable from "./inboxTable";
 import "./inbox.css"; 
 import {
   MDBContainer, 
@@ -74,7 +73,7 @@ const Approval = () => {
         </div>
 
         <div className="approval-table">
-          <ApprovalTable />
+          <InboxTable />
         </div>
       </div>
     </MDBContainer>

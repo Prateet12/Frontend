@@ -68,6 +68,15 @@ function NavBar({ setLoggedIn }) {
       // Set it 2nd from the bottom
       settings.splice(settings.length - 1, 0, uploadResumeAllowed);
     }
+    if (role.role === "admin" || role.role === "institution admin") {
+      // TODO(team): discuss for admin
+      const adminDocsInbox = {
+        route: "/inbox",
+        title: "My Documents",
+      };
+      // Set it 2nd from the bottom
+      settings.splice(settings.length - 1, 0, adminDocsInbox);
+    }
   }
 
   console.log("localStorage.getItem('role')", localStorage.getItem("role"));
