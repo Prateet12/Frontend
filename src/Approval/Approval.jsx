@@ -51,7 +51,7 @@ const Approval = () => {
   useEffect(() => {
     // Replace 'Your Institution Name' with the actual institution name
     const user = JSON.parse(localStorage.getItem("user")).user;
-    const instituteName = user.institution_name;
+    const instituteName = user.institution;
     getUserRegistrationRequests(instituteName).catch((error) => {
       console.error("Failed to fetch registration requests:", error);
     });
@@ -59,7 +59,7 @@ const Approval = () => {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user")).user;
-    const instituteName = user.institution_name;
+    const instituteName = user.institution;
     getUserDocumentRequests(instituteName).catch((error) => {
       console.error("Failed to fetch document requests:", error);
     });
@@ -118,6 +118,8 @@ const Approval = () => {
           <ApprovalTable
             registrationRequests={registrationRequests}
             setRegistrationRequests={setRegistrationRequests}
+            uploadRequests={uploadRequests}
+            setUploadRequests={setUploadRequests}
           />
         </div>
       </div>
