@@ -2,28 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ApprovalTable from "./ApprovalTable";
 import "./Approval.css";
-import {
-  MDBContainer,
-  MDBBtn,
-  MDBIcon
-} from 'mdb-react-ui-kit';
+import { MDBContainer, MDBBtn, MDBIcon } from "mdb-react-ui-kit";
 
 const Approval = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("");
 
   const [registrationRequests, setRegistrationRequests] = useState([]);
+  const [uploadRequests, setUploadRequests] = useState([]);
 
-  const getUserRegistrationRequests = async (institutionName) => {
+  const getUserRegistrationRequests = async (instituteName) => {
     const response = await fetch(
-      "http://localhost:3001/v1/admin/registrationRequests",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ institution: institutionName }),
-      }
+      `http://localhost:3001/v1/admin/registrationRequests/${instituteName}`
     );
 
     if (!response.ok) {
@@ -43,10 +33,35 @@ const Approval = () => {
     setRegistrationRequests(requests);
   };
 
+  const getUserDocumentRequests = async (instituteName) => {
+    const response = await fetch(
+      `http://localhost:3001/v1/admin/uploadRequests/${instituteName}`
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    console.log("Upload requests:", data);
+    setUploadRequests(data);
+  };
+
   useEffect(() => {
     // Replace 'Your Institution Name' with the actual institution name
-    getUserRegistrationRequests("Your Institution Name").catch((error) => {
+    const user = JSON.parse(localStorage.getItem("user")).user;
+    const instituteName = user.institution_name;
+    getUserRegistrationRequests(instituteName).catch((error) => {
       console.error("Failed to fetch registration requests:", error);
+    });
+  }, []);
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user")).user;
+    const instituteName = user.institution_name;
+    getUserDocumentRequests(instituteName).catch((error) => {
+      console.error("Failed to fetch document requests:", error);
     });
   }, []);
 
@@ -78,8 +93,8 @@ const Approval = () => {
               placeholder="Search here"
               className="search_input"
             />
-            <MDBBtn className=''>
-              <MDBIcon fas icon="search"/>
+            <MDBBtn className="">
+              <MDBIcon fas icon="search" />
               Search
             </MDBBtn>
           </form>
@@ -100,8 +115,8 @@ const Approval = () => {
           </div>
         </div>
         <div className="approval-table">
-          <ApprovalTable 
-            registrationRequests={registrationRequests} 
+          <ApprovalTable
+            registrationRequests={registrationRequests}
             setRegistrationRequests={setRegistrationRequests}
           />
         </div>
