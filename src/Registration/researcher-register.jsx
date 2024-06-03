@@ -3,11 +3,11 @@ import "./researcher-register.css";
 import Select from "react-select";
 import { MDBIcon, MDBBtn } from 'mdb-react-ui-kit';
 
-const ResearcherRegistration = ({ registerCallback }) => {
+const ResearcherRegistration = ({ registerCallback, institutes }) => {
   const [highestDegreeObtained, setHighestDegreeObtained] = useState("");
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [instituteName, setInstituteName] = useState("");
   const [instituteType, setInstituteType] = useState("");
+  const [selectedInstitute, setSelectedInstitute] = useState("");
 
   const InstituteOptions = [
     { value: "Government", label: "Government" },
@@ -15,10 +15,6 @@ const ResearcherRegistration = ({ registerCallback }) => {
     { value: "Private", label: "Private" },
     { value: "NGO", label: "NGO" },
   ];
-
-  const handleInstituteNameChange = (e) => {
-    setInstituteName(e.target.value);
-  };
 
   const handleInstituteTypeChange = (selectedOption) => {
     console.log("Selected option: ", selectedOption);
@@ -32,7 +28,7 @@ const ResearcherRegistration = ({ registerCallback }) => {
     const areasOfStudy = selectedOptions.map((option) => option.value);
     const fieldDetails = {
       highest_degree_earned: highestDegreeObtained,
-      institution_name: instituteName,
+      institution_name: selectedInstitute,
       institution_type: instituteType.value,
       // institution_address: instituteAddress,
     };
@@ -127,13 +123,18 @@ const ResearcherRegistration = ({ registerCallback }) => {
       </div>
       <div className="form-group">
         <label htmlFor="Name">Organization Name</label>
-        <input
-          type="text"
-          placeholder="Name of Institute"
-          value={instituteName}
-          onChange={handleInstituteNameChange}
-          className="input_field"
-        />
+        <select
+            id="institute"
+            className="upload_input"
+            value={selectedInstitute}
+            onChange={(e) => setSelectedInstitute(e.target.value)}
+            required
+          >
+            <option value="">Select an institute</option>
+            {institutes.map((institute, index) => (
+              <option value={institute} key={institute}>{institute}</option>
+            ))}
+          </select>
       </div>
       {/* <div className="form-group">
         <label htmlFor="instituteAddress">Institute Address:</label>
