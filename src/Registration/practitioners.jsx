@@ -15,6 +15,7 @@ const PractitionersRegistration = ({ registerCallback }) => {
       years_of_experience: yearsOfExperience,
       company: organizationName,
       industry_sector: selectedSectorOption ? selectedSectorOption.value : null,
+      institution_type: selectedOrganizationOption ? selectedOrganizationOption.value : null,
     };
 
     console.log("Field details: ", fieldDetails);
