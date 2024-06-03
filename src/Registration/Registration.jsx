@@ -20,18 +20,23 @@ const Registration = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [selectedRole, setSelectedRole] = useState("");
-  const [roles, setRoles] = useState([]);
-  const [institutes, setInstitutes] = useState([]);
+  const [roles, setRoles] = useState(
+    JSON.parse(localStorage.getItem("roles")) || []
+  );
+  const [institutes, setInstitutes] = useState(
+    JSON.parse(localStorage.getItem("institutes")) || []
+  );
 
   useEffect(() => {
-    getAllRoles(setRoles);
+    if (!roles || roles.length <= 1) {
+      getAllRoles(setRoles);
+    }
   }, []);
 
   useEffect(() => {
     getAllInstitutes(setInstitutes);
   }, []);
-  
-  
+
   const navigate = useNavigate();
 
   let roleNames = roles.map((role) => role.role);

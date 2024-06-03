@@ -13,7 +13,9 @@ const UploadDocument = () => {
   } = useForm();
 
   const [selectedInstitution, setSelectedInstitution] = useState("");
-  const [registeredInstitutes, setRegisteredInstitutes] = useState([]);
+  const [registeredInstitutes, setRegisteredInstitutes] = useState(
+    JSON.parse(localStorage.getItem("institutes")) || []
+  );
 
   const createFormData = (data, files, fileType) => {
     let formData = new FormData();
@@ -47,7 +49,9 @@ const UploadDocument = () => {
   };
 
   useEffect(() => {
-    getAllInstitutes(setRegisteredInstitutes);
+    if (!registeredInstitutes || registeredInstitutes.length <= 1) {
+      getAllInstitutes(setRegisteredInstitutes);
+    }
   }, []);
 
   const handleInstitutionChange = (event) => {

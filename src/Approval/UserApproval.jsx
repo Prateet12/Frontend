@@ -206,10 +206,12 @@ const UserApproval = (props) => {
   const [open, setOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [rows, setRows] = useState([]);
-  const [roles, setRoles] = useState([]);
+  const [roles, setRoles] = useState(JSON.parse(localStorage.getItem("roles")) || []);
 
   useEffect(() => {
-    getAllRoles(setRoles);
+    if (!roles || roles.length <= 1) {
+      getAllRoles(setRoles);
+    }
   }, []); // only pre fetching roles
 
   useEffect(() => {

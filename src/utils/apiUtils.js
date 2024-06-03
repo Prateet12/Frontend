@@ -56,6 +56,7 @@ export const getAllRoles = async (setRoles) => {
     }
     const data = await response.json();
     setRoles(data);
+    localStorage.setItem("roles", JSON.stringify(data));
     return data;
   } catch (error) {
     console.error("Error:", error);
@@ -74,6 +75,7 @@ export const getAllInstitutes = async (setRegisteredInstitutes) => {
       data = [data];
     }
     setRegisteredInstitutes(data);
+    localStorage.setItem("institutes", JSON.stringify(data));
     return data;
   } catch (error) {
     console.error("Error:", error);
