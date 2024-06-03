@@ -129,107 +129,122 @@ export default function CollapsibleTable() {
             </tr>
           </MDBTableHead>
           <MDBTableBody style={{ verticalAlign: "middle" }}>
-            {rows.map((row, index) => (
-              <React.Fragment key={index}>
-                <tr>
-                  <td>
-                    <p className="fw-normal mb-1">{row.title}</p>
-                  </td>
-                  <td>
-                    <p className="fw-normal mb-1">{row.fileType}</p>
-                  </td>
-                  <td>
-                    <p className="fw-normal mb-1">{row.author}</p>
-                  </td>
-                  <td>
-                    <p className="fw-normal mb-0">{row.degree_program}</p>
-                  </td>
-                  <td>
-                    <p className="fw-normal mb-0">{new Date(row.publication_date).toDateString()}</p>
-                  </td>
-                  <td>
-                    <p className="fw-normal mb-0">{row.fileSize}</p>
-                  </td>
-                  <td>
-                    <p className="fw-normal mb-0">{new Date(row.uploadDate).toDateString()}</p>
-                  </td>
-                  <td>
-                    <MDBIcon
-                      fas
-                      icon={expandedRow === row.id ? "caret-up" : "caret-down"}
-                      onClick={() => toggleRowDetails(row.id)}
-                      style={{
-                        cursor: "pointer",
-                        color: "#0d6efd",
-                        fontSize: "1.5rem",
-                      }}
-                    />
-                  </td>
-                </tr>
-                <tr
-                  style={{
-                    display: expandedRow === row.id ? "table-row" : "none",
-                  }}
-                >
-                  <td colSpan={8}>
-                    <MDBCollapse open={expandedRow === row.id}>
-                      <div className="p-3">
-                        <p>
-                          <strong>Ttile:</strong> {row.title}
-                        </p>
-                        <p>
-                          <strong>Authors:</strong> {row.author}
-                        </p>
-                        <p>
-                          <strong>Degree/Program:</strong> {row.degree_program}
-                        </p>
-                        <p>
-                          <strong>Publication Date:</strong>{" "}
-                          {new Date(row.publication_date).toDateString()}
-                        </p>
-                        <p>
-                          <strong>Abstract:</strong> {row.abstract}
-                        </p>
-                        <p>
-                          <strong>Keywords:</strong> {row.keywords}
-                        </p>
+            {rows.length === 0 ? (
+              <tr>
+                <td colSpan={8} align="center">
+                  No files in academic repository
+                </td>
+              </tr>
+            ) : (
+              rows.map((row, index) => (
+                <React.Fragment key={index}>
+                  <tr>
+                    <td>
+                      <p className="fw-normal mb-1">{row.title}</p>
+                    </td>
+                    <td>
+                      <p className="fw-normal mb-1">{row.fileType}</p>
+                    </td>
+                    <td>
+                      <p className="fw-normal mb-1">{row.author}</p>
+                    </td>
+                    <td>
+                      <p className="fw-normal mb-0">{row.degree_program}</p>
+                    </td>
+                    <td>
+                      <p className="fw-normal mb-0">
+                        {new Date(row.publication_date).toDateString()}
+                      </p>
+                    </td>
+                    <td>
+                      <p className="fw-normal mb-0">{row.fileSize}</p>
+                    </td>
+                    <td>
+                      <p className="fw-normal mb-0">
+                        {new Date(row.uploadDate).toDateString()}
+                      </p>
+                    </td>
+                    <td>
+                      <MDBIcon
+                        fas
+                        icon={
+                          expandedRow === row.id ? "caret-up" : "caret-down"
+                        }
+                        onClick={() => toggleRowDetails(row.id)}
+                        style={{
+                          cursor: "pointer",
+                          color: "#0d6efd",
+                          fontSize: "1.5rem",
+                        }}
+                      />
+                    </td>
+                  </tr>
+                  <tr
+                    style={{
+                      display: expandedRow === row.id ? "table-row" : "none",
+                    }}
+                  >
+                    <td colSpan={8}>
+                      <MDBCollapse open={expandedRow === row.id}>
+                        <div className="p-3">
+                          <p>
+                            <strong>Ttile:</strong> {row.title}
+                          </p>
+                          <p>
+                            <strong>Authors:</strong> {row.author}
+                          </p>
+                          <p>
+                            <strong>Degree/Program:</strong>{" "}
+                            {row.degree_program}
+                          </p>
+                          <p>
+                            <strong>Publication Date:</strong>{" "}
+                            {new Date(row.publication_date).toDateString()}
+                          </p>
+                          <p>
+                            <strong>Abstract:</strong> {row.abstract}
+                          </p>
+                          <p>
+                            <strong>Keywords:</strong> {row.keywords}
+                          </p>
 
-                        <p>
-                          <strong>Thesis Document:</strong>{" "}
-                          {row.filePath && (
-                            <a
-                              href={`http://localhost:3001/static/${getFilename(
-                                row.filePath
-                              )}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              View Thesis
-                            </a>
-                          )}
-                        </p>
-                        <p>
-                          {row.synopsisFilePath && (
-                            <>
-                              <strong>Synopsis Document:</strong>{" "}
+                          <p>
+                            <strong>Thesis Document:</strong>{" "}
+                            {row.filePath && (
                               <a
                                 href={`http://localhost:3001/static/${getFilename(
-                                  row.synopsisFilePath
+                                  row.filePath
                                 )}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                               >
-                                View Synopsis
+                                View Thesis
                               </a>
-                            </>
-                          )}
-                        </p>
-                      </div>
-                    </MDBCollapse>
-                  </td>
-                </tr>
-              </React.Fragment>
-            ))}
+                            )}
+                          </p>
+                          <p>
+                            {row.synopsisFilePath && (
+                              <>
+                                <strong>Synopsis Document:</strong>{" "}
+                                <a
+                                  href={`http://localhost:3001/static/${getFilename(
+                                    row.synopsisFilePath
+                                  )}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  View Synopsis
+                                </a>
+                              </>
+                            )}
+                          </p>
+                        </div>
+                      </MDBCollapse>
+                    </td>
+                  </tr>
+                </React.Fragment>
+              ))
+            )}
           </MDBTableBody>
         </MDBTable>
       </div>

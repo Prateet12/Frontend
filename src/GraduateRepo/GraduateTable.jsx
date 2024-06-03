@@ -17,7 +17,6 @@ import {
 import avatar1 from "../Components/Assets/avatars/1.jpg";
 import { getAllRoles, fetchAllUsers } from "../utils/apiUtils";
 
-
 const handleMailClick = (email) => {
   const mailtoLink = `mailto:${email}`;
   window.open(mailtoLink);
@@ -61,52 +60,62 @@ export default function CollapsibleTable() {
             </tr>
           </MDBTableHead>
           <MDBTableBody style={{ verticalAlign: "middle" }}>
-            {rows.map((user, index) => (
-              <tr key={index}>
-                <td>
-                  <div className="d-flex align-items-center">
-                    <img
-                      src={avatar1}
-                      alt=""
-                      style={{ width: "45px", height: "45px" }}
-                      className="rounded-circle"
-                    />
-                    <div className="ms-3">
-                      <p className="fw-bold mb-1">{user.name}</p>
-                      <p className="text-muted mb-0">{user.email}</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <p className="fw-normal mb-1">{getUserOrganization(user)}</p>
-                </td>
-                <td>
-                  <p className="fw-normal mb-1">
-                    {getUserPosition(user, tableRoles)}
-                  </p>
-                </td>
-                <td>
-                  <p className="fw-normal mb-0">
-                    {getUserSpecialization(user)}
-                  </p>
-                </td>
-                <td>
-                  <p className="fw-normal mb-0">{getUserJoinDate(user)}</p>
-                </td>
-                <td>
-                  <MDBIcon
-                    far
-                    icon="envelope"
-                    style={{
-                      cursor: "pointer",
-                      color: "#0d6efd",
-                      fontSize: "1.5rem",
-                    }}
-                    onClick={() => handleMailClick(user.email)}
-                  />
+            {rows.length === 0 ? (
+              <tr>
+                <td colSpan={8} align="center">
+                  No files in graduate repository
                 </td>
               </tr>
-            ))}
+            ) : (
+              rows.map((user, index) => (
+                <tr key={index}>
+                  <td>
+                    <div className="d-flex align-items-center">
+                      <img
+                        src={avatar1}
+                        alt=""
+                        style={{ width: "45px", height: "45px" }}
+                        className="rounded-circle"
+                      />
+                      <div className="ms-3">
+                        <p className="fw-bold mb-1">{user.name}</p>
+                        <p className="text-muted mb-0">{user.email}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <p className="fw-normal mb-1">
+                      {getUserOrganization(user)}
+                    </p>
+                  </td>
+                  <td>
+                    <p className="fw-normal mb-1">
+                      {getUserPosition(user, tableRoles)}
+                    </p>
+                  </td>
+                  <td>
+                    <p className="fw-normal mb-0">
+                      {getUserSpecialization(user)}
+                    </p>
+                  </td>
+                  <td>
+                    <p className="fw-normal mb-0">{getUserJoinDate(user)}</p>
+                  </td>
+                  <td>
+                    <MDBIcon
+                      far
+                      icon="envelope"
+                      style={{
+                        cursor: "pointer",
+                        color: "#0d6efd",
+                        fontSize: "1.5rem",
+                      }}
+                      onClick={() => handleMailClick(user.email)}
+                    />
+                  </td>
+                </tr>
+              ))
+            )}
           </MDBTableBody>
         </MDBTable>
       </div>
