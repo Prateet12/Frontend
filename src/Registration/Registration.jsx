@@ -230,7 +230,10 @@ const Registration = () => {
               )}
 
               {showResearcherOptions && (
-                <ResearcherRegistration registerCallback={registerCallback} />
+                <ResearcherRegistration
+                  registerCallback={registerCallback}
+                  institutes={institutes}
+                />
               )}
 
               {showPractitionerOptions && (
@@ -248,7 +251,10 @@ const Registration = () => {
               )}
 
               {showProfessorOptions && (
-                <ProfessorRegistration registerCallback={registerCallback} />
+                <ProfessorRegistration
+                  registerCallback={registerCallback}
+                  institutes={institutes}
+                />
               )}
             </div>
           </div>
