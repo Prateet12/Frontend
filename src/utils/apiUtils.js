@@ -5,7 +5,7 @@ import { BASE_URL } from "./baseUrl";
 export const getAllUserFiles = async (userId, setRowsState) => {
   try {
     const response = await fetch(
-      `http://localhost:3001/v1/file/userFiles/${userId}`
+      `${BASE_URL}/v1/file/userFiles/${userId}`
     );
     if (!response.ok) {
       const data = await response.json();
@@ -82,13 +82,13 @@ export const getAllInstitutes = async (setRegisteredInstitutes) => {
 
 export const fetchAllUsers = async (setRows) => {
   try {
-    const response = await fetch("http://localhost:3001/v1/user/");
+    const response = await fetch(`${BASE_URL}/v1/user/`);
     if (!response.ok) {
       const data = await response.text();
       console.error("An error occurred: " + data.error);
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    const data = await response.json();
+    let data = await response.json();
     if (!Array.isArray(data)) {
       data = [data];
     }
