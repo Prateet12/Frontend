@@ -22,10 +22,6 @@ import {
   MDBCollapse,
 } from "mdb-react-ui-kit";
 
-function getFilename(path) {
-  return path.split("/").pop();
-}
-
 function createData(
   id,
   title,
@@ -210,33 +206,29 @@ export default function CollapsibleTable() {
 
                           <p>
                             <strong>Thesis Document:</strong>{" "}
-                            {row.filePath && (
+                            {row.filename && (
+                            <a
+                              href={`http://localhost:3001/static/${row.filename}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              View Thesis
+                            </a>
+                          )}
+                          </p>
+                          <p>
+                          {row.synopsisFileName && (
+                            <>
+                              <strong>Synopsis Document:</strong>{" "}
                               <a
-                                href={`http://localhost:3001/static/${getFilename(
-                                  row.filePath
-                                )}`}
+                                href={`http://localhost:3001/static/${row.synopsisFileName}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                               >
-                                View Thesis
+                                View Synopsis
                               </a>
-                            )}
-                          </p>
-                          <p>
-                            {row.synopsisFilePath && (
-                              <>
-                                <strong>Synopsis Document:</strong>{" "}
-                                <a
-                                  href={`http://localhost:3001/static/${getFilename(
-                                    row.synopsisFilePath
-                                  )}`}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                >
-                                  View Synopsis
-                                </a>
-                              </>
-                            )}
+                            </>
+                          )}
                           </p>
                         </div>
                       </MDBCollapse>

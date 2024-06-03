@@ -42,10 +42,6 @@ const style = {
   p: 4,
 };
 
-function getFilename(path) {
-  return path.split("/").pop();
-}
-
 // ViewDetailsModal component
 function ViewDetailsModal({ open, handleClose, document }) {
   if (!document) return null;
@@ -85,30 +81,30 @@ function ViewDetailsModal({ open, handleClose, document }) {
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
           <strong>Supervisors/Advisors:</strong> {document.supervisors}
         </Typography>
-        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          <strong>Thesis Document:</strong>{" "}
-          <a
-            href={`http://localhost:3001/static/${getFilename(
-              document.filePath
-            )}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            View Thesis
-          </a>
-        </Typography>
-        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          <strong>Synopsis Document:</strong>{" "}
-          <a
-            href={`http://localhost:3001/static/${getFilename(
-              document.synopsisFilePath
-            )}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            View Synopsis
-          </a>
-        </Typography>
+        {document.filename && (
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            <strong>Thesis Document:</strong>{" "}
+            <a
+              href={`http://localhost:3001/static/${document.filename}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View Thesis
+            </a>
+          </Typography>
+        )}
+        {document.synopsisFileName && (
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            <strong>Synopsis Document:</strong>{" "}
+            <a
+              href={`http://localhost:3001/static/${document.synopsisFileName}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View Synopsis
+            </a>
+          </Typography>
+        )}
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
           <strong>Funding Sources:</strong> {document.fundingSources}
         </Typography>
