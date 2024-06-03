@@ -1,12 +1,8 @@
 import "./AcademicRepo.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AcademicTable from "./AcademicTable"; 
-import {
-  MDBContainer,
-  MDBBtn,
-  MDBIcon
-} from 'mdb-react-ui-kit';
+import AcademicTable from "./AcademicTable";
+import { MDBContainer, MDBBtn, MDBIcon } from "mdb-react-ui-kit";
 
 const AcademicRepo = () => {
   const navigate = useNavigate();
@@ -36,13 +32,17 @@ const AcademicRepo = () => {
       <section className="m-4">
         <h2 className="mb-4">Academic Repository</h2>
         <p>
-          Welcome to our Academic Repository! We invite you to contribute to our growing collection by uploading your theses, 
-          research papers, and scholarly documents. Join us in expanding access to knowledge and fostering academic collaboration.
+          Welcome to our Academic Repository! We invite you to contribute to our
+          growing collection by uploading your theses, research papers, and
+          scholarly documents. Join us in expanding access to knowledge and
+          fostering academic collaboration.
         </p>
         <hr></hr>
         <p>
-          You can share your insights and discoveries with the global academic community by uploading your research materials today. 
-          Join us in advancing knowledge dissemination and empowering others with your research contributions.
+          You can share your insights and discoveries with the global academic
+          community by uploading your research materials today. Join us in
+          advancing knowledge dissemination and empowering others with your
+          research contributions.
         </p>
       </section>
       <div className="container_academic">
@@ -56,8 +56,8 @@ const AcademicRepo = () => {
                 placeholder="Search for various thesis and research papers..."
                 className="search_input"
               />
-              <MDBBtn className=''>
-                <MDBIcon fas icon="search"/>
+              <MDBBtn className="">
+                <MDBIcon fas icon="search" />
                 Search
               </MDBBtn>
             </form>
@@ -79,7 +79,16 @@ const AcademicRepo = () => {
               </select>
             </div>
           </div>
-          <MDBBtn className='upload_button' onClick={() => redirectToUpload()}>Upload your research</MDBBtn>
+          {JSON.parse(localStorage.getItem("role")).permissions.includes(
+            "uploadThesis"
+          ) && (
+            <MDBBtn
+              className="upload_button"
+              onClick={() => redirectToUpload()}
+            >
+              Upload your research
+            </MDBBtn>
+          )}
         </div>
         <div className="grad-table">
           <AcademicTable />
