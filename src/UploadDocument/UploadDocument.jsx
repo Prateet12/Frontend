@@ -9,14 +9,14 @@ const UploadDocument = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset, 
+    reset,
   } = useForm();
 
   const [selectedInstitution, setSelectedInstitution] = useState("");
   const [registeredInstitutes, setRegisteredInstitutes] = useState([]);
 
   const createFormData = (data, files, fileType) => {
-    const formData = new FormData();
+    let formData = new FormData();
     console.log("User ID:", JSON.parse(localStorage.getItem("user")).user.id);
     // Required Fields
     formData.append(
@@ -85,9 +85,9 @@ const UploadDocument = () => {
       const formData = createFormData(data, files, fileType);
       await uploadDocument(formData);
 
-      reset();
       setThesisFile(null);
       setSynopsisFile(null);
+      reset();
     } catch (error) {
       console.error("Error:", error);
     }

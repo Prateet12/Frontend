@@ -43,8 +43,8 @@ const UploadResume = () => {
     // Call your API to upload the form data here
     await uploadDocument(createFormData(data, selectedFile));
     // Clear the form and file input
-    reset();
     setSelectedFile(null);
+    reset();
   };
 
   return (
