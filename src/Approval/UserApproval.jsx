@@ -38,22 +38,23 @@ function UserDetailsModal({ open, handleClose, user }) {
   let modalContent;
 
   switch (
-    user.role // Role-based rendering
+    user.role.toLowerCase() // Role-based rendering
   ) {
     case "graduate":
+      console.log("user in graduate", user.userDetails);
       modalContent = (
         <>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Graduate Details
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <strong>Degree Program:</strong> {user.degreeProgram}
+            <strong>Degree Program:</strong> {user.userDetails.highest_degree_earned}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <strong>Graduation Year:</strong> {user.graduationYear}
+            <strong>Graduation Year:</strong> {user.userDetails.graduation_date}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <strong>Institution Name:</strong> {user.institutionName}
+            <strong>Institution Name:</strong> {user.userDetails.institution_name}
           </Typography>
         </>
       );
@@ -65,22 +66,23 @@ function UserDetailsModal({ open, handleClose, user }) {
             Practitioner Details
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <strong>Years of Experience:</strong> {user.yearsOfExperience}
+            <strong>Years of Experience:</strong> {user.userDetails.years_of_experience}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <strong>Organization Type:</strong> {user.organizationType}
+            <strong>Organization Type:</strong> {user.userDetails.institution_type}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <strong>Industry Sector:</strong> {user.industrySector}
+            <strong>Industry Sector:</strong> {user.userDetails.industry_sector}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             <strong>Associated Organization Name:</strong>{" "}
-            {user.associatedOrganizationName}
+            {user.userDetails.industry_sector}
           </Typography>
         </>
       );
+      console.log("modalContent: " + modalContent);
       break;
-    case "Professor":
+    case "professor":
       console.log("user in professor", user.userDetails);
       modalContent = (
         <>
@@ -102,7 +104,7 @@ function UserDetailsModal({ open, handleClose, user }) {
         </>
       );
       break;
-    case "Researcher":
+    case "researcher":
       modalContent = (
         <>
           <Typography id="modal-modal-title" variant="h6" component="h2">
@@ -123,26 +125,7 @@ function UserDetailsModal({ open, handleClose, user }) {
         </>
       );
       break;
-    case "Researcher":
-      modalContent = (
-        <>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Research Assistant Details
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <strong>Highest Degree:</strong> {user.highestDegree}
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <strong>Research Areas:</strong> {user.researchAreas}
-          </Typography>
-
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <strong>Organization Name:</strong> {user.organizationName}
-          </Typography>
-        </>
-      );
-      break;
-    case "Institution Admin":
+    case "institution admin":
       modalContent = (
         <>
           <Typography id="modal-modal-title" variant="h6" component="h2">

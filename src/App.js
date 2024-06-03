@@ -4,7 +4,7 @@ import LoginSignup from "./LoginSignup/LoginSignup";
 import AcademicRepo from "./AcademicRepo/AcademicRepo";
 import UploadDocument from "./UploadDocument/UploadDocument";
 import UploadResume from "./UploadResume/UploadResume";
-import Profile from "./Profile/Profile";
+import Profile from "./profile/profile";
 import Registration from "./Registration/Registration";
 import Dashboard from "./Dashboard/Dashboard";
 import { useState, useEffect } from "react";
