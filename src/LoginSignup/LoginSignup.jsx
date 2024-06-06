@@ -125,7 +125,7 @@ const LoginSignup = (props) => {
           <div className="app-logo">
             <img src={logo} alt="logo" />
           </div>
-          <h1 className="heading">Welcome to Urb Clinder</h1>
+          <h1 className="heading">Welcome to Urb-Clinder</h1>
           <p className="welcometext">
             Your comprehensive digital repository for urban research and
             knowledge. Just like Shodhganga, Urb Clinder serves as a one-stop
