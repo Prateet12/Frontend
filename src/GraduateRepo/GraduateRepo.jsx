@@ -67,9 +67,10 @@ const GraduateRepo = () => {
               onChange={handleFilterChange}
             >
               <option value="">All</option>
-              <option value="job_seeker">Specialization</option>
-              <option value="employer">Institute</option>
-              <option value="employer">Position/Role</option>
+              <option value="specialization">Specialization</option>
+              <option value="position-role">Position/Role</option>
+              <option value="institute">Institute</option>
+             
             </select>
           </div>
         </div>
