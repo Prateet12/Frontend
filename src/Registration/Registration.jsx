@@ -129,7 +129,7 @@ const Registration = () => {
           <div className="app-logo">
             <img src={logo} alt="logo" />
           </div>
-          <h1 className="heading">Welcome to Urb Clinder</h1>
+          <h1 className="heading">Welcome to Urb-Clinder</h1>
           <p className="welcometext">
             Your comprehensive digital repository for urban research and
             knowledge. Just like Shodhganga, Urb Clinder serves as a one-stop
@@ -172,6 +172,26 @@ const Registration = () => {
               </Button>
             </Link>
             <div className="form">
+
+            <div className="form-group">
+                <select
+                  id="dropdown-menu"
+                  value={selectedRole}
+                  onChange={handleRoleChange}
+                  className="input_field"
+                >
+                  <option value="">Select your Role</option>
+                  {roleNames.map(
+                    (roleName, index) =>
+                      roleName !== "admin" && (
+                        <option key={index} value={roleName}>
+                          {roleName?.toUpperCase()}
+                        </option>
+                      )
+                  )}
+                </select>
+              </div>
+
               <div className="form-group">
                 <label htmlFor="Name">Enter your full name</label>
                 <input
@@ -208,24 +228,7 @@ const Registration = () => {
                 />
               </div>
 
-              <div className="form-group">
-                <select
-                  id="dropdown-menu"
-                  value={selectedRole}
-                  onChange={handleRoleChange}
-                  className="input_field"
-                >
-                  <option value="">Select your Role</option>
-                  {roleNames.map(
-                    (roleName, index) =>
-                      roleName !== "admin" && (
-                        <option key={index} value={roleName}>
-                          {roleName?.toUpperCase()}
-                        </option>
-                      )
-                  )}
-                </select>
-              </div>
+            
 
               {showGraduateOptions && (
                 <GraduateRegistration
