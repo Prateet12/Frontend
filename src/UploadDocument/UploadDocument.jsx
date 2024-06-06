@@ -111,6 +111,14 @@ const UploadDocument = () => {
     setSynopsisFile(event.target.files[0]);
   };
 
+  const validateKeywords = (value) => {
+    const keywordsArray = value.split(',').map(kw => kw.trim()).filter(Boolean);
+    if (keywordsArray.length < 5) {
+      return 'At least 5 keywords are required';
+    }
+    return true;
+  };
+
   return (
     <MDBContainer>
       <div className="container_upload">
@@ -167,19 +175,27 @@ const UploadDocument = () => {
                 )}
               </div>
             </div>
+
             <div className="col-lg-12 col-md-12 col-sm-12 col-12">
-              <div>
-                <label>Keywords</label>
-                <input
-                  className="upload_input"
-                  {...register("keywords", {
-                    validate: validateCommaSeparated,
-                  })}
-                />
-                {errors.keywords && <span>{errors.keywords.message}</span>}
-              </div>
-            </div>
+          <div>
+            <label>
+              Keywords <span className="required-field">*</span>
+            </label>
+            <input
+              className="upload_input"
+              {...register("keywords", {
+                required: "This field is required",
+                validate: validateKeywords,
+              })}
+            />
+            {errors.keywords && (
+              <span className="error-message">{errors.keywords.message}</span>
+            )}
           </div>
+        </div>
+      </div>
+
+
           <div className="row">
             <div className="col-lg-4 col-md-4 col-sm-12 col-12">
               <div>
@@ -202,22 +218,33 @@ const UploadDocument = () => {
                 )}
               </div>
             </div>
+
             <div className="col-lg-4 col-md-4 col-sm-12 col-12">
-              <label htmlFor="institution">Institution</label>
-              <select
-                id="institution"
-                className="upload_input"
-                value={selectedInstitution}
-                onChange={handleInstitutionChange}
-              >
-                <option value="">Select an institution</option>
-                {registeredInstitutes.map((institution, index) => (
-                  <option key={index} value={institution}>
-                    {institution}
-                  </option>
-                ))}
-              </select>
-            </div>
+          <div>
+            <label htmlFor="institution">
+              Institution <span className="required-field">*</span>
+            </label>
+            <select
+              id="institution"
+              className="upload_input"
+              {...register("institution", { required: true })}
+            >
+              <option value="">Select an institution</option>
+              {registeredInstitutes.map((institution, index) => (
+                <option key={index} value={institution}>
+                  {institution}
+                </option>
+              ))}
+            </select>
+            {errors.institution && (
+              <span className="error-message">This field is required</span>
+            )}
+          </div>
+        </div>
+
+           
+
+            
             <div className="col-lg-4 col-md-4 col-sm-12 col-12">
               <div>
                 <label>Publication Date</label>

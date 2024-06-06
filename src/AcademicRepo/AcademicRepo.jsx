@@ -76,6 +76,8 @@ const AcademicRepo = () => {
                 <option value="Author Name">Author Name</option>
                 <option value="Institute">Institute</option>
                 <option value="Keywords">Keywords</option>
+                <option value="Keywords">Specialization</option>
+                <option value="Keywords">Cities</option>
               </select>
             </div>
           </div>
