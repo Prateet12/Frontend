@@ -77,8 +77,8 @@ const Profile = () => {
                 {currRole === 'professor' && (
                   <>
                     <MDBCol md="6"><p className="profile-field"><strong>Institution name:</strong> {user.institution_name}</p></MDBCol>
-                    <MDBCol md="6"><p className="profile-field"><strong>Institution type:</strong> {user.institution_type}</p></MDBCol>
-                    <MDBCol md="6"><p className="profile-field"><strong>Research:</strong> {user.areas_of_study || user.areas_of_interest}</p></MDBCol>
+                    <MDBCol md="6"><p className="profile-field"><strong>Field of Specialization:</strong> {user.field_of_study}</p></MDBCol>
+                    <MDBCol md="6"><p className="profile-field"><strong>Years of teaching experience</strong> {user.years_of_experience}</p></MDBCol>
                   </>
                 )}
                 {currRole === 'researcher' && (
@@ -89,8 +89,8 @@ const Profile = () => {
                 )}
                 {currRole === 'graduate' && (
                   <>
-                    <MDBCol md="6"><p className="profile-field"><strong>Degree Program:</strong> {user.degree_program}</p></MDBCol>
-                    <MDBCol md="6"><p className="profile-field"><strong>Graduation Year:</strong> {user.graduation_year}</p></MDBCol>
+                    <MDBCol md="6"><p className="profile-field"><strong>Degree Program:</strong> {user.highest_degree_earned}</p></MDBCol>
+                    <MDBCol md="6"><p className="profile-field"><strong>Graduation Year:</strong> {user.graduation_date}</p></MDBCol>
                     <MDBCol md="6"><p className="profile-field"><strong>Institution:</strong> {user.institution_name}</p></MDBCol>
                   </>
                 )}
