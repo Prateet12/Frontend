@@ -40,7 +40,7 @@ const PractitionersRegistration = ({ registerCallback }) => {
 
   const organizationOptions = [
     { value: "Government", label: "Government" },
-    { value: "Local Body", label: "Local Body" },
+    { value: "Autonomous Institute", label: "Autonomous Institute" },
     { value: "Private", label: "Private" },
     { value: "NGO", label: "NGO" },
   ];
