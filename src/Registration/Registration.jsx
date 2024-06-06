@@ -1,5 +1,4 @@
 import "./Registration.css";
-
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import GraduateRegistration from "./graduate-register";
@@ -14,6 +13,8 @@ import { useNavigate } from "react-router-dom";
 import logo from "../Components/Assets/dummy-logo.png";
 import { MDBIcon, MDBBtn } from "mdb-react-ui-kit";
 import { getAllRoles, getAllInstitutes } from "../utils/apiUtils";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 
 const Registration = () => {
   const [name, setName] = useState("");
@@ -107,15 +108,65 @@ const Registration = () => {
     setEmail(e.target.value);
   };
 
-  const handleRoleChange = (event) => {
-    const value = event.target.value;
-    setSelectedRole(value);
-    setShowGraduateOptions(value === "graduate");
-    setShowResearcherOptions(value === "researcher");
-    setShowPractitionerOptions(value === "practitioner");
-    setShowInstituteOptions(value === "institution admin");
-    setShowAssistantOptions(value === "research assistant");
-    setShowProfessorOptions(value === "professor");
+    const handleRoleChange = (role) => {
+      setSelectedRole(role);
+      setShowGraduateOptions(role === "graduate");
+      setShowResearcherOptions(role === "researcher");
+      setShowPractitionerOptions(role === "practitioner");
+      setShowInstituteOptions(role === "institution admin");
+      setShowAssistantOptions(role === "research assistant");
+      setShowProfessorOptions(role === "professor");
+    };
+
+  let registrationOptions;
+  switch (selectedRole) {
+    case "graduate":
+      registrationOptions = (
+        <GraduateRegistration
+          registerCallback={registerCallback}
+          institutes={institutes}
+        />
+      );
+      break;
+    case "researcher":
+      registrationOptions = (
+        <ResearcherRegistration
+          registerCallback={registerCallback}
+          institutes={institutes}
+        />
+      );
+      break;
+    case "practitioner":
+      registrationOptions = (
+        <PractitionerRegistration registerCallback={registerCallback} />
+      );
+      break;
+    case "institution admin":
+      registrationOptions = (
+        <InstitutesRegistration registerCallback={registerCallback} />
+      );
+      break;
+    case "research assistant":
+      registrationOptions = (
+        <ResearchAssistantRegistration registerCallback={registerCallback} />
+      );
+      break;
+    case "professor":
+      registrationOptions = (
+        <ProfessorRegistration
+          registerCallback={registerCallback}
+          institutes={institutes}
+        />
+      );
+      break;
+    default:
+      registrationOptions = null;
+  }
+
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  const handleDropdownToggle = () => {
+    setShowDropdown(!showDropdown);
   };
 
   const handlePasswordChange = (e) => {
@@ -172,24 +223,42 @@ const Registration = () => {
               </Button>
             </Link>
             <div className="form">
-
-            <div className="form-group">
-                <select
-                  id="dropdown-menu"
-                  value={selectedRole}
-                  onChange={handleRoleChange}
-                  className="input_field"
+              <div className="form-group">
+                <div
+                  className={`dropdown-container ${
+                    showDropdown ? "dropdown-open" : ""
+                  }`}
                 >
-                  <option value="">Select your Role</option>
-                  {roleNames.map(
-                    (roleName, index) =>
-                      roleName !== "admin" && (
-                        <option key={index} value={roleName}>
-                          {roleName?.toUpperCase()}
-                        </option>
-                      )
+                  <div
+                    className="dropdown-toggle click-dropdown"
+                    onClick={handleDropdownToggle}
+                  >
+                    {selectedRole ? selectedRole.toUpperCase() : "Select your role"}
+                  </div>
+                  {showDropdown && (
+                    <div className="dropdown-menu dropdown-bordered">
+                      <ul>
+                        {roleNames.map(
+                          (roleName, index) =>
+                            roleName !== "admin" && (
+                              <li key={index}>
+                                <a
+                                  href="#"
+                                  onClick={() => {
+                                    handleRoleChange(roleName);
+                                    setShowDropdown(false);
+                                  }}
+                                >
+                                  {roleName.toUpperCase()}{" "}
+                                  <FontAwesomeIcon icon={faInfoCircle}  className=" Info" />
+                                </a>
+                              </li>
+                            )
+                        )}
+                      </ul>
+                    </div>
                   )}
-                </select>
+                </div>
               </div>
 
               <div className="form-group">
