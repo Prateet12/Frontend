@@ -17,6 +17,7 @@ import AuthProvider from "react-auth-kit";
 import createRefresh from "react-auth-kit/createRefresh";
 import axios from "axios";
 import Inbox from "./inbox/inbox";
+import Home from "./Home/Home"
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(
@@ -101,6 +102,7 @@ function App() {
                 <Route path="/dashboard" element={<Dashboard user={user} />} />
                 <Route path="/approvals-inbox" element={<Approval />} />
                 <Route path="/inbox" element={<Inbox />} />
+                <Route path="/home" element={<Home/>} />
                 <Route
                   path="/logout"
                   element={
