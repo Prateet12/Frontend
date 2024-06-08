@@ -6,6 +6,10 @@
   margin: 20px;
 }
 
+.members_container{
+  margin-top: 150px;
+  margin-bottom: 75px;
+}
 .header_graduate {
   display: flex;
   justify-content: space-between;

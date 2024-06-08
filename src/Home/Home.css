@@ -12,7 +12,7 @@
   /* General Styles */
   body {
     font-family: Arial, sans-serif;
-    overflow-x:hidden
+    overflow-x: hidden;
   }
   
   
@@ -148,11 +148,10 @@
     border: 7px solid rgb(8, 41, 134);
     margin-right: 50px;
   }
-
   .footer {
     background-color: rgb(16, 160, 88);
     color: #fff;
-    padding: 50px 0;
+    padding: 25px 0;
   }
   
   .footer h3 {
@@ -181,7 +180,7 @@
   .bottom-bar {
     background-color: rgb(16, 160, 88);
     padding: 10px 0;
-    margin-top: 20px;
+    margin-top: 10px;
   }
   
   .bottom-bar p {
@@ -191,4 +190,34 @@
     color: white;
   }
   
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .footer-logo img {
+    max-width: 100px; /* Adjust as needed */
+  }
+  
+  .footer-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .footer-contact,
+  .footer-follow {
+    margin-bottom: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .footer-content {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .footer-logo img {
+      margin-bottom: 10px;
+    }
+  }
   

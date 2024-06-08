@@ -1,6 +1,7 @@
 import React from 'react';
 import './Home.css'; // Importing CSS for styling
 import dummyVideo from './dummy_video.mp4'; // Importing the video file
+import logo from './logo1.png';
 
 const Home = () => {
   return (
@@ -12,7 +13,7 @@ const Home = () => {
             Your browser does not support the video tag.
           </video>
         </div>
-        <div className="container-fluid p-0">
+        <div className="container-fluid p">
           <div className="row align-items-center">
             <div className="col-sm-12 col-md-6">
               <div className="main-content">
@@ -54,36 +55,39 @@ const Home = () => {
               </div>
             </div> 
           </div>
-          </div>
-          </div>
-          <footer className="footer">
-      <div className="container">
-        <div className="row">
-          
-          <div className="col-md-4">
-            <h3>Contact Us</h3>
-            <p>Email: info@urbclinder.com</p>
-            <p>Phone: +1 (123) 456-7890</p>
-          </div>
-          <div className="col-md-4">
-            <h3>Follow Us</h3>
-            <ul className="social-icons">
-              <li><a href="#"><i className="fa fa-facebook"></i></a></li>
-              <li><a href="#"><i className="fa fa-twitter"></i></a></li>
-              <li><a href="#"><i className="fa fa-linkedin"></i></a></li>
-              <li><a href="#"><i className="fa fa-instagram"></i></a></li>
-            </ul>
-          </div>
         </div>
       </div>
-      <div className="bottom-bar">
+      
+      <footer className="footer">
         <div className="container">
-          <p>&copy; 2024 Urb-Clinder. All Rights Reserved.</p>
+          <div className="footer-content">
+            <div className="footer-logo">
+              <img src={logo} alt="Urb-Clinder Logo" />
+            </div>
+            <div className="footer-info">
+              <div className="footer-contact">
+                <h3>Contact Us</h3>
+                <p>Email: info@urbclinder.com</p>
+                <p>Phone: +1 (123) 456-7890</p>
+              </div>
+              <div className="footer-follow">
+                <h3>Follow Us</h3>
+                <ul className="social-icons">
+                  <li><a href="#"><i className="fa fa-facebook"></i></a></li>
+                  <li><a href="#"><i className="fa fa-twitter"></i></a></li>
+                  <li><a href="#"><i className="fa fa-linkedin"></i></a></li>
+                  <li><a href="#"><i className="fa fa-instagram"></i></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </footer>
-       
-     
+        <div className="bottom-bar">
+          <div className="container">
+            <p>&copy; 2024 Urb-Clinder. All Rights Reserved.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

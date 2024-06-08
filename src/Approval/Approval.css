@@ -1,6 +1,12 @@
 .container_approval {
     max-width: 100%;
   }
+
+  .approval{
+    margin-top: 150px;
+
+    margin-bottom: 75px;
+  }
   
 .header_approval {
     display: flex;

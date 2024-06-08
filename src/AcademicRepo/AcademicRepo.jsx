@@ -28,7 +28,8 @@ const AcademicRepo = () => {
   };
 
   return (
-    <MDBContainer>
+    <div className="academia_container">
+ <MDBContainer>
       <section className="m-4">
         <h2 className="mb-4">Academic Repository</h2>
         <p>
@@ -97,6 +98,8 @@ const AcademicRepo = () => {
         </div>
       </div>
     </MDBContainer>
+    </div>
+   
   );
 };
 

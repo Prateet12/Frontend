@@ -31,7 +31,8 @@ const Dashboard = ({ user }) => {
   }
 
   return (
-    <MDBContainer>
+    <div className="dashboard_container">
+ <MDBContainer>
       <section>
         <h5 className='mb-4'>This month</h5>
         <MDBRow>
@@ -219,6 +220,8 @@ const Dashboard = ({ user }) => {
         </div>
       </section>
     </MDBContainer>
+    </div>
+   
   );
 };
 

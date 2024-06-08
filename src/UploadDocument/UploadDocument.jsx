@@ -120,7 +120,8 @@ const UploadDocument = () => {
   };
 
   return (
-    <MDBContainer>
+    <div className="uploadDocument">
+       <MDBContainer>
       <div className="container_upload">
         <h1 className="header_upload pt-2 pb-3">UPLOAD YOUR DOCUMENT</h1>
         <form className="form_upload" onSubmit={handleSubmit(onSubmit)}>
@@ -333,6 +334,8 @@ const UploadDocument = () => {
         </form>
       </div>
     </MDBContainer>
+    </div>
+   
   );
 };
 

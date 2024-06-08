@@ -34,11 +34,12 @@ const Approval = () => {
   };
 
   return (
-    <MDBContainer>
+    <div className="inbox_container">
+ <MDBContainer>
       <section className="m-4">
         <h2 className="mb-4">My Documents</h2>
       </section>
-      <div className="approval">
+      <div className="approval_status">
         <div className="controls">
           <form onSubmit={handleSearchSubmit} className="search_form">
             <input
@@ -63,11 +64,10 @@ const Approval = () => {
               onChange={handleFilterChange}
             >
               <option value="">All</option>
-              <option >Admin Approved </option>
+              <option >Approved </option>
               <option >Pending</option>
               <option>Rejected</option>
-              <option >Super Admin Approved </option>
-              <option >Fully Approved </option>
+          
             </select>
           </div>
         </div>
@@ -77,6 +77,8 @@ const Approval = () => {
         </div>
       </div>
     </MDBContainer>
+    </div>
+   
   );
 };
 

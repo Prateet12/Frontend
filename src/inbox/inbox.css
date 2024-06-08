@@ -1,6 +1,10 @@
 .container_approval {
     max-width: 100%;
   }
+  .inbox_container{
+    margin-top: 150px;
+    margin-bottom: 75px;
+  }
   
 .header_approval {
     display: flex;

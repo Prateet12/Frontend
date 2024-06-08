@@ -32,7 +32,8 @@ const GraduateRepo = () => {
   };
 
   return (
-    <MDBContainer>
+    <div className="members_container">
+  <MDBContainer>
       <section className="m-4">
         <h2 className="mb-4">Members</h2>
         <p>Explore a diverse array of skilled job seekers and eager employers, all
@@ -79,6 +80,8 @@ const GraduateRepo = () => {
         </div>
       </div>
     </MDBContainer>
+    </div>
+  
   );
 };
 

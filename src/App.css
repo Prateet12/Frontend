@@ -1,8 +1,8 @@
-/* .app-container { */
-  /* height: 100vmin; */
-  /* display: flex;
+.app-container { 
+   height: 100vmin;
+  display: flex;
   flex-direction: column;
-} */
+}
 
 .navbar-container {
   position: fixed;

@@ -79,7 +79,8 @@ const Approval = () => {
   };
 
   return (
-    <MDBContainer>
+    <div className="approval">
+       <MDBContainer>
       <section className="m-4 approval">
         <h2 className="mb-4">Approve Requests</h2>
       </section>
@@ -124,6 +125,8 @@ const Approval = () => {
         </div>
       </div>
     </MDBContainer>
+    </div>
+   
   );
 };
 

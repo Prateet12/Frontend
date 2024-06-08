@@ -5,7 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import "./UploadDocument.css";
+import "./UploadResume.css";
 import { useForm } from "react-hook-form";
 import { uploadDocument } from "../utils/apiUtils";
 
@@ -48,7 +48,8 @@ const UploadResume = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="upload-document-form">
+    <div className="uploadResume">
+<form onSubmit={handleSubmit(onSubmit)} className="upload-document-form">
       <Card
         sx={{
           width: "50%",
@@ -87,6 +88,8 @@ const UploadResume = () => {
         </CardActions>
       </Card>
     </form>
+    </div>
+    
   );
 };
 
