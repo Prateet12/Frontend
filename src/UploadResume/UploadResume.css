@@ -1,11 +1,10 @@
-/* UploadDocument.css */
-
 .container_upload {
   margin: 10px auto;
   padding: 25px;
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
 }
 
 .header_upload {
@@ -20,19 +19,33 @@
   flex-direction: column;
 }
 
+.upload_row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
 
-
-.col-md-6, .col-md-12 {
-  flex: 1;
+.col-lg-4,
+.col-md-6,
+.col-md-12,
+.col-sm-12,
+.col-12 {
   padding: 0 10px;
   box-sizing: border-box;
+  flex: 1;
+}
+
+.col-lg-4 {
+  max-width: 33.33%;
 }
 
 .col-md-6 {
   max-width: 50%;
 }
 
-.col-md-12 {
+.col-md-12,
+.col-sm-12,
+.col-12 {
   max-width: 100%;
 }
 
@@ -46,7 +59,7 @@ label {
 .upload_input {
   width: 100%;
   padding: 10px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
   box-sizing: border-box;
@@ -64,21 +77,27 @@ label {
 .error-message {
   color: red;
   font-size: 0.9em;
+  margin-top: -10px;
+  margin-bottom: 10px;
 }
 
 .submit_upload, .resume_upload {
-  background-color: #f9f9f9;
-  color: black;
+  background-color: #007bff;
+  color: white;
   border: none;
   padding: 10px 20px;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  border: 2px solid black;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  border: 2px solid #007bff;
+  max-width: 50%;
+  margin: 20px auto 0;
+  display: block;
 }
 
 .submit_upload:hover, .resume_upload:hover {
-  background-color: rgb(192, 190, 190);
+  background-color: #0056b3;
+  border-color: #004a99;
 }
 
 .checkbox-label {
@@ -95,23 +114,7 @@ label {
   margin-right: 5px;
 }
 
-.submit_upload{
-  background-color: #007bff;
-  max-width: 50%;
-  justify-content: center;
-  align-items: center;
-}
-
-.resume_heading{
-  padding-bottom:30px;
-  justify-content: center;
-  align-items: center;
-}
-
-.submit_upload:hover{
-  background-color: #0056b3;
-  border-color: #004a99;
-  max-width: 50%;
-  justify-content: center;
-  align-items: center;
+.resume_heading {
+  padding-bottom: 30px;
+  text-align: center;
 }

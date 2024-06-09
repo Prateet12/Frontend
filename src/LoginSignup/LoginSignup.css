@@ -55,6 +55,8 @@
   margin-right: 10px;
 }
 
+
+
 .input input,
 .input select {
   flex-grow: 1;
@@ -68,6 +70,11 @@
   display: flex;
   justify-content: center;
   margin-top: 2rem;
+}
+
+.logo{
+  width: 20px;
+  height: 20px;
 }
 
 .submit {

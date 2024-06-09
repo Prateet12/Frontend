@@ -62,11 +62,11 @@ body {
 }
 
 .logo1 {
-  width: 100px; /* Adjust size as needed */
+  width: 150px; /* Adjust size as needed */
 }
 
 .logo2 {
-  width: 100px; /* Adjust size as needed */
+  width: 150px; /* Adjust size as needed */
   margin-right: 20px;
 }
 
@@ -74,10 +74,12 @@ body {
   margin-left: auto;
 }
 
-button {
+.login-btn {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+  height: 70px;
+  border-radius: 4px;
 }
 
 .main-content {

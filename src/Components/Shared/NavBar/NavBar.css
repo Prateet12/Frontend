@@ -5,9 +5,13 @@
     align-items: center;
     padding: 0 20px;
     background-color: #f8f9fa;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: relative;
     width: 100%;
     z-index: 100;
     padding: 20px;
+}
+
+.nav-logo img{
+    width: 80px !important;
+    height: 80px !important;
 }

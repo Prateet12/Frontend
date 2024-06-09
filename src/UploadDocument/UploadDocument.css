@@ -109,6 +109,8 @@ label {
   max-width: 50%;
   justify-content: center;
   align-items: center;
+  margin-top: 20px;
+  margin-bottom: 40px;
 }
 
 .resume_heading{

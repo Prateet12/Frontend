@@ -11,14 +11,14 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import "./NavBar.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../../Assets/dummy-logo.png";
+import "./NavBar.css";
 
 function NavBar({ setLoggedIn }) {
   const navigate = useNavigate();
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
 
   let permissions = [
     {
@@ -69,7 +69,7 @@ function NavBar({ setLoggedIn }) {
       settings.splice(settings.length - 1, 0, uploadResumeAllowed);
     }
     if (role.role === "admin" || role.role === "institution admin") {
-      // TODO(team): discuss for admin
+      // TODO: discuss for admin
       const adminDocsInbox = {
         route: "/inbox",
         title: "My Documents",
@@ -104,7 +104,7 @@ function NavBar({ setLoggedIn }) {
   };
 
   const handleSettingNavigation = (route, title) => {
-    if (title == "Logout") {
+    if (title === "Logout") {
       localStorage.clear();
       setLoggedIn(false);
       navigate("/");
@@ -138,7 +138,7 @@ function NavBar({ setLoggedIn }) {
               textDecoration: "none",
             }}
           >
-            <img src={logo} alt="logo" style={imageStyle} />
+            <img src={logo} alt="logo" style={imageStyle} className="nav-logo"/>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -198,7 +198,7 @@ function NavBar({ setLoggedIn }) {
               textDecoration: "none",
             }}
           >
-            <img src={logo} alt="logo" style={imageStyle} />
+            <img src={logo} alt="logo" style={imageStyle} className="nav-logo"/>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {permissions.map((permission, index) => (

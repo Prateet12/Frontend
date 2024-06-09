@@ -9,6 +9,7 @@ const UploadDocument = () => {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
     reset,
   } = useForm();
 
@@ -58,6 +59,35 @@ const UploadDocument = () => {
     setSelectedInstitution(event.target.value);
   };
 
+  const handleThesisChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const fileType = file.name.split(".").pop().toLowerCase();
+      if (["pdf", "doc", "docx"].includes(fileType)) {
+        setThesisFile(file);
+      } else {
+        alert("Please select a PDF, DOC, or DOCX file for the thesis.");
+      }
+    }
+  };
+
+  const handleSynopsisChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const fileType = file.name.split(".").pop().toLowerCase();
+      if (["pdf", "doc", "docx"].includes(fileType)) {
+        setSynopsisFile(file);
+      } else {
+        alert("Please select a PDF, DOC, or DOCX file for the synopsis.");
+      }
+    }
+  };
+
+  const isTextWithCommas = (value) => {
+    const regex = /^[a-zA-Z,\s]*$/; // Allow only alphabets, commas, and whitespaces
+    return regex.test(value) || "Only text and commas are allowed";
+  };
+
   const [thesisFile, setThesisFile] = useState(null);
   const [synopsisFile, setSynopsisFile] = useState(null);
 
@@ -103,239 +133,263 @@ const UploadDocument = () => {
     return regex.test(value) || "Please enter a comma-separated list.";
   };
 
-  const handleThesisChange = (event) => {
-    setThesisFile(event.target.files[0]);
-  };
-
-  const handleSynopsisChange = (event) => {
-    setSynopsisFile(event.target.files[0]);
-  };
-
   const validateKeywords = (value) => {
-    const keywordsArray = value.split(',').map(kw => kw.trim()).filter(Boolean);
+    const keywordsArray = value
+      .split(",")
+      .map((kw) => kw.trim())
+      .filter(Boolean);
     if (keywordsArray.length < 5) {
-      return 'At least 5 keywords are required';
+      return "At least 5 keywords are required";
     }
     return true;
   };
 
+  // Watch the required fields to determine if the form is valid
+  const requiredFields = watch([
+    "Title",
+    "author",
+    "abstract",
+    "degreeProgram",
+    "institution",
+    "keywords",
+    "terms",
+  ]);
+
+  const isFormValid = requiredFields.every((field) => field);
+
   return (
     <div className="uploadDocument">
-       <MDBContainer>
-      <div className="container_upload">
-        <h1 className="header_upload pt-2 pb-3">UPLOAD YOUR DOCUMENT</h1>
-        <form className="form_upload" onSubmit={handleSubmit(onSubmit)}>
-          <div className="row upload_row">
-            <div className="col-lg-4 col-md-4 col-sm-12 col-12">
-              <div>
-                <label>
-                  Title <span className="required-field">*</span>
-                </label>
-                <input
-                  className="upload_input"
-                  {...register("Title", { required: true })}
-                />
-                {errors.Title && (
-                  <span className="error-message">This field is required</span>
-                )}
+      <MDBContainer>
+        <div className="container_upload">
+          <h1 className="header_upload pt-2 pb-3">UPLOAD YOUR DOCUMENT</h1>
+          <form className="form_upload" onSubmit={handleSubmit(onSubmit)}>
+            <div className="row upload_row">
+              <div className="col-lg-4 col-md-4 col-sm-12 col-12">
+                <div>
+                  <label>
+                    Title <span className="required-field">*</span>
+                  </label>
+                  <input
+                    className="upload_input"
+                    {...register("Title", { required: true })}
+                  />
+                  {errors.Title && (
+                    <span className="error-message">
+                      This field is required
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="col-lg-4 col-md-4 col-sm-12 col-12">
+                <div>
+                  <label>
+                    Author <span className="required-field">*</span>
+                  </label>
+                  <input
+                    className="upload_input"
+                    {...register("author", { required: true })}
+                  />
+                  {errors.author && (
+                    <span className="error-message">
+                      This field is required
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="col-lg-4 col-md-4 col-sm-12 col-12">
+                <div>
+                  <label>Department</label>
+                  <input className="upload_input" {...register("department")} />
+                </div>
               </div>
             </div>
-            <div className="col-lg-4 col-md-4 col-sm-12 col-12">
-              <div>
-                <label>
-                  Author <span className="required-field">*</span>
-                </label>
-                <input
-                  className="upload_input"
-                  {...register("author", { required: true })}
-                />
-                {errors.author && (
-                  <span className="error-message">This field is required</span>
-                )}
+            <div className="row">
+              <div className="col-lg-12 col-md-12 col-sm-12 col-12">
+                <div>
+                  <label>
+                    Abstract <span className="required-field">*</span>
+                  </label>
+                  <textarea
+                    className="upload_input"
+                    {...register("abstract", { required: true })}
+                  />
+                  {errors.abstract && (
+                    <span className="error-message">
+                      This field is required
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="col-lg-12 col-md-12 col-sm-12 col-12">
+                <div>
+                  <label>
+                    Keywords (At least 5 keywords are required){" "}
+                    <span className="required-field">*</span>
+                  </label>
+                  <input
+                    className="upload_input"
+                    {...register("keywords", {
+                      required: "This field is required",
+                      validate: validateKeywords,
+                    })}
+                  />
+                  {errors.keywords && (
+                    <span className="error-message">
+                      {errors.keywords.message}
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
-            <div className="col-lg-4 col-md-4 col-sm-12 col-12">
-              <div>
-                <label>Department</label>
-                <input className="upload_input" {...register("department")} />
+            <div className="row">
+              <div className="col-lg-4 col-md-4 col-sm-12 col-12">
+                <div>
+                  <label>
+                    Degree/Program <span className="required-field">*</span>
+                  </label>
+                  <select
+                    className="upload_input"
+                    {...register("degreeProgram", { required: true })}
+                  >
+                    <option value="" disabled selected>
+                      Select your degree
+                    </option>
+                    <option value="PhD">PhD</option>
+                    <option value="Masters">Master's</option>
+                    <option value="Bachelors">Bachelor's</option>
+                  </select>
+                  {errors.degreeProgram && (
+                    <span className="error-message">
+                      This field is required
+                    </span>
+                  )}
+                </div>
               </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-12 col-md-12 col-sm-12 col-12">
-              <div>
-                <label>
-                  Abstract <span className="required-field">*</span>
-                </label>
-                <textarea
-                  className="upload_input"
-                  {...register("abstract", { required: true })}
-                />
-                {errors.abstract && (
-                  <span className="error-message">This field is required</span>
-                )}
+              <div className="col-lg-4 col-md-4 col-sm-12 col-12">
+                <div>
+                  <label htmlFor="institution">
+                    Institution <span className="required-field">*</span>
+                  </label>
+                  <select
+                    id="institution"
+                    className="upload_input"
+                    {...register("institution", { required: true })}
+                  >
+                    <option value="">Select an institution</option>
+                    {registeredInstitutes.map((institution, index) => (
+                      <option key={index} value={institution}>
+                        {institution}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.institution && (
+                    <span className="error-message">
+                      This field is required
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="col-lg-4 col-md-4 col-sm-12 col-12">
+                <div>
+                  <label>Publication Date</label>
+                  <input
+                    type="date"
+                    className="upload_input"
+                    {...register("publicationDate")}
+                  />
+                </div>
               </div>
             </div>
 
-            <div className="col-lg-12 col-md-12 col-sm-12 col-12">
-          <div>
-            <label>
-              Keywords <span className="required-field">*</span>
-            </label>
-            <input
-              className="upload_input"
-              {...register("keywords", {
-                required: "This field is required",
-                validate: validateKeywords,
-              })}
-            />
-            {errors.keywords && (
-              <span className="error-message">{errors.keywords.message}</span>
-            )}
-          </div>
+            <div className="row">
+              <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                <div>
+                  <label>Supervisors/Advisors</label>
+                  <textarea
+                    className="upload_input"
+                    {...register("supervisors", { validate: isTextWithCommas  })}
+                  />
+                  {errors.supervisors && (
+                    <span className="error-message">
+                      {errors.supervisors.message}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                <div>
+                  <label>Acknowledgements</label>
+                  <textarea
+                    className="upload_input"
+                    {...register("acknowledgements", { validate: isTextWithCommas  })}
+                  />
+                  {errors.acknowledgements && (
+                    <span className="error-message">
+                      {errors.acknowledgements.message}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                <div>
+                  <label>Upload Thesis Document</label>
+                  <input
+                    className="upload_input"
+                    type="file"
+                    onChange={handleThesisChange}
+                  />
+                </div>
+              </div>
+              <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                <div>
+                  <label>Upload Synopsis Document</label>
+                  <input
+                    className="upload_input"
+                    type="file"
+                    onChange={handleSynopsisChange}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-lg-12 col-md-12 col-sm-12 col-12">
+                <div>
+                  <label>Funding Sources</label>
+                  <input
+                    className="upload_input"
+                    {...register("fundingSources")}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-lg-12 col-md-12 col-sm-12 col-12 checkbox-label">
+                <input
+                  type="checkbox"
+                  {...register("terms", { required: true })}
+                />
+                <span className="terms-label">
+                  I agree to the terms and conditions
+                </span>
+                <span className="required-field">*</span>
+                {errors.terms && (
+                  <span className="error-message">This field is required</span>
+                )}
+              </div>
+              <div className="col-lg-12 col-md-12 col-sm-12 col-12">
+                {isFormValid && (
+                  <MDBBtn size="lg" className="submit_upload">
+                    Submit
+                  </MDBBtn>
+                )}
+              </div>
+            </div>
+          </form>
         </div>
-      </div>
-
-
-          <div className="row">
-            <div className="col-lg-4 col-md-4 col-sm-12 col-12">
-              <div>
-                <label>
-                  Degree/Program <span className="required-field">*</span>
-                </label>
-                <select
-                  className="upload_input"
-                  {...register("degreeProgram", { required: true })}
-                >
-                  <option value="" disabled selected>
-                    Select your degree
-                  </option>
-                  <option value="PhD">PhD</option>
-                  <option value="Masters">Master's</option>
-                  <option value="Bachelors">Bachelor's</option>
-                </select>
-                {errors.degreeProgram && (
-                  <span className="error-message">This field is required</span>
-                )}
-              </div>
-            </div>
-
-            <div className="col-lg-4 col-md-4 col-sm-12 col-12">
-          <div>
-            <label htmlFor="institution">
-              Institution <span className="required-field">*</span>
-            </label>
-            <select
-              id="institution"
-              className="upload_input"
-              {...register("institution", { required: true })}
-            >
-              <option value="">Select an institution</option>
-              {registeredInstitutes.map((institution, index) => (
-                <option key={index} value={institution}>
-                  {institution}
-                </option>
-              ))}
-            </select>
-            {errors.institution && (
-              <span className="error-message">This field is required</span>
-            )}
-          </div>
-        </div>
-
-           
-
-            
-            <div className="col-lg-4 col-md-4 col-sm-12 col-12">
-              <div>
-                <label>Publication Date</label>
-                <input
-                  type="date"
-                  className="upload_input"
-                  {...register("publicationDate")}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-              <div>
-                <label>Supervisors/Advisors</label>
-                <textarea
-                  className="upload_input"
-                  {...register("supervisors")}
-                />
-              </div>
-            </div>
-            <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-              <div>
-                <label>Acknowledgements</label>
-                <textarea
-                  className="upload_input"
-                  {...register("acknowledgements")}
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className="row">
-            <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-              <div>
-                <label>Upload Thesis Document</label>
-                <input
-                  className="upload_input"
-                  type="file"
-                  onChange={handleThesisChange}
-                />
-              </div>
-            </div>
-            <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-              <div>
-                <label>Upload Synopsis Document</label>
-                <input
-                  className="upload_input"
-                  type="file"
-                  onChange={handleSynopsisChange}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-12 col-md-12 col-sm-12 col-12">
-              <div>
-                <label>Funding Sources</label>
-                <input
-                  className="upload_input"
-                  {...register("fundingSources")}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-12 col-md-12 col-sm-12 col-12 checkbox-label">
-              <input
-                type="checkbox"
-                {...register("terms", { required: true })}
-              />
-              <span className="terms-label">
-                I agree to the terms and conditions
-              </span>
-              <span className="required-field">*</span>
-              {errors.terms && (
-                <span className="error-message">This field is required</span>
-              )}
-            </div>
-            <div className="col-lg-12 col-md-12 col-sm-12 col-12">
-              <MDBBtn size="lg" className="submit_upload">
-                Submit
-              </MDBBtn>
-            </div>
-          </div>
-        </form>
-      </div>
-    </MDBContainer>
+      </MDBContainer>
     </div>
-   
   );
 };
 

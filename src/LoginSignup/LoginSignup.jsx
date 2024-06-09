@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./LoginSignup.css";
 import { MDBIcon, MDBBtn } from "mdb-react-ui-kit";
-import logo from "../Components/Assets/dummy-logo.png";
+import logo from "../Components/Assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL, HEADER_DATA } from "../utils/baseUrl";
 
@@ -42,7 +42,7 @@ const LoginSignup = (props) => {
   };
 
   const logIn = async () => {
-    const response = await fetch(`${BASE_URL}/v1/auth/login`, {
+    const response = await fetch(`${BASE_URL}/v1/auth/login`,{
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -125,10 +125,10 @@ const LoginSignup = (props) => {
           <div className="app-logo">
             <img src={logo} alt="logo" />
           </div>
-          <h1 className="heading">Welcome to Urb-Clinder</h1>
+          <h1 className="heading">Welcome to UDAY</h1>
           <p className="welcometext">
             Your comprehensive digital repository for urban research and
-            knowledge. Just like Shodhganga, Urb Clinder serves as a one-stop
+            knowledge. Just like Shodhganga, UDAY serves as a one-stop
             portal for accessing, sharing, and preserving scholarly works and
             publications focused on urban studies.
           </p>

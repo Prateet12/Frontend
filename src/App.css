@@ -68,7 +68,8 @@ i.fas {
 }
 
 .landingpage .app-logo img {
-  max-width: 245px;
+  max-width: 145px;
+  padding-top: 25px;
 }
 
 .app-stats {
