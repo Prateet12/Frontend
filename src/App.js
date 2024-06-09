@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
 import LoginSignup from "./LoginSignup/LoginSignup";
 import AcademicRepo from "./AcademicRepo/AcademicRepo";
@@ -17,7 +17,7 @@ import AuthProvider from "react-auth-kit";
 import createRefresh from "react-auth-kit/createRefresh";
 import axios from "axios";
 import Inbox from "./inbox/inbox";
-import Home from "./Home/Home"
+import Home from "./Home/Home";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(
@@ -25,7 +25,12 @@ function App() {
   );
   const [user, setUser] = useState({});
 
-  const handleLogout = (e) => {
+  useEffect(() => {
+    // When loggedIn state changes, update sessionStorage
+    sessionStorage.setItem("loggedIn", JSON.stringify(loggedIn));
+  }, [loggedIn]);
+
+  const handleLogout = () => {
     // Clear local storage
     if (!loggedIn) {
       console.log("Logging out");
@@ -35,19 +40,17 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    // When loggedIn state changes, update sessionStorage
-    sessionStorage.setItem("loggedIn", JSON.stringify(loggedIn));
-    handleLogout();
-  }, [loggedIn]);
-
   const refresh = createRefresh({
-    interval: 10, // The time in sec to refresh the Access token,
+    interval: 10,
     refreshApiCallback: async (param) => {
       try {
-        const response = await axios.post("/v1/auth/refresh-tokens", param, {
-          headers: { Authorization: `Bearer ${param.authToken}` },
-        });
+        const response = await axios.post(
+          "/v1/auth/refresh-tokens",
+          param,
+          {
+            headers: { Authorization: `Bearer ${param.authToken}` },
+          }
+        );
         console.log("Refreshing token and details are:" + response.data);
         return {
           isSuccess: true,
@@ -68,7 +71,7 @@ function App() {
     authName: "_auth",
     authType: "cookie",
     cookieDomain: window.location.hostname,
-    cookieSecure: window.location.protocol === "http:", // TODO(team): check this
+    cookieSecure: window.location.protocol === "http:",
     refresh: refresh,
   });
 
@@ -84,29 +87,77 @@ function App() {
             )}
             <div className="page-container">
               <Routes>
+                <Route path="/" element={<Home />} />
                 <Route
-                  path="/"
+                  path="/login-signup"
                   element={
-                    <LoginSignup
-                      setLoggedIn={setLoggedIn}
-                      setUser={setUser}
-                    />
+                    loggedIn ? (
+                      <Navigate to="/" />
+                    ) : (
+                      <LoginSignup
+                        setLoggedIn={setLoggedIn}
+                        setUser={setUser}
+                      />
+                    )
                   }
                 />
-                <Route path="/academic-repo" element={<AcademicRepo />} />
-                <Route path="/registration" element={<Registration />} />
-                <Route path="/graduate-repo" element={<GraduateRepo />} />
-                <Route path="/upload-document" element={<UploadDocument />} />
-                <Route path="/upload-resume" element={<UploadResume />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/dashboard" element={<Dashboard user={user} />} />
-                <Route path="/approvals-inbox" element={<Approval />} />
-                <Route path="/inbox" element={<Inbox />} />
-                <Route path="/home" element={<Home/>} />
+                <Route
+                  path="/academic-repo"
+                  element={loggedIn ? <AcademicRepo /> : <Navigate to="/" />}
+                />
+                <Route
+                  path="/registration"
+                  element={
+                    loggedIn ? <Registration /> : <Navigate to="/" />
+                  }
+                />
+                <Route
+                  path="/graduate-repo"
+                  element={loggedIn ? <GraduateRepo /> : <Navigate to="/" />}
+                />
+                <Route
+                  path="/upload-document"
+                  element={
+                    loggedIn ? <UploadDocument /> : <Navigate to="/" />
+                  }
+                />
+                <Route
+                  path="/upload-resume"
+                  element={
+                    loggedIn ? <UploadResume /> : <Navigate to="/" />
+                  }
+                />
+                <Route
+                  path="/profile"
+                  element={loggedIn ? <Profile /> : <Navigate to="/" />}
+                />
+                <Route
+                  path="/dashboard"
+                  element={
+                    loggedIn ? <Dashboard user={user} /> : <Navigate to="/" />
+                  }
+                />
+                <Route
+                  path="/approvals-inbox"
+                  element={
+                    loggedIn ? <Approval /> : <Navigate to="/" />
+                  }
+                />
+                <Route
+                  path="/inbox"
+                  element={loggedIn ? <Inbox /> : <Navigate to="/" />}
+                />
                 <Route
                   path="/logout"
                   element={
-                    <LoginSignup setLoggedIn={setLoggedIn} setUser={setUser} />
+                    loggedIn ? (
+                      <LoginSignup
+                        setLoggedIn={setLoggedIn}
+                        setUser={setUser}
+                      />
+                    ) : (
+                      <Navigate to="/" />
+                    )
                   }
                 />
               </Routes>

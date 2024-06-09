@@ -20,11 +20,7 @@
   flex-direction: column;
 }
 
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 15px;
-}
+
 
 .col-md-6, .col-md-12 {
   flex: 1;

@@ -125,7 +125,7 @@ const UploadDocument = () => {
       <div className="container_upload">
         <h1 className="header_upload pt-2 pb-3">UPLOAD YOUR DOCUMENT</h1>
         <form className="form_upload" onSubmit={handleSubmit(onSubmit)}>
-          <div className="row">
+          <div className="row upload_row">
             <div className="col-lg-4 col-md-4 col-sm-12 col-12">
               <div>
                 <label>
