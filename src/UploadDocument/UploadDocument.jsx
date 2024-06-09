@@ -307,7 +307,7 @@ const UploadDocument = () => {
                   <label>Supervisors/Advisors</label>
                   <textarea
                     className="upload_input"
-                    {...register("supervisors", { validate: isTextWithCommas  })}
+                    {...register("supervisors", { validate: isTextWithCommas })}
                   />
                   {errors.supervisors && (
                     <span className="error-message">
@@ -321,7 +321,9 @@ const UploadDocument = () => {
                   <label>Acknowledgements</label>
                   <textarea
                     className="upload_input"
-                    {...register("acknowledgements", { validate: isTextWithCommas  })}
+                    {...register("acknowledgements", {
+                      validate: isTextWithCommas,
+                    })}
                   />
                   {errors.acknowledgements && (
                     <span className="error-message">
@@ -353,17 +355,33 @@ const UploadDocument = () => {
                 </div>
               </div>
             </div>
+
             <div className="row">
               <div className="col-lg-12 col-md-12 col-sm-12 col-12">
                 <div>
                   <label>Funding Sources</label>
-                  <input
+                  <select
                     className="upload_input"
                     {...register("fundingSources")}
-                  />
+                  >
+                    <option value="">Select Funding Source</option>
+                    <option value="Government Grants">Government Grants</option>
+                    <option value="Private Grants">Private Grants</option>
+                    <option value="Scholarships">Scholarships</option>
+                    <option value="Endowments">Endowments</option>
+                    <option value="Crowdfunding">Crowdfunding</option>
+                    <option value="Personal Savings">Personal Savings</option>
+                    <option value="Venture Capital">Venture Capital</option>
+                    <option value="Angel Investors">Angel Investors</option>
+                    <option value="Corporate Sponsors">
+                      Corporate Sponsors
+                    </option>
+                    <option value="Other">Other</option>
+                  </select>
                 </div>
               </div>
             </div>
+
             <div className="row">
               <div className="col-lg-12 col-md-12 col-sm-12 col-12 checkbox-label">
                 <input
