@@ -108,7 +108,9 @@ const LoginSignup = (props) => {
     <div className="container landingpage login">
           <div className="registration-container">
             <img src={logo} alt="Logo" className="logo" />
-            <h1>{action}</h1>
+            <div className="header_main">
+              <div className="text">LOGIN</div>
+            </div>
             <form onSubmit={handleLogin}>
               <div className="form-group">
                 <label htmlFor="email">
