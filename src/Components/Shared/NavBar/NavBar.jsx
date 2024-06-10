@@ -116,7 +116,6 @@ function NavBar({ setLoggedIn }) {
 
   const imageStyle = {
     maxWidth: "150px",
-    filter: "invert(1)",
   };
 
   return (
