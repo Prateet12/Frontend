@@ -107,9 +107,7 @@ function App() {
                 />
                 <Route
                   path="/registration"
-                  element={
-                    loggedIn ? <Registration /> : <Navigate to="/" />
-                  }
+                  element={<Registration />}
                 />
                 <Route
                   path="/graduate-repo"

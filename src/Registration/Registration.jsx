@@ -1,6 +1,6 @@
 import "./Registration.css";
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import GraduateRegistration from "./graduate-register";
 import ResearcherRegistration from "./researcher-register";
 import PractitionerRegistration from "./practitioners";
@@ -9,14 +9,12 @@ import ResearchAssistantRegistration from "./researchAssistants";
 import ProfessorRegistration from "./professors";
 import Button from "@mui/material/Button";
 import { BASE_URL } from "../utils/baseUrl";
-import { useNavigate } from "react-router-dom";
-import logo from "../Components/Assets/dummy-logo.png";
-import { MDBIcon, MDBBtn } from "mdb-react-ui-kit";
+import logo from "../Components/Assets/logo.png";
 import { getAllRoles, getAllInstitutes } from "../utils/apiUtils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 
-const Registration = () => {
+const Registration = ({ setLoggedIn }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,6 +26,27 @@ const Registration = () => {
     JSON.parse(localStorage.getItem("institutes")) || []
   );
 
+  const navigate = useNavigate();
+  const [tellAboutYourself, setTellAboutYourself] = useState("");
+  const [error, setError] = useState("");
+
+  const handleAboutYourselfChange = (e) => {
+    const text = e.target.value;
+    // Split the text by spaces to count words
+    const words = text.trim().split(/\s+/);
+    // Limit the text to 30 words
+    if (words.length <= 30) {
+      setTellAboutYourself(text);
+      setError("");
+    } else {
+      setError("Please limit your response to 30 words.");
+    }
+  };
+
+  const redirectToLoginSignup = () => {
+    navigate("/login-signup");
+  };
+
   useEffect(() => {
     if (!roles || roles.length <= 1) {
       getAllRoles(setRoles);
@@ -35,10 +54,11 @@ const Registration = () => {
   }, []);
 
   useEffect(() => {
-    getAllInstitutes(setInstitutes);
+    getAllInstitutes(setInstitutes); 
   }, []);
+  
 
-  const navigate = useNavigate();
+  
 
   let roleNames = roles.map((role) => role.role);
 
@@ -71,10 +91,14 @@ const Registration = () => {
 
       const new_user = await response.json();
       if (new_user) {
-        navigate("/");
+        // Assume registration was successful and log in the user
+        //setLoggedIn(true);
+        //sessionStorage.setItem("loggedIn", JSON.stringify(true));
+        
         window.alert(
           "Registration successful, please wait for an email to be verified"
         );
+        navigate("/");
       }
     } catch (error) {
       console.error("Registration Error:", error);
@@ -108,15 +132,15 @@ const Registration = () => {
     setEmail(e.target.value);
   };
 
-    const handleRoleChange = (role) => {
-      setSelectedRole(role);
-      setShowGraduateOptions(role === "graduate");
-      setShowResearcherOptions(role === "researcher");
-      setShowPractitionerOptions(role === "practitioner");
-      setShowInstituteOptions(role === "institution admin");
-      setShowAssistantOptions(role === "research assistant");
-      setShowProfessorOptions(role === "professor");
-    };
+  const handleRoleChange = (role) => {
+    setSelectedRole(role);
+    setShowGraduateOptions(role === "graduate");
+    setShowResearcherOptions(role === "researcher");
+    setShowPractitionerOptions(role === "practitioner");
+    setShowInstituteOptions(role === "institution admin");
+    setShowAssistantOptions(role === "research assistant");
+    setShowProfessorOptions(role === "professor");
+  };
 
   let registrationOptions;
   switch (selectedRole) {
@@ -162,7 +186,6 @@ const Registration = () => {
     default:
       registrationOptions = null;
   }
-
   const [showDropdown, setShowDropdown] = useState(false);
 
   const handleDropdownToggle = () => {
@@ -173,6 +196,7 @@ const Registration = () => {
     setPassword(e.target.value);
   };
 
+
   return (
     <div className="container landingpage">
       <div className="row">
@@ -180,7 +204,7 @@ const Registration = () => {
           <div className="app-logo">
             <img src={logo} alt="logo" />
           </div>
-          <h1 className="heading">Welcome to Urb-Clinder</h1>
+          <h1 className="heading">Welcome to UDAY</h1>
           <p className="welcometext">
             Your comprehensive digital repository for urban research and
             knowledge. Just like Shodhganga, Urb Clinder serves as a one-stop
@@ -217,11 +241,14 @@ const Registration = () => {
             <div className="header_main">
               <div className="text">REGISTER</div>
             </div>
-            <Link to="/" style={{ textDecoration: "none" }}>
-              <Button variant="text" color="primary">
-                Already a user?
-              </Button>
-            </Link>
+            <Button
+              variant="text"
+              color="primary"
+              onClick={redirectToLoginSignup}
+            >
+              Already a user?
+            </Button>
+
             <div className="form">
               <div className="form-group">
                 <div
@@ -233,7 +260,9 @@ const Registration = () => {
                     className="dropdown-toggle click-dropdown"
                     onClick={handleDropdownToggle}
                   >
-                    {selectedRole ? selectedRole.toUpperCase() : "Select your role"}
+                    {selectedRole
+                      ? selectedRole.toUpperCase()
+                      : "Select your role"}
                   </div>
                   {showDropdown && (
                     <div className="dropdown-menu dropdown-bordered">
@@ -250,7 +279,10 @@ const Registration = () => {
                                   }}
                                 >
                                   {roleName.toUpperCase()}{" "}
-                                  <FontAwesomeIcon icon={faInfoCircle}  className=" Info" />
+                                  <FontAwesomeIcon
+                                    icon={faInfoCircle}
+                                    className=" Info"
+                                  />
                                 </a>
                               </li>
                             )
@@ -286,7 +318,7 @@ const Registration = () => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="password">Enter your password </label>
+                <label htmlFor="password">Enter your password</label>
                 <input
                   type="password"
                   placeholder="Password"
@@ -297,7 +329,23 @@ const Registration = () => {
                 />
               </div>
 
-            
+              <div className="form-group">
+                <label htmlFor="tellAboutYourself">
+                  Tell me about yourself (max 30 words):
+                </label>
+                <textarea
+                  id="tellAboutYourself"
+                  value={tellAboutYourself}
+                  onChange={handleAboutYourselfChange}
+                  className="input_field"
+                  required
+                />
+                {error && (
+                  <p className="error" style={{ color: "red" }}>
+                    {error}
+                  </p>
+                )}
+              </div>
 
               {showGraduateOptions && (
                 <GraduateRegistration

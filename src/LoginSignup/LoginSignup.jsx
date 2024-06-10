@@ -4,7 +4,6 @@ import { MDBIcon, MDBBtn } from "mdb-react-ui-kit";
 import logo from "../Components/Assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL, HEADER_DATA } from "../utils/baseUrl";
-
 import useSignIn from "react-auth-kit/hooks/useSignIn";
 
 const LoginSignup = (props) => {
@@ -42,7 +41,7 @@ const LoginSignup = (props) => {
   };
 
   const logIn = async () => {
-    const response = await fetch(`${BASE_URL}/v1/auth/login`,{
+    const response = await fetch(`${BASE_URL}/v1/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -115,7 +114,10 @@ const LoginSignup = (props) => {
 
   const handleToggle = () => {
     setAction((prevAction) => (prevAction === "Login" ? "Register" : "Login"));
-    navigate(action === "Login" ? "/registration" : "/");
+  };
+
+  const handleRegisterClick = () => {
+    navigate("/registration");
   };
 
   return (
@@ -201,8 +203,8 @@ const LoginSignup = (props) => {
                 </div>
               )}
               <div className="submit-container">
-                <MDBBtn className="me-1 submit">Login</MDBBtn>
-                <MDBBtn className="me-1 submit" onClick={handleToggle}>
+                <MDBBtn className="me-1 submit" type="submit">Login</MDBBtn>
+                <MDBBtn className="me-1 submit" onClick={handleRegisterClick}>
                   Register
                 </MDBBtn>
               </div>

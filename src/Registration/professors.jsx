@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Select from "react-select";
 import { MDBIcon, MDBBtn } from "mdb-react-ui-kit";
 
-const ProfessorRegistration = ({ registerCallback, institutes }) => {
+const ProfessorRegistration = ({ registerCallback, institutes = [] }) => {
   const [teachingExperience, setTeachingExperience] = useState("");
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [selectedInstitute, setSelectedInstitute] = useState("");
@@ -19,7 +19,6 @@ const ProfessorRegistration = ({ registerCallback, institutes }) => {
     console.log("Field details: ", fieldDetails);
     registerCallback(fieldDetails);
   };
-
 
   const handleTeachingExperienceChange = (e) => {
     setTeachingExperience(e.target.value);
@@ -39,34 +38,13 @@ const ProfessorRegistration = ({ registerCallback, institutes }) => {
     { value: "urban_planning_and_design", label: "Urban Planning and Design" },
     { value: "climate_science", label: "Climate Science" },
     { value: "remote_sensing", label: "Remote Sensing" },
-    {
-      value: "geographic_information_system",
-      label: "Geographic Information System",
-    },
-    {
-      value: "energy_efficiency_and_urban_sustainibility",
-      label: "Energy Efficiency and Urban Sustainability",
-    },
-    {
-      value: "urban_transportation_and_mobility",
-      label: "Urban Transportation and Mobility",
-    },
-    {
-      value: "urban_data_science_and_modelling",
-      label: "Urban Data Science and Modelling",
-    },
-    {
-      value: "urban_disaster_risk_reduction",
-      label: "Urban Disaster Risk Reduction",
-    },
-    {
-      value: "urban_climate_adaption_planning",
-      label: "Urban Climate Adaptation Planning",
-    },
-    {
-      value: "urban_carbon_footprint_assessment",
-      label: "Urban Carbon Footprint Assessment",
-    },
+    { value: "geographic_information_system", label: "Geographic Information System" },
+    { value: "energy_efficiency_and_urban_sustainibility", label: "Energy Efficiency and Urban Sustainability" },
+    { value: "urban_transportation_and_mobility", label: "Urban Transportation and Mobility" },
+    { value: "urban_data_science_and_modelling", label: "Urban Data Science and Modelling" },
+    { value: "urban_disaster_risk_reduction", label: "Urban Disaster Risk Reduction" },
+    { value: "urban_climate_adaption_planning", label: "Urban Climate Adaptation Planning" },
+    { value: "urban_carbon_footprint_assessment", label: "Urban Carbon Footprint Assessment" },
     { value: "others", label: "Others" },
   ];
 
@@ -83,7 +61,7 @@ const ProfessorRegistration = ({ registerCallback, institutes }) => {
         >
           <option value="">Select an institute</option>
           {institutes.map((institute, index) => (
-            <option value={institute} key={institute}>
+            <option value={institute} key={index}>
               {institute}
             </option>
           ))}

@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react"; // Add this import statement
 import "./graduate-register.css";
 import Select from "react-select";
-import { MDBIcon, MDBBtn } from "mdb-react-ui-kit";
+import { MDBBtn } from "mdb-react-ui-kit";
 
-const GraduateRegistration = ({ registerCallback, institutes }) => {
+const GraduateRegistration = ({ registerCallback, institutes = [], setRegistrationStatus }) => { // Add 'setRegistrationStatus' to the props
   const [degreeProgram, setDegreeProgram] = useState("");
   const [fieldOfStudy, setFieldOfStudy] = useState("");
   const [graduationYear, setGraduationYear] = useState("");
   const [selectedInstitute, setSelectedInstitute] = useState("");
+  const [registrationSuccess, setRegistrationSuccess] = useState(false); // State to track registration success
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const fieldDetails = {
       highest_degree_earned: degreeProgram,
@@ -17,9 +18,19 @@ const GraduateRegistration = ({ registerCallback, institutes }) => {
       graduation_date: graduationYear,
       institution_name: selectedInstitute,
     };
-    
-    registerCallback(fieldDetails);
+
+    const success = await registerCallback(fieldDetails); // Await registration callback
+    setRegistrationSuccess(success); // Set registration success state
   };
+
+  // Use useEffect to handle registration success
+  useEffect(() => {
+    if (registrationSuccess) {
+      setTimeout(() => {
+        setRegistrationStatus(true); // Redirect after a delay
+      }, 3000); // Redirect after 3 seconds (adjust as needed)
+    }
+  }, [registrationSuccess, setRegistrationStatus]);
 
   const handleChange = (selectedField) => {
     setFieldOfStudy(selectedField);
@@ -27,13 +38,13 @@ const GraduateRegistration = ({ registerCallback, institutes }) => {
 
   const options = [
     { value: "environmental_science", label: "Environmental Science" },
-    { value: "meteorology", label: "metereology" },
+    { value: "meteorology", label: "Metereology" },
     { value: "air_pollution_science", label: "Air Pollution Science" },
     { value: "Architecture", label: "Architecture" },
     { value: "building_engineering ", label: "Building engineering " },
     { value: "urban_geography", label: "Urban Geography" },
     { value: "urban_planning_and_design", label: "Urban planning and Design" },
-    { value: "cimate_science", label: "Climate Science" },
+    { value: "climate_science", label: "Climate Science" },
     { value: "remote_sensing", label: "Remote Sensing" },
     {
       value: "geographic_information_system",
@@ -79,8 +90,10 @@ const GraduateRegistration = ({ registerCallback, institutes }) => {
             required
           >
             <option value="">Select an institute</option>
-            {institutes.map((institute, index) => (
-              <option value={institute} key={institute}>{institute}</option>
+            {institutes.map((institute) => (
+              <option value={institute} key={institute}>
+                {institute}
+              </option>
             ))}
           </select>
         </div>

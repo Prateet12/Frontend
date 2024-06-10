@@ -58,17 +58,17 @@
 
 .dropdown-container {
   position: relative;
-  max-width: 100%; /* Adjust as needed */
-  margin-bottom: 1.5rem; /* Match form-group margin */
+  max-width: 100%;
+  margin-bottom: 1.5rem;
 }
 
 .dropdown-toggle {
-  width: 100%; /* Make the dropdown toggle full width */
+  width: 100%;
   color: #555555;
   background-color: #ffffff;
-  font-size: 1rem; /* Match input_field font size */
-  padding: 0.5rem; /* Match input_field padding */
-  border: 1px solid #ccc; /* Match input_field border */
+  font-size: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
   border-radius: 4px;
   font-weight: 600;
   cursor: pointer;
@@ -79,12 +79,12 @@
 }
 
 .dropdown-toggle::before {
-  margin-left: auto; /* Move the arrow to the right */
+  margin-left: auto;
 }
 
 .dropdown-menu {
-  width: calc(100% + 2px); /* Adjust width to match input_field width */
-  border-radius: 4px; /* Match input_field border radius */
+  width: calc(100% + 2px);
+  border-radius: 4px;
   box-shadow: 0px 0px 4px -2px rgba(0, 0, 0, 0.5);
   position: absolute;
   top: 100%;
@@ -99,18 +99,18 @@
   padding: 0;
   margin: 0;
   overflow: hidden;
-  border-radius: 4px; /* Match input_field border radius */
+  border-radius: 4px;
 }
 
 .dropdown-menu ul li {
-  padding: 0.5rem; /* Match input_field padding */
+  padding: 0.5rem;
 }
 
 .dropdown-menu ul li a {
   text-decoration: none;
   display: block;
   color: #555555;
-  font-size: 1rem; /* Match input_field font size */
+  font-size: 1rem;
   font-weight: 600;
   transition: all ease-in-out 0.3s;
 }
@@ -121,7 +121,7 @@
 }
 
 .dropdown-container.dropdown-open .dropdown-toggle::before {
-  transform: rotate(180deg); /* Rotate arrow upwards when dropdown is open */
+  transform: rotate(180deg);
 }
 
 .dropdown-container.dropdown-open .dropdown-menu {

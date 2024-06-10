@@ -3,7 +3,7 @@ import "./researcher-register.css";
 import Select from "react-select";
 import { MDBIcon, MDBBtn } from 'mdb-react-ui-kit';
 
-const ResearcherRegistration = ({ registerCallback, institutes }) => {
+const ResearcherRegistration = ({ registerCallback, institutes = [] }) => {
   const [highestDegreeObtained, setHighestDegreeObtained] = useState("");
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [instituteType, setInstituteType] = useState("");
@@ -132,7 +132,7 @@ const ResearcherRegistration = ({ registerCallback, institutes }) => {
           >
             <option value="">Select an institute</option>
             {institutes.map((institute, index) => (
-              <option value={institute} key={institute}>{institute}</option>
+              <option value={institute} key={index}>{institute}</option>
             ))}
           </select>
       </div>
