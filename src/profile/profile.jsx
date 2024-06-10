@@ -46,9 +46,14 @@ const Profile = () => {
   return (
     <div className="profile">
       <MDBContainer className="my-5">
-        <MDBTypography tag="h1" className="text-center mb-5">
-          YOUR PROFILE
+        <MDBTypography
+          tag="h1"
+          className="text-center mb-5 profile_heading"
+          id="profile_heading"
+        >
+          <strong>YOUR PROFILE</strong>
         </MDBTypography>
+
         <MDBRow className="justify-content-center">
           <MDBCol md="10">
             <MDBCard className="profile-card">

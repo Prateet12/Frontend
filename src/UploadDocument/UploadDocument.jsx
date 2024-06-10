@@ -144,6 +144,20 @@ const UploadDocument = () => {
     return true;
   };
 
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    
+    // Check if file size exceeds 10MB (10 * 1024 * 1024 bytes)
+    if (file.size > 10 * 1024 * 1024) {
+      alert("File size exceeds 10MB. Please upload a smaller file.");
+      return;
+    }
+    
+    setSelectedFile(file);
+    console.log("Selected file:", file);
+  };
   // Watch the required fields to determine if the form is valid
   const requiredFields = watch([
     "Title",
@@ -336,21 +350,24 @@ const UploadDocument = () => {
             <div className="row">
               <div className="col-lg-6 col-md-6 col-sm-12 col-12">
                 <div>
-                  <label>Upload Thesis Document</label>
+                  <label>Upload Thesis Document (Please upload a file with a maximum size of 10MB) </label>
                   <input
                     className="upload_input"
                     type="file"
-                    onChange={handleThesisChange}
+                    accept=".pdf,.doc,.docx"
+                    onChange={handleFileUpload}
                   />
                 </div>
               </div>
+
               <div className="col-lg-6 col-md-6 col-sm-12 col-12">
                 <div>
-                  <label>Upload Synopsis Document</label>
+                  <label>Upload Synopsis Document (Please upload a file with a maximum size of 10MB)</label>
                   <input
                     className="upload_input"
                     type="file"
-                    onChange={handleSynopsisChange}
+                    accept=".pdf,.doc,.docx"
+                    onChange={handleFileUpload}
                   />
                 </div>
               </div>

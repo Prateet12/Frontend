@@ -12,7 +12,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
-import logo from "../../Assets/dummy-logo.png";
+import logo from "./logo.png";
 import "./NavBar.css";
 
 function NavBar({ setLoggedIn }) {
@@ -120,6 +120,7 @@ function NavBar({ setLoggedIn }) {
   };
 
   return (
+    
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
