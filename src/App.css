@@ -21,9 +21,9 @@
   background: #fccb90;
 
   /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-linear-gradient(to top, #c1dfc4 0%, #deecdd 100%);
+  background: -webkit-linear-gradient(to top, aliceblue 0%, #deecdd 100%);
 
-  background-image: linear-gradient(to top, #c1dfc4 0%, #deecdd 100%);
+  background-image: linear-gradient(to top, aliceblue 0%, #deecdd 100%);
 }
 
 .landingpage {

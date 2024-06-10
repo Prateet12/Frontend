@@ -28,7 +28,7 @@ const Home = () => {
 
         <div className="top-section">
           <div className="container-fluid">
-            <div className="row align-items-center justify-content-between">
+            <div className="row align-items-center justify-content-between ">
               <div className="d-flex align-items-center">
                 <img src={logo1} alt="logo" className="logo1" />
                 <div className="right">

@@ -13,11 +13,17 @@ body, html {
 body {
   font-family: Arial, sans-serif;
   overflow-x: hidden;
+
+}
+
+#about{
+  background-color: aliceblue;
 }
 
 .row {
   display: flex;
   flex-wrap: wrap;
+  
 }
 
 /* Main Section Styles */
@@ -62,11 +68,11 @@ body {
 }
 
 .logo1 {
-  width: 150px; /* Adjust size as needed */
+  width: 125px; /* Adjust size as needed */
 }
 
 .logo2 {
-  width: 150px; /* Adjust size as needed */
+  width: 125px; /* Adjust size as needed */
   margin-right: 20px;
 }
 
@@ -78,7 +84,7 @@ body {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
-  height: 70px;
+  height: 50px;
   border-radius: 4px;
 }
 
@@ -125,7 +131,7 @@ body {
 
 
 .left-section {
-  background-color: transparent; /* No background color */
+  background-color: aliceblue; /* No background color */
 }
 
 .right-section {
@@ -150,12 +156,13 @@ body {
 }
 
 .login-btn {
-  background-color: rgb(5, 133, 5);
+  background-color: #2596be;
   color: #ffffff;
 }
 
 .login-btn:hover {
-  background-color: rgb(14, 181, 14);
+  background-color: rgb(98, 196, 232);
+  color: black;
 }
 
 .about-text p {
@@ -232,7 +239,7 @@ body {
 /* Footer Styles */
 /* Footer Styles */
 .footer {
-  background-color: rgb(16, 160, 88);
+  background-color: navy;
   color: #fff;
   padding: 15px 0; /* Reduced padding */
   font-size: 14px; /* Reduced font size */
@@ -270,7 +277,7 @@ body {
 }
 
 .bottom-bar {
-  background-color: rgb(16, 160, 88);
+  background-color: navy;
   padding: 5px 0; /* Reduced padding */
   margin-top: 5px; /* Reduced margin */
 }
@@ -306,6 +313,7 @@ body {
 .social-icons li a img {
   width: 25px; /* Adjust the width of the social media icons */
   height: auto; /* Maintain aspect ratio */
+  filter: invert();
 }
 
 @media (max-width: 768px) {
