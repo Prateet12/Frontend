@@ -2,6 +2,19 @@
   max-width: 425px;
   margin: 25px auto;
   padding: 2rem;
+  border-radius: 10px;
+  background-color: #fff; /* Add background color to the container */
+}
+
+#registration {
+  max-width: 50% !important;
+  border-radius: 10px;
+}
+
+#user-btn {
+  text-align: left;
+  margin-bottom: 15px;
+  display: block;
 }
 
 .registration-container h1 {
@@ -16,6 +29,7 @@
 .form-group label {
   display: block;
   margin-bottom: 0.5rem;
+  text-align: left;
 }
 
 .input_field {
@@ -46,8 +60,7 @@
   background-color: #4396f0;
   border-color: #4396f0;
   border-radius: 0.25rem;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-   border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   cursor: pointer;
 }
 
@@ -76,6 +89,8 @@
   transition: all ease-in-out 0.3s;
   display: flex;
   align-items: center;
+  justify-content: flex-start; /* Align contents to the left */
+  text-align: left; /* Ensure text is aligned to the left */
 }
 
 .dropdown-toggle::before {
@@ -104,6 +119,7 @@
 
 .dropdown-menu ul li {
   padding: 0.5rem;
+  text-align: left; /* Ensure text is aligned to the left */
 }
 
 .dropdown-menu ul li a {
@@ -113,6 +129,7 @@
   font-size: 1rem;
   font-weight: 600;
   transition: all ease-in-out 0.3s;
+  text-align: left; /* Ensure text is aligned to the left */
 }
 
 .dropdown-menu ul li a:hover {
@@ -128,7 +145,18 @@
   display: block;
 }
 
-.InfoIcon{
+.InfoIcon {
   justify-content: left;
   align-items: left;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto 1rem auto;
+  max-width: 100px;
+}
+
+.select{
+  text-align: left;
+  color: black;
 }

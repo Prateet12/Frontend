@@ -10,21 +10,13 @@ const LoginSignup = (props) => {
   const navigate = useNavigate();
   const signIn = useSignIn();
 
-  // Local state
   const [action, setAction] = useState("Login");
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
-  const getRolePermissions = async (
-    roleId,
-    setLoggedIn,
-    setUser,
-    user
-  ) => {
+  const getRolePermissions = async (roleId, setLoggedIn, setUser, user) => {
     try {
       const response = await fetch(`${BASE_URL}/v1/role/${roleId}`, {
         headers: HEADER_DATA,
@@ -36,7 +28,7 @@ const LoginSignup = (props) => {
       setUser(user);
       navigate("/dashboard");
     } catch (error) {
-      console.error("Didnt find role but logged in for now:", error);
+      console.error("Didn't find role but logged in for now:", error);
     }
   };
 
@@ -70,14 +62,8 @@ const LoginSignup = (props) => {
       ) {
         console.log("Logged in successfully");
         localStorage.setItem("user", JSON.stringify({ user: data.user }));
-        getRolePermissions(
-          data.user.role,
-          props.setLoggedIn,
-          props.setUser,
-          data.user
-        );
+        getRolePermissions(data.user.role, props.setLoggedIn, props.setUser, data.user);
       } else {
-        // throw an error
         console.error("Error");
         window.alert("An error occurred. Please try again later.");
       }
@@ -89,12 +75,10 @@ const LoginSignup = (props) => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    // Set initial error values to empty
     setEmailError("");
     setPasswordError("");
 
-    // Check if the user has entered both fields correctly
-    if ("" === email) {
+    if (email === "") {
       setEmailError("Please enter your email");
       return;
     }
@@ -104,7 +88,7 @@ const LoginSignup = (props) => {
       return;
     }
 
-    if ("" === password) {
+    if (password === "") {
       setPasswordError("Please enter a password");
       return;
     }
@@ -121,46 +105,9 @@ const LoginSignup = (props) => {
   };
 
   return (
-    <div className="container landingpage">
-      <div className="row">
-        <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-          <div className="app-logo">
-            <img src={logo} alt="logo" />
-          </div>
-          <h1 className="heading">Welcome to UDAY</h1>
-          <p className="welcometext">
-            Your comprehensive digital repository for urban research and
-            knowledge. Just like Shodhganga, UDAY serves as a one-stop
-            portal for accessing, sharing, and preserving scholarly works and
-            publications focused on urban studies.
-          </p>
-          <p className="welcometext">
-            Explore a vast collection of theses, dissertations, and research
-            papers, and contribute to advancing our understanding of urban
-            environments. Join us in fostering a vibrant academic community
-            dedicated to the study of cities and their dynamics.
-          </p>
-          <div className="app-stats">
-            <div className="stats-data">
-              <span className="stat-title">Thesis: </span>
-              <span>145</span>
-            </div>
-            <div className="stats-data">
-              <span className="stat-title">Synopsis: </span>
-              <span>345</span>
-            </div>
-            <div className="stats-data">
-              <span className="stat-title">Reports: </span>
-              <span>35</span>
-            </div>
-            <div className="stats-data">
-              <span className="stat-title">Members: </span>
-              <span>45</span>
-            </div>
-          </div>
-        </div>
-        <div className="col-lg-6 col-md-6 col-sm-12 col-12 bg-teal border-radius-1">
+    <div className="container landingpage login">
           <div className="registration-container">
+            <img src={logo} alt="Logo" className="logo" />
             <h1>{action}</h1>
             <form onSubmit={handleLogin}>
               <div className="form-group">
@@ -197,11 +144,6 @@ const LoginSignup = (props) => {
                 />
                 <label className="errorLabel">{passwordError}</label>
               </div>
-              {action === "Login" && (
-                <div className="form-group forgot-password">
-                  Forgot Password? <span id="clickLink">Click here!</span>
-                </div>
-              )}
               <div className="submit-container">
                 <MDBBtn className="me-1 submit" type="submit">Login</MDBBtn>
                 <MDBBtn className="me-1 submit" onClick={handleRegisterClick}>
@@ -211,8 +153,7 @@ const LoginSignup = (props) => {
             </form>
           </div>
         </div>
-      </div>
-    </div>
+ 
   );
 };
 

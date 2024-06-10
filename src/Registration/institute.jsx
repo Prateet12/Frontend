@@ -47,6 +47,7 @@ const InstitutesRegistration = ({ registerCallback }) => {
         <label htmlFor="InstituteType">Institute Type:</label>
         <Select
           options={InstituteOptions}
+          className="select"
           value={selectedOption}
           onChange={handleInstituteTypeChange}
           required

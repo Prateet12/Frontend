@@ -73,6 +73,7 @@ const PractitionersRegistration = ({ registerCallback }) => {
         <label htmlFor="organizationType">Organization Type:</label>
         <Select
           options={organizationOptions}
+          className="select"
           value={selectedOrganizationOption}
           onChange={handleOrganizationTypeChange}
           required
@@ -82,6 +83,7 @@ const PractitionersRegistration = ({ registerCallback }) => {
         <label htmlFor="industry-sector">Industry Sector:</label>
         <Select
           options={industrySectorOptions}
+          className="select"
           value={selectedSectorOption}
           onChange={handleSectorChange}
         />

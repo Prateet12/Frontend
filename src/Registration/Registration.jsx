@@ -1,6 +1,5 @@
-import "./Registration.css";
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import GraduateRegistration from "./graduate-register";
 import ResearcherRegistration from "./researcher-register";
 import PractitionerRegistration from "./practitioners";
@@ -13,6 +12,7 @@ import logo from "../Components/Assets/logo.png";
 import { getAllRoles, getAllInstitutes } from "../utils/apiUtils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import "./Registration.css";
 
 const Registration = ({ setLoggedIn }) => {
   const [name, setName] = useState("");
@@ -32,9 +32,7 @@ const Registration = ({ setLoggedIn }) => {
 
   const handleAboutYourselfChange = (e) => {
     const text = e.target.value;
-    // Split the text by spaces to count words
     const words = text.trim().split(/\s+/);
-    // Limit the text to 30 words
     if (words.length <= 30) {
       setTellAboutYourself(text);
       setError("");
@@ -56,9 +54,6 @@ const Registration = ({ setLoggedIn }) => {
   useEffect(() => {
     getAllInstitutes(setInstitutes); 
   }, []);
-  
-
-  
 
   let roleNames = roles.map((role) => role.role);
 
@@ -91,14 +86,10 @@ const Registration = ({ setLoggedIn }) => {
 
       const new_user = await response.json();
       if (new_user) {
-        // Assume registration was successful and log in the user
-        //setLoggedIn(true);
-        //sessionStorage.setItem("loggedIn", JSON.stringify(true));
-        
         window.alert(
           "Registration successful, please wait for an email to be verified"
         );
-        navigate("/");
+        navigate("/login-signup");
       }
     } catch (error) {
       console.error("Registration Error:", error);
@@ -142,50 +133,6 @@ const Registration = ({ setLoggedIn }) => {
     setShowProfessorOptions(role === "professor");
   };
 
-  let registrationOptions;
-  switch (selectedRole) {
-    case "graduate":
-      registrationOptions = (
-        <GraduateRegistration
-          registerCallback={registerCallback}
-          institutes={institutes}
-        />
-      );
-      break;
-    case "researcher":
-      registrationOptions = (
-        <ResearcherRegistration
-          registerCallback={registerCallback}
-          institutes={institutes}
-        />
-      );
-      break;
-    case "practitioner":
-      registrationOptions = (
-        <PractitionerRegistration registerCallback={registerCallback} />
-      );
-      break;
-    case "institution admin":
-      registrationOptions = (
-        <InstitutesRegistration registerCallback={registerCallback} />
-      );
-      break;
-    case "research assistant":
-      registrationOptions = (
-        <ResearchAssistantRegistration registerCallback={registerCallback} />
-      );
-      break;
-    case "professor":
-      registrationOptions = (
-        <ProfessorRegistration
-          registerCallback={registerCallback}
-          institutes={institutes}
-        />
-      );
-      break;
-    default:
-      registrationOptions = null;
-  }
   const [showDropdown, setShowDropdown] = useState(false);
 
   const handleDropdownToggle = () => {
@@ -196,48 +143,11 @@ const Registration = ({ setLoggedIn }) => {
     setPassword(e.target.value);
   };
 
-
   return (
-    <div className="container landingpage">
-      <div className="row">
-        <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-          <div className="app-logo">
-            <img src={logo} alt="logo" />
-          </div>
-          <h1 className="heading">Welcome to UDAY</h1>
-          <p className="welcometext">
-            Your comprehensive digital repository for urban research and
-            knowledge. Just like Shodhganga, Urb Clinder serves as a one-stop
-            portal for accessing, sharing, and preserving scholarly works and
-            publications focused on urban studies.
-          </p>
-          <p className="welcometext">
-            Explore a vast collection of theses, dissertations, and research
-            papers, and contribute to advancing our understanding of urban
-            environments. Join us in fostering a vibrant academic community
-            dedicated to the study of cities and their dynamics.
-          </p>
-          <div className="app-stats">
-            <div className="stats-data">
-              <span className="stat-title">Thesis: </span>
-              <span>145</span>
-            </div>
-            <div className="stats-data">
-              <span className="stat-title">Synopsis: </span>
-              <span>345</span>
-            </div>
-            <div className="stats-data">
-              <span className="stat-title">Reports: </span>
-              <span>35</span>
-            </div>
-            <div className="stats-data">
-              <span className="stat-title">Members: </span>
-              <span>45</span>
-            </div>
-          </div>
-        </div>
-        <div className="col-lg-6 col-md-6 col-sm-12 col-12 bg-teal">
+    <div className="container landingpage" id="registration">
+     
           <div className="registration-container">
+            <img src={logo} alt="Logo" className="logo" />
             <div className="header_main">
               <div className="text">REGISTER</div>
             </div>
@@ -245,6 +155,7 @@ const Registration = ({ setLoggedIn }) => {
               variant="text"
               color="primary"
               onClick={redirectToLoginSignup}
+              id="user-btn"
             >
               Already a user?
             </Button>
@@ -384,8 +295,8 @@ const Registration = ({ setLoggedIn }) => {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      
+
   );
 };
 

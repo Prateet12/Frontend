@@ -106,6 +106,7 @@ const ResearcherRegistration = ({ registerCallback, institutes = [] }) => {
         <label htmlFor="research-areas">Research Areas:</label>
         <Select
           options={options}
+          className="select"
           value={selectedOptions}
           onChange={handleChange}
           isMulti={true}
@@ -115,6 +116,7 @@ const ResearcherRegistration = ({ registerCallback, institutes = [] }) => {
         <label htmlFor="InstituteType">Organization Type:</label>
         <Select
           options={InstituteOptions}
+          className="select"
           value={instituteType}
           onChange={handleInstituteTypeChange}
           isMulti={false}

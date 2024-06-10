@@ -2,6 +2,11 @@
    height: 100vmin;
   display: flex;
   flex-direction: column;
+  background-color: aliceblue;
+}
+
+.page-container{
+  background-color: aliceblue;
 }
 
 .navbar-container {

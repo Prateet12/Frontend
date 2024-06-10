@@ -125,7 +125,7 @@ body {
   flex-direction: column;
   justify-content: center; /* Center content vertically */
   align-items: center; /* Center content horizontally */
-  padding: 20px; /* Add padding for better aesthetics */
+
   box-sizing: border-box; /* Ensure padding is included in width/height */
 }
 
@@ -152,7 +152,7 @@ body {
 
 .education-header h2 {
   font-size: 2.5em;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 
 .login-btn {
@@ -307,7 +307,7 @@ body {
 }
 
 .footer-logo img {
-  max-width: 80px; /* Adjust the max-width to resize the footer images */
+  max-width: 100px; /* Adjust the max-width to resize the footer images */
 }
 
 .social-icons li a img {

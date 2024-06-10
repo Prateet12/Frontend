@@ -1,16 +1,20 @@
 .registration-container {
   max-width: 425px;
   margin: 25px auto;
-  padding: 2rem;
+  padding: 1.75rem;
+  text-align: center; /* Center align the content */
+  min-height: 50vh; /* Decrease the height */
 }
 
-.uploadResume{
-  margin-top:150px;
-  margin-bottom:75px;
+.login {
+  max-width: 50% !important;
+
 }
+
+
 
 .landingpage {
-  margin-top: 150px;
+  margin-top: 75px;
   margin-bottom: 75px;
 }
 
@@ -51,11 +55,9 @@
   margin-right: 0.5rem;
 }
 
-.input_img{
+.input_img {
   margin-right: 10px;
 }
-
-
 
 .input input,
 .input select {
@@ -72,9 +74,10 @@
   margin-top: 2rem;
 }
 
-.logo{
-  width: 20px;
-  height: 20px;
+.logo {
+  width: 100px; /* Adjust the width */
+  height: auto; /* Maintain aspect ratio */
+  margin-bottom: 1rem; /* Add space below the logo */
 }
 
 .submit {

@@ -73,6 +73,7 @@ const ProfessorRegistration = ({ registerCallback, institutes = [] }) => {
           options={options}
           value={selectedOptions}
           onChange={handleChange}
+          className="select"
           isMulti={true}
           required
         />
