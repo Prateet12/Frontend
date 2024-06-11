@@ -19,6 +19,7 @@ import axios from "axios";
 import Inbox from "./inbox/inbox";
 import Home from "./Home/Home";
 import UploadBestPractices from "./BestPractices/UploadBestPractices";
+import BestPractices from "./BestPractices/BestPractices";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(
@@ -45,13 +46,9 @@ function App() {
     interval: 10,
     refreshApiCallback: async (param) => {
       try {
-        const response = await axios.post(
-          "/v1/auth/refresh-tokens",
-          param,
-          {
-            headers: { Authorization: `Bearer ${param.authToken}` },
-          }
-        );
+        const response = await axios.post("/v1/auth/refresh-tokens", param, {
+          headers: { Authorization: `Bearer ${param.authToken}` },
+        });
         console.log("Refreshing token and details are:" + response.data);
         return {
           isSuccess: true,
@@ -106,25 +103,18 @@ function App() {
                   path="/academic-repo"
                   element={loggedIn ? <AcademicRepo /> : <Navigate to="/" />}
                 />
-                <Route
-                  path="/registration"
-                  element={<Registration />}
-                />
+                <Route path="/registration" element={<Registration />} />
                 <Route
                   path="/graduate-repo"
                   element={loggedIn ? <GraduateRepo /> : <Navigate to="/" />}
                 />
                 <Route
                   path="/upload-document"
-                  element={
-                    loggedIn ? <UploadDocument /> : <Navigate to="/" />
-                  }
+                  element={loggedIn ? <UploadDocument /> : <Navigate to="/" />}
                 />
                 <Route
                   path="/upload-resume"
-                  element={
-                    loggedIn ? <UploadResume /> : <Navigate to="/" />
-                  }
+                  element={loggedIn ? <UploadResume /> : <Navigate to="/" />}
                 />
                 <Route
                   path="/profile"
@@ -138,18 +128,26 @@ function App() {
                 />
                 <Route
                   path="/approvals-inbox"
-                  element={
-                    loggedIn ? <Approval /> : <Navigate to="/" />
-                  }
+                  element={loggedIn ? <Approval /> : <Navigate to="/" />}
                 />
                 <Route
                   path="/inbox"
                   element={loggedIn ? <Inbox /> : <Navigate to="/" />}
                 />
-                 <Route
+                <Route
                   path="/uploadBestPractices"
-                  element={loggedIn ? <UploadBestPractices/> : <Navigate to="/" />}
+                  element={
+                    loggedIn ? <UploadBestPractices /> : <Navigate to="/" />
+                  }
                 />
+
+                <Route
+                  path="/bestPractices"
+                  element={
+                    loggedIn ? <BestPractices /> : <Navigate to="/" />
+                  }
+                />
+
                 <Route
                   path="/logout"
                   element={

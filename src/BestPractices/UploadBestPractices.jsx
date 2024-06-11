@@ -51,6 +51,19 @@ const indianCities = [
   "Kota",
 ];
 
+const sectorOptions = [
+  { value: "Energy", label: "Energy" },
+  { value: "Buildings and Construction", label: "Buildings and Construction" },
+  { value: "Waste Management", label: "Waste Management" },
+  { value: "Water and Wastewater Management", label: "Water and Wastewater Management" },
+  { value: "Transportation", label: "Transportation" },
+  { value: "Urban Agriculture", label: "Urban Agriculture" },
+  { value: "Industry and Manufacturing", label: "Industry and Manufacturing" },
+  { value: "Environmental Science", label: "Environmental Science" },
+  { value: "Meteorology", label: "Meteorology" },
+  { value: "Air Pollution Science", label: "Air Pollution Science" },
+];
+
 const UploadBestPractices = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -60,6 +73,7 @@ const UploadBestPractices = () => {
   const [keywords, setKeywords] = useState("");
   const [document, setDocument] = useState(null);
   const [allFieldsFilled, setAllFieldsFilled] = useState(false);
+  const [sector, setSector] = useState("");
   const [keywordMessage, setKeywordMessage] = useState(
     "At least 5 keywords are required"
   );
@@ -160,6 +174,9 @@ const UploadBestPractices = () => {
 
   const fileInputRef = useRef(null);
 
+  const handleSectorChange = (event) => {
+    setSector(event.target.value);
+  };
 
   useEffect(() => {
     checkAllFields();
@@ -206,6 +223,7 @@ const UploadBestPractices = () => {
               value={city}
               onChange={(e) => setCity(e.target.value)}
               required
+             
               className="form-control"
             >
               <option value="" disabled>
@@ -246,6 +264,28 @@ const UploadBestPractices = () => {
             {keywordMessage && (
               <p className="error-message">{keywordMessage}</p>
             )}
+          </div>
+          <div className="form-group">
+            <label htmlFor="sector">
+              Sector <span className="required">*</span>
+            </label>
+            <select
+              id="sector"
+              name="sector"
+              value={sector}
+              onChange={handleSectorChange}
+              required
+              className="form-control"
+            >
+              <option value="" disabled>
+                Select a sector
+              </option>
+              {sectorOptions.map((sector) => (
+                <option key={sector.value} value={sector.value}>
+                  {sector.label}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="form-group">
             <label htmlFor="document">
