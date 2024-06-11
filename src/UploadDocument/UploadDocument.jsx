@@ -20,7 +20,7 @@ const UploadDocument = () => {
 
   const createFormData = (data, files, fileType) => {
     let formData = new FormData();
-    console.log("User ID:", JSON.parse(localStorage.getItem("user")).user.id);
+    // console.log("User ID:", JSON.parse(localStorage.getItem("user")).user.id);
     // Required Fields
     formData.append(
       "fromUser",
@@ -32,7 +32,7 @@ const UploadDocument = () => {
     formData.append("abstract", data.abstract);
     formData.append("degree_program", data.degreeProgram);
     for (let file of files) {
-      console.log("File:", file);
+      // console.log("File:", file);
       formData.append("files", file);
     }
     // Optional Fields:
@@ -40,12 +40,12 @@ const UploadDocument = () => {
     formData.append("publication_date", data.publicationDate);
     formData.append("institution", selectedInstitution);
     formData.append("department", data.department);
-    console.log("Supervisors:", data.supervisors);
+    // console.log("Supervisors:", data.supervisors);
     formData.append("supervisors", JSON.stringify(data.supervisors));
     formData.append("funding_sources", data.fundingSources);
     formData.append("acknowledgements", data.acknowledgements);
 
-    console.log("Form Data:", formData);
+    // console.log("Form Data:", formData);
     return formData;
   };
 
@@ -69,6 +69,16 @@ const UploadDocument = () => {
         alert("Please select a PDF, DOC, or DOCX file for the thesis.");
       }
     }
+    // Check if file size exceeds 10MB (10 * 1024 * 1024 bytes)
+    if (file.size > 10 * 1024 * 1024) {
+      alert("File size exceeds 10MB. Please upload a smaller file.");
+      return;
+    }
+    
+    setSelectedFile(file);
+    // console.log("Selected file:", file);
+
+    setThesisFile(event.target.files[0]);
   };
 
   const handleSynopsisChange = (event) => {
@@ -81,6 +91,16 @@ const UploadDocument = () => {
         alert("Please select a PDF, DOC, or DOCX file for the synopsis.");
       }
     }
+    // Check if file size exceeds 10MB (10 * 1024 * 1024 bytes)
+    if (file.size > 10 * 1024 * 1024) {
+      alert("File size exceeds 10MB. Please upload a smaller file.");
+      return;
+    }
+    
+    setSelectedFile(file);
+    // console.log("Selected file:", file);
+
+    setThesisFile(event.target.files[0]);
   };
 
   const isTextWithCommas = (value) => {
@@ -156,7 +176,7 @@ const UploadDocument = () => {
     }
     
     setSelectedFile(file);
-    console.log("Selected file:", file);
+    // console.log("Selected file:", file);
   };
   // Watch the required fields to determine if the form is valid
   const requiredFields = watch([
@@ -355,7 +375,7 @@ const UploadDocument = () => {
                     className="upload_input"
                     type="file"
                     accept=".pdf,.doc,.docx"
-                    onChange={handleFileUpload}
+                    onChange={handleThesisChange}
                   />
                 </div>
               </div>
@@ -367,7 +387,7 @@ const UploadDocument = () => {
                     className="upload_input"
                     type="file"
                     accept=".pdf,.doc,.docx"
-                    onChange={handleFileUpload}
+                    onChange={handleSynopsisChange}
                   />
                 </div>
               </div>

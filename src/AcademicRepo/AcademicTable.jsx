@@ -93,7 +93,7 @@ export default function CollapsibleTable() {
       }
 
       const data = await response.json();
-      console.log("Data:", data);
+      // console.log("Data:", data);
       setRows(data);
     } catch (error) {
       console.error("Error:", error);

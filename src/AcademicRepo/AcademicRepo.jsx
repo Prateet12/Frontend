@@ -20,7 +20,7 @@ const AcademicRepo = () => {
 
   const handleSearchSubmit = (event) => {
     event.preventDefault();
-    console.log("Search term:", searchTerm);
+    // console.log("Search term:", searchTerm);
   };
 
   const handleFilterChange = (event) => {
