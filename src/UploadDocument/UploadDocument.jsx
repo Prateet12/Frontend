@@ -18,6 +18,9 @@ const UploadDocument = () => {
     JSON.parse(localStorage.getItem("institutes")) || []
   );
 
+
+  
+
   const createFormData = (data, files, fileType) => {
     let formData = new FormData();
     // console.log("User ID:", JSON.parse(localStorage.getItem("user")).user.id);
