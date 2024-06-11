@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { MDBBtn } from "mdb-react-ui-kit";
 import "./BestPractices.css";
 import { uploadDocument } from "../utils/apiUtils";
@@ -60,10 +60,15 @@ const UploadBestPractices = () => {
   const [keywords, setKeywords] = useState("");
   const [document, setDocument] = useState(null);
   const [allFieldsFilled, setAllFieldsFilled] = useState(false);
-  const [keywordMessage, setKeywordMessage] = useState("At least 5 keywords are required");
+  const [keywordMessage, setKeywordMessage] = useState(
+    "At least 5 keywords are required"
+  );
 
   const validateKeywords = (value) => {
-    const keywordsArray = value.split(",").map((kw) => kw.trim()).filter(Boolean);
+    const keywordsArray = value
+      .split(",")
+      .map((kw) => kw.trim())
+      .filter(Boolean);
     if (keywordsArray.length < 5) {
       setKeywordMessage("At least 5 keywords are required");
       return false;
@@ -85,10 +90,12 @@ const UploadBestPractices = () => {
       const fileType = file.name.split(".").pop().toLowerCase();
       if (!["pdf", "doc", "docx"].includes(fileType)) {
         alert("Please select a PDF, DOC, or DOCX file.");
+        fileInputRef.current.value = ""; // Clear the file input
         return;
       }
       if (file.size > 10 * 1024 * 1024) {
         alert("File size exceeds 10MB. Please upload a smaller file.");
+        fileInputRef.current.value = ""; // Clear the file input
         return;
       }
       setDocument(file);
@@ -150,6 +157,9 @@ const UploadBestPractices = () => {
       setAllFieldsFilled(false);
     }
   };
+
+  const fileInputRef = useRef(null);
+
 
   useEffect(() => {
     checkAllFields();
@@ -222,7 +232,8 @@ const UploadBestPractices = () => {
           </div>
           <div className="form-group">
             <label htmlFor="keywords">
-              Keywords (At least 5 keywords required) <span className="required">*</span>
+              Keywords (At least 5 keywords required){" "}
+              <span className="required">*</span>
             </label>
             <input
               type="text"
@@ -232,11 +243,14 @@ const UploadBestPractices = () => {
               onChange={handleKeywordsChange}
               required
             />
-            {keywordMessage && <p className="error-message">{keywordMessage}</p>}
+            {keywordMessage && (
+              <p className="error-message">{keywordMessage}</p>
+            )}
           </div>
           <div className="form-group">
             <label htmlFor="document">
-              Document Upload <span className="required">*</span>
+              Document Upload (Please upload a file with a maximum size of 10MB)
+             <span className="required">*</span>
             </label>
             <input
               type="file"
@@ -244,6 +258,7 @@ const UploadBestPractices = () => {
               name="document"
               accept=".pdf,.doc,.docx"
               onChange={handleFileChange}
+              ref={fileInputRef} 
               required
             />
           </div>
