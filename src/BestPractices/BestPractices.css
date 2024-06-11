@@ -3,7 +3,12 @@
     margin: auto;
     padding: 20px;
     background: #f9f9f9;
-    border-radius: 10px;
+    border-radius: 15px;
+    margin-top: 150px;
+  }
+
+  .uploadBestPractices{
+    margin-top: 80px;
   }
   
   .form-container h2 {
@@ -34,5 +39,38 @@
   
   .submit-container {
     text-align: center;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+  
+  /* Optional: You can add more styling as needed */
+  .form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+  
+  .required {
+    color: red;
+    margin-left: 5px;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 0.875em;
+    margin-top: 0.25em;
   }
   

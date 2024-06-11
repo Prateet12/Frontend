@@ -18,6 +18,7 @@ import createRefresh from "react-auth-kit/createRefresh";
 import axios from "axios";
 import Inbox from "./inbox/inbox";
 import Home from "./Home/Home";
+import UploadBestPractices from "./BestPractices/UploadBestPractices";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(
@@ -144,6 +145,10 @@ function App() {
                 <Route
                   path="/inbox"
                   element={loggedIn ? <Inbox /> : <Navigate to="/" />}
+                />
+                 <Route
+                  path="/uploadBestPractices"
+                  element={loggedIn ? <UploadBestPractices/> : <Navigate to="/" />}
                 />
                 <Route
                   path="/logout"
