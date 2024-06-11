@@ -1,20 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./LoginSignup.css";
 import { MDBIcon, MDBBtn } from "mdb-react-ui-kit";
 import logo from "../Components/Assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL, HEADER_DATA } from "../utils/baseUrl";
 import useSignIn from "react-auth-kit/hooks/useSignIn";
+import { getAllInstitutes, uploadDocument } from "../utils/apiUtils";
 
 const LoginSignup = (props) => {
   const navigate = useNavigate();
   const signIn = useSignIn();
+
+  //const [selectedInstitution, setSelectedInstitution] = useState("");
+  const [registeredInstitutes, setRegisteredInstitutes] = useState(
+    JSON.parse(localStorage.getItem("institutes")) || []
+  );
 
   const [action, setAction] = useState("Login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+
+  
+  useEffect(() => {
+    if (!registeredInstitutes || registeredInstitutes.length <= 1) {
+      getAllInstitutes(setRegisteredInstitutes);
+    }
+  }, []);
+
+  console.log(registeredInstitutes);
 
   const getRolePermissions = async (roleId, setLoggedIn, setUser, user) => {
     try {

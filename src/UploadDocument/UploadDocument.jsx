@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import "./UploadDocument.css";
 import { MDBBtn, MDBContainer } from "mdb-react-ui-kit";
-import { getAllInstitutes, uploadDocument } from "../utils/apiUtils";
+ import { getAllInstitutes, uploadDocument } from "../utils/apiUtils";
 
 const UploadDocument = () => {
   const {
@@ -52,11 +52,11 @@ const UploadDocument = () => {
     return formData;
   };
 
-  useEffect(() => {
-    if (!registeredInstitutes || registeredInstitutes.length <= 1) {
-      getAllInstitutes(setRegisteredInstitutes);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!registeredInstitutes || registeredInstitutes.length <= 1) {
+  //     getAllInstitutes(setRegisteredInstitutes);
+  //   }
+  // }, []);
 
   const handleInstitutionChange = (event) => {
     setSelectedInstitution(event.target.value);
@@ -195,6 +195,8 @@ const UploadDocument = () => {
   const isFormValid = requiredFields.every((field) => field);
 
   return (
+
+    
     <div className="uploadDocument">
       <MDBContainer>
         <div className="container_upload">
