@@ -84,6 +84,10 @@ export default function GraduateTable({ searchTerm, selectedFilter }) {
     setRows(prevRows => sortRows([...prevRows], criteria));
   };
 
+  const filteredRows = searchTerm
+    ? rows.filter(row => row.name.toLowerCase().includes(searchTerm.toLowerCase()))
+    : rows;
+
   return (
     <section className="mt-5">
       <div className="rounded-2 overflow-hidden">
@@ -99,12 +103,12 @@ export default function GraduateTable({ searchTerm, selectedFilter }) {
             </tr>
           </MDBTableHead>
           <MDBTableBody style={{ verticalAlign: "middle" }}>
-            {rows.length === 0 ? (
+            {filteredRows.length === 0 ? (
               <tr>
                 <td colSpan={6} align="center">No files in graduate repository</td>
               </tr>
             ) : (
-              rows.map((user, index) => (
+              filteredRows.map((user, index) => (
                 <tr key={index}>
                   <td>
                     <div className="d-flex align-items-center">
@@ -153,3 +157,4 @@ export default function GraduateTable({ searchTerm, selectedFilter }) {
     </section>
   );
 }
+
