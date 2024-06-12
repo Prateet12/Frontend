@@ -28,6 +28,7 @@ const GraduateRepo = () => {
   };
 
   const handleFilterChange = (event) => {
+    console.log("event",event)
     setSelectedFilter(event.target.value);
   };
 
@@ -68,15 +69,15 @@ const GraduateRepo = () => {
               onChange={handleFilterChange}
             >
               <option value="">All</option>
-              <option value="specialization">Specialization</option>
-              <option value="position-role">Position/Role</option>
-              <option value="institute">Institute</option>
+              <option value="field_of_study">Specialization</option>
+              <option value="role">Role</option>
+              <option value="institution_name">Organization</option>
              
             </select>
           </div>
         </div>
         <div className="grad-table">
-          <GraduateTable />
+          <GraduateTable searchTerm={searchTerm} selectedFilter={selectedFilter} />
         </div>
       </div>
     </MDBContainer>
