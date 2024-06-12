@@ -37,6 +37,10 @@ function NavBar({ setLoggedIn }) {
       route: "/approvals-inbox",
       title: "Approve Requests",
     },
+    {
+      route: "/bestPractices",
+      title: "Best Practices",
+    }
   ];
 
   let settings = [

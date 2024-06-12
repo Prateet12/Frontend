@@ -33,25 +33,25 @@ const BestPractices = () => {
     {
       heading: "Sustainable Transport Initiatives in Indian Cities",
       abstract:
-        "Indian cities are implementing sustainable transport initiatives to reduce carbon emissions and mitigate climate change. Projects include the development of metro rail systems, bus rapid transit corridors, and cycling infrastructure. These efforts aim to promote eco-friendly modes of transportation, reduce traffic congestion, and improve air quality.",
+        "Indian cities are implementing sustainable transport initiatives to reduce carbon emissions and mitigate climate change.  These efforts aim to promote eco-friendly modes of transportation, reduce traffic congestion, and improve air quality.",
       keywords: ["Sustainable Transport", "Indian Cities", "Climate Change"],
       documentLink: "http://pdf.wri.org/sustainable_urban_transport_india.pdf",
       imageLink:
-        "https://egov.eletsonline.com/wp-content/uploads/2019/08/Gurugram%E2%80%99s-urban-development-journey-towards-millennium-city.jpg",
+        "https://static.wixstatic.com/media/94a484_87bb49b847ad4e2a86e43e88919ff6be~mv2.jpg/v1/fill/w_701,h_373,al_c,q_80,enc_auto/94a484_87bb49b847ad4e2a86e43e88919ff6be~mv2.jpg",
     },
     {
       heading: "Renewable Energy Integration in Urban Infrastructure",
       abstract:
-        "Integrating renewable energy sources into urban infrastructure is a key strategy for reducing greenhouse gas emissions and combating climate change. Indian cities are increasingly adopting solar energy systems for street lighting, public buildings, and residential complexes, thereby reducing reliance on fossil fuels and promoting sustainability.",
+        "Integrating renewable energy sources into urban infrastructure is a key strategy for reducing greenhouse gas emissions and combating climate change. Indian cities are increasingly adopting solar energy systems  thereby   promoting sustainability.",
       keywords: ["Renewable Energy", "Urban Infrastructure", "Solar Power"],
       documentLink: "https://www.irena.org/-/media/Files/IRENA/Agency/Publication/2016/IRENA_Renewable_Energy_in_Cities_2016.pdf?rev=57732a726d8047fe87da57b4511697d7",
       imageLink:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQshj8N2AaY6_N19_wh0JrTT8kLxfXKPA5F6Q&s",
+        "https://www.speccorporation.com/wp-content/uploads/2020/12/AdobeStock_172956774-scaled.jpeg",
     },
     {
       heading: "Community-Based Climate Resilience Initiatives",
       abstract:
-        "Community-based climate resilience initiatives play a vital role in addressing the impacts of climate change in vulnerable areas. In India, these initiatives involve community engagement, capacity building, and the adoption of nature-based solutions to enhance resilience to extreme weather events.",
+        "Community-based climate resilience initiatives play a vital role in addressing the impacts of climate change in vulnerable areas. In India, these initiatives involve community engagement, capacity building, and the adoption of nature-based solutions.",
       keywords: ["Climate Change", "Resilience", "Community Engagement"],
       documentLink: "https://www.iwmi.cgiar.org/Publications/Other/PDF/locally_led_climate_action_for_sustainable_community_resilience.pdf",
       imageLink:
