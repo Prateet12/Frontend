@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import "./UploadDocument.css";
 import { MDBBtn, MDBContainer } from "mdb-react-ui-kit";
- import { getAllInstitutes, uploadDocument } from "../utils/apiUtils";
+import { getAllInstitutes, uploadDocument } from "../utils/apiUtils";
 
 const UploadDocument = () => {
   const {
@@ -18,12 +18,9 @@ const UploadDocument = () => {
     JSON.parse(localStorage.getItem("institutes")) || []
   );
 
-
-  
-
   const createFormData = (data, files, fileType) => {
     let formData = new FormData();
-    // console.log("User ID:", JSON.parse(localStorage.getItem("user")).user.id);
+    console.log("User ID:", JSON.parse(localStorage.getItem("user")).user.id);
     // Required Fields
     formData.append(
       "fromUser",
@@ -35,28 +32,30 @@ const UploadDocument = () => {
     formData.append("abstract", data.abstract);
     formData.append("degree_program", data.degreeProgram);
     for (let file of files) {
-      // console.log("File:", file);
+      console.log("File:", file);
       formData.append("files", file);
     }
     // Optional Fields:
     formData.append("keywords", data.keywords);
     formData.append("publication_date", data.publicationDate);
-    formData.append("institution", selectedInstitution);
+    formData.append("institution", data.institution);
     formData.append("department", data.department);
-    // console.log("Supervisors:", data.supervisors);
+    console.log("Supervisors:", data.supervisors);
     formData.append("supervisors", JSON.stringify(data.supervisors));
     formData.append("funding_sources", data.fundingSources);
     formData.append("acknowledgements", data.acknowledgements);
-
-    // console.log("Form Data:", formData);
+formData.forEach((item)=>{
+  console.log(item);
+})
+   // console.log("Form Data:", formData);
     return formData;
   };
 
-  // useEffect(() => {
-  //   if (!registeredInstitutes || registeredInstitutes.length <= 1) {
-  //     getAllInstitutes(setRegisteredInstitutes);
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (!registeredInstitutes || registeredInstitutes.length <= 1) {
+      getAllInstitutes(setRegisteredInstitutes);
+    }
+  }, []);
 
   const handleInstitutionChange = (event) => {
     setSelectedInstitution(event.target.value);
@@ -79,7 +78,7 @@ const UploadDocument = () => {
     }
     
     setSelectedFile(file);
-    // console.log("Selected file:", file);
+    console.log("Selected file:", file);
 
     setThesisFile(event.target.files[0]);
   };
@@ -101,7 +100,7 @@ const UploadDocument = () => {
     }
     
     setSelectedFile(file);
-    // console.log("Selected file:", file);
+    console.log("Selected file:", file);
 
     setThesisFile(event.target.files[0]);
   };
@@ -179,7 +178,7 @@ const UploadDocument = () => {
     }
     
     setSelectedFile(file);
-    // console.log("Selected file:", file);
+    console.log("Selected file:", file);
   };
   // Watch the required fields to determine if the form is valid
   const requiredFields = watch([
@@ -195,8 +194,6 @@ const UploadDocument = () => {
   const isFormValid = requiredFields.every((field) => field);
 
   return (
-
-    
     <div className="uploadDocument">
       <MDBContainer>
         <div className="container_upload">

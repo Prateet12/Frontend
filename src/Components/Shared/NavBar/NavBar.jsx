@@ -49,6 +49,10 @@ function NavBar({ setLoggedIn }) {
       title: "Profile",
     },
     {
+      route: "/uploadBestPractices",
+      title: "Upload Best Practices",
+    },
+    {
       route: "/",
       title: "Logout",
     },

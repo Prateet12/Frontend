@@ -37,12 +37,14 @@ const Approval = () => {
     const response = await fetch(
       `http://localhost:3001/v1/admin/uploadRequests/${instituteName}`
     );
-
+    console.log("response",response);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
     const data = await response.json();
+
+    console.log("data",data);
 
     console.log("Upload requests:", data);
     setUploadRequests(data);
