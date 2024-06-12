@@ -1,178 +1,69 @@
 import React, { useState, useEffect } from "react";
-import Box from "@mui/material/Box";
-import Collapse from "@mui/material/Collapse";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import IconButton from "@mui/material/IconButton";
+import { MDBIcon, MDBCollapse } from "mdb-react-ui-kit";
 
-import {
-  MDBContainer,
-  MDBTable,
-  MDBTableHead,
-  MDBTableBody,
-  MDBIcon,
-  MDBCollapse,
-} from "mdb-react-ui-kit";
-
-function createData(
-  id,
-  title,
-  type,
-  author,
-  degree_program,
-  published_on,
-  file_size,
-  upload_date,
-  content,
-  abstract,
-  keywords
-) {
-  return {
-    id,
-    title,
-    type,
-    author,
-    degree_program,
-    published_on,
-    file_size,
-    upload_date,
-    content,
-    abstract,
-    keywords,
-  };
-}
-
-const backup_rows = [
-  createData(
-    "1",
-    "Thesis on Quantum Computing",
-    "Thesis",
-    "Alice Johnson, Rewada",
-    "PhD",
-    "2024-05-01",
-    1.2,
-    "2024-05-01",
-    "This is the content of the Quantum Computing thesis in PDF format.",
-    "This thesis explores the potential of quantum computing in solving complex problems that are intractable for classical computers.",
-    "Quantum Computing, Qubits, Superposition, Entanglement"
-  ),
-  createData(
-    "2",
-    "Deep Learning Advances",
-    "Synopsis",
-    "Bob Smith",
-    "PhD",
-    "2024-04-15",
-    1.5,
-    "2024-04-15",
-    "This is the content of the Deep Learning Advances thesis in PDF format.",
-    "An in-depth look at the latest advancements in deep learning and their applications in various fields.",
-    "Deep Learning, Neural Networks, AI, Machine Learning"
-  ),
-];
-
-export default function AcademicTable({ searchTerm, selectedFilter }) {
-  console.log(selectedFilter);
+function AcademicTable({ searchTerm, selectedFilter }) {
   const [expandedRow, setExpandedRow] = useState(null);
-  // const [searchTerm, setSearchTerm] = useState("");
   const [sortedBy, setSortedBy] = useState(null);
-
-  const [rows, setRows] = useState(backup_rows);
-
-  useEffect(() => {
- 
-    rows.sort((a, b) => {
-      let x = a[selectedFilter]?.toLowerCase();
-      let y = b[selectedFilter]?.toLowerCase();
-      if (x < y) {
-        return -1;
-      }
-      if (x > y) {
-        return 1;
-      }
-      return 0;
-    });
-
-
-    setRows((prev) => {
-      return [...rows];
-    });
-  }, [searchTerm, selectedFilter]);
-
-  const fetchAllPapers = async () => {
-    try {
-      const response = await fetch("http://localhost:3001/v1/file/all");
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-    
-
-      const data = await response.json();
-      console.log("Api data",data);
-      setRows(data);
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
+  const [rows, setRows] = useState([]);
 
   useEffect(() => {
-    fetchAllPapers();
+    // Fetch data from your API endpoint or use the existing data source
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:3001/v1/file/all");
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setRows(data);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   const toggleRowDetails = (index) => {
-    setExpandedRow(expandedRow === index ? null : index);
+    setExpandedRow((prev) => (prev === index ? null : index));
   };
 
   const handleSort = (criteria) => {
-    console.log(criteria);
     setSortedBy(criteria);
   };
+
+  const filteredRows = rows.filter((row) =>
+    row.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <section className="mt-5">
       <div className="rounded-2 overflow-hidden">
-        <MDBTable responsive striped>
-          <MDBTableHead light>
+        <table className="table table-striped">
+          <thead>
             <tr>
-              <th
-                onClick={() => {
-                  console.log("terst");
-                  handleSort("title");
-                }}
-              >
-                Research Title
-              </th>
+              <th onClick={() => handleSort("title")}>Research Title</th>
               <th>Document</th>
-              <th onClick={() => handleSort("authors")}>Author/'s</th>
-              <th onClick={() => handleSort("authors")}>Inst</th>
-              <th onClick={() => handleSort("degree_program")}>
-                Degree/Program
-              </th>
-              <th onClick={() => handleSort("published_on")}>Published on</th>
-              <th onClick={() => handleSort("file_size")}>File size (MB)</th>
-              <th onClick={() => handleSort("upload_date")}>Uploaded on</th>
+              <th>Author(s)</th>
+              <th>Institution</th>
+              <th>Degree/Program</th>
+              <th>Published on</th>
+              <th>File size (MB)</th>
+              <th>Uploaded on</th>
               <th></th>
             </tr>
-          </MDBTableHead>
-          <MDBTableBody style={{ verticalAlign: "middle" }}>
-            {rows.length === 0 ? (
+          </thead>
+          <tbody>
+            {filteredRows.length === 0 ? (
               <tr>
-                <td colSpan={8} align="center">
-                  No files in academic repository
+                <td colSpan={9} align="center">
+                  No files found
                 </td>
               </tr>
             ) : (
-              rows.map((row, index) => (
+              filteredRows.map((row, index) => (
                 <React.Fragment key={index}>
                   <tr>
                     <td>
@@ -223,11 +114,11 @@ export default function AcademicTable({ searchTerm, selectedFilter }) {
                       display: expandedRow === row.id ? "table-row" : "none",
                     }}
                   >
-                    <td colSpan={8}>
+                    <td colSpan={9}>
                       <MDBCollapse open={expandedRow === row.id}>
                         <div className="p-3">
                           <p>
-                            <strong>Ttile:</strong> {row.title}
+                            <strong>Title:</strong> {row.title}
                           </p>
                           <p>
                             <strong>Authors:</strong> {row.author}
@@ -280,9 +171,11 @@ export default function AcademicTable({ searchTerm, selectedFilter }) {
                 </React.Fragment>
               ))
             )}
-          </MDBTableBody>
-        </MDBTable>
+          </tbody>
+        </table>
       </div>
     </section>
   );
 }
+
+export default AcademicTable;

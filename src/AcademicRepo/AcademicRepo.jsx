@@ -1,10 +1,8 @@
-// AcademicRepo.js
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AcademicTable from "./AcademicTable"; // Assuming the component name is AcademicTable
+import AcademicTable from "./AcademicTable";
 import { MDBContainer, MDBBtn, MDBIcon } from "mdb-react-ui-kit";
-import './AcademicRepo.css'
+import './AcademicRepo.css';
 
 const AcademicRepo = () => {
   const navigate = useNavigate();
@@ -26,7 +24,6 @@ const AcademicRepo = () => {
   };
 
   const handleFilterChange = (event) => {
-    console.log("event",event);
     setSelectedFilter(event.target.value);
   };
 
@@ -57,7 +54,7 @@ const AcademicRepo = () => {
                   type="text"
                   value={searchTerm}
                   onChange={handleSearchChange}
-                  placeholder="Search for various thesis and research papers..."
+                  placeholder="Search by title..."
                   className="search_input"
                 />
                 <MDBBtn className="">
@@ -76,12 +73,8 @@ const AcademicRepo = () => {
                   onChange={handleFilterChange}
                 >
                   <option value="">All</option>
-                  {/* <option value="Year">Year</option> */}
                   <option value="author">Author Name</option>
                   <option value="institution">Institute</option>
-                  {/* <option value="Keywords">Keywords</option> */}
-                  {/* <option value="specialization">Specialization</option> */}
-                  {/* <option value="cities">Cities</option> */}
                 </select>
               </div>
             </div>
