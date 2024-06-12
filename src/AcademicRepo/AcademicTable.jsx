@@ -26,7 +26,7 @@ function createData(
   id,
   title,
   type,
-  authors,
+  author,
   degree_program,
   published_on,
   file_size,
@@ -39,7 +39,7 @@ function createData(
     id,
     title,
     type,
-    authors,
+    author,
     degree_program,
     published_on,
     file_size,
@@ -79,10 +79,33 @@ const backup_rows = [
   ),
 ];
 
-export default function CollapsibleTable() {
+export default function AcademicTable({ searchTerm, selectedFilter }) {
+  console.log(selectedFilter);
   const [expandedRow, setExpandedRow] = useState(null);
+  // const [searchTerm, setSearchTerm] = useState("");
+  const [sortedBy, setSortedBy] = useState(null);
 
-  const [rows, setRows] = useState([backup_rows]);
+  const [rows, setRows] = useState(backup_rows);
+
+  useEffect(() => {
+ 
+    rows.sort((a, b) => {
+      let x = a[selectedFilter]?.toLowerCase();
+      let y = b[selectedFilter]?.toLowerCase();
+      if (x < y) {
+        return -1;
+      }
+      if (x > y) {
+        return 1;
+      }
+      return 0;
+    });
+
+
+    setRows((prev) => {
+      return [...rows];
+    });
+  }, [searchTerm, selectedFilter]);
 
   const fetchAllPapers = async () => {
     try {
@@ -92,8 +115,10 @@ export default function CollapsibleTable() {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
+    
+
       const data = await response.json();
-      // console.log("Data:", data);
+      console.log("Api data",data);
       setRows(data);
     } catch (error) {
       console.error("Error:", error);
@@ -108,19 +133,34 @@ export default function CollapsibleTable() {
     setExpandedRow(expandedRow === index ? null : index);
   };
 
+  const handleSort = (criteria) => {
+    console.log(criteria);
+    setSortedBy(criteria);
+  };
+
   return (
     <section className="mt-5">
       <div className="rounded-2 overflow-hidden">
         <MDBTable responsive striped>
           <MDBTableHead light>
             <tr>
-              <th>Research Title</th>
+              <th
+                onClick={() => {
+                  console.log("terst");
+                  handleSort("title");
+                }}
+              >
+                Research Title
+              </th>
               <th>Document</th>
-              <th>Author/'s</th>
-              <th>Degree/Program</th>
-              <th>Published on</th>
-              <th>File size (MB)</th>
-              <th>Uploaded on</th>
+              <th onClick={() => handleSort("authors")}>Author/'s</th>
+              <th onClick={() => handleSort("authors")}>Inst</th>
+              <th onClick={() => handleSort("degree_program")}>
+                Degree/Program
+              </th>
+              <th onClick={() => handleSort("published_on")}>Published on</th>
+              <th onClick={() => handleSort("file_size")}>File size (MB)</th>
+              <th onClick={() => handleSort("upload_date")}>Uploaded on</th>
               <th></th>
             </tr>
           </MDBTableHead>
@@ -143,6 +183,9 @@ export default function CollapsibleTable() {
                     </td>
                     <td>
                       <p className="fw-normal mb-1">{row.author}</p>
+                    </td>
+                    <td>
+                      <p className="fw-normal mb-1">{row.institution}</p>
                     </td>
                     <td>
                       <p className="fw-normal mb-0">{row.degree_program}</p>
@@ -207,28 +250,28 @@ export default function CollapsibleTable() {
                           <p>
                             <strong>Thesis Document:</strong>{" "}
                             {row.filename && (
-                            <a
-                              href={`http://localhost:3001/static/${row.filename}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              View Thesis
-                            </a>
-                          )}
-                          </p>
-                          <p>
-                          {row.synopsisFileName && (
-                            <>
-                              <strong>Synopsis Document:</strong>{" "}
                               <a
-                                href={`http://localhost:3001/static/${row.synopsisFileName}`}
+                                href={`http://localhost:3001/static/${row.filename}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                               >
-                                View Synopsis
+                                View Thesis
                               </a>
-                            </>
-                          )}
+                            )}
+                          </p>
+                          <p>
+                            {row.synopsisFileName && (
+                              <>
+                                <strong>Synopsis Document:</strong>{" "}
+                                <a
+                                  href={`http://localhost:3001/static/${row.synopsisFileName}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  View Synopsis
+                                </a>
+                              </>
+                            )}
                           </p>
                         </div>
                       </MDBCollapse>
