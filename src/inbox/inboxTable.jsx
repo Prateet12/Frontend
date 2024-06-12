@@ -70,6 +70,10 @@ export default function InboxTable({ searchTerm, selectedFilter }) {
     }
   }, [selectedFilter]);
 
+  const filteredRows = rowsState.filter((row) =>
+    row.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <section className="mt-5">
       <div className="rounded-2 overflow-hidden">
@@ -83,7 +87,7 @@ export default function InboxTable({ searchTerm, selectedFilter }) {
             </tr>
           </MDBTableHead>
           <MDBTableBody style={{ verticalAlign: "middle" }}>
-            {rowsState.map((row, index) => (
+            {filteredRows.map((row, index) => (
               <tr key={index}>
                 <td>
                   <p className="fw-normal mb-1">{row.title}</p>
