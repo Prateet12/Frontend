@@ -81,12 +81,12 @@ const Approval = () => {
   };
 
   return (
-    <div className="approval">
+    <div className="approval container_approval">
        <MDBContainer>
       <section className="m-4 approval">
         <h2 className="mb-4">Approve Requests</h2>
       </section>
-      <div className="container_approval">
+      {/* <div className="container_approval">
         <div className="controls m-4">
           <form onSubmit={handleSearchSubmit} className="search_form">
             <input
@@ -104,19 +104,19 @@ const Approval = () => {
           <div className="sort_by">
             <label htmlFor="filter" className="filter_label">
               Sort By:
-            </label>
-            <select
+            </label> */}
+            {/* <select
               id="filter"
               className="filter-dropdown"
               value={selectedFilter}
               onChange={handleFilterChange}
-            >
-              <option value="">All</option>
-              <option value="job_seeker">Document Approval</option>
-              <option value="employer">User Approval</option>
-            </select>
+            > */}
+              {/* <option value="">All</option>
+              <option value="job_seeker">Date Of Request</option>
+              <option value="employer">User Type</option> */}
+            {/* </select>
           </div>
-        </div>
+        </div> */}
         <div className="approval-table">
           <ApprovalTable
             registrationRequests={registrationRequests}
@@ -125,7 +125,7 @@ const Approval = () => {
             setUploadRequests={setUploadRequests}
           />
         </div>
-      </div>
+      {/* </div> */}
     </MDBContainer>
     </div>
    

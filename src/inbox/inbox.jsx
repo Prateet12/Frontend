@@ -16,7 +16,7 @@ import {
   MDBCardFooter 
 } from 'mdb-react-ui-kit';
 
-const Approval = () => {
+const Inbox = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("");
 
@@ -39,7 +39,7 @@ const Approval = () => {
       <section className="m-4">
         <h2 className="mb-4">My Documents</h2>
       </section>
-      <div className="approval_status">
+      <div className="Inbox_status">
         <div className="controls">
           <form onSubmit={handleSearchSubmit} className="search_form">
             <input
@@ -64,16 +64,15 @@ const Approval = () => {
               onChange={handleFilterChange}
             >
               <option value="">All</option>
-              <option >Approved </option>
-              <option >Pending</option>
-              <option>Rejected</option>
+              <option value="status">Status </option>
+              <option value="uploadDate">Date of Request</option>
           
             </select>
           </div>
         </div>
 
-        <div className="approval-table">
-          <InboxTable />
+        <div className="Inbox-table">
+          <InboxTable searchTerm={searchTerm} selectedFilter={selectedFilter}/>
         </div>
       </div>
     </MDBContainer>
@@ -82,4 +81,4 @@ const Approval = () => {
   );
 };
 
-export default Approval;
+export default Inbox;

@@ -1,23 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import IconButton from "@mui/material/IconButton";
-import EditIcon from "@mui/icons-material/Edit";
-import Tooltip from "@mui/material/Tooltip";
 import { getAllUserFiles } from "../utils/apiUtils";
-
-import {
-  MDBTable,
-  MDBTableHead,
-  MDBTableBody,
-  MDBIcon,
-  MDBBadge,
-} from "mdb-react-ui-kit";
+import { MDBTable, MDBTableHead, MDBTableBody, MDBIcon, MDBBadge } from "mdb-react-ui-kit";
 
 function createData(createdAt, title, status) {
   return { createdAt, title, status };
@@ -34,12 +17,13 @@ const rows = [
   createData("2023-03-10", "Document Title 8", "Approved"),
 ];
 
-export default function InboxTable() {
+export default function InboxTable({ searchTerm, selectedFilter }) {
   const [rowsState, setRowsState] = useState(rows);
+
   useEffect(() => {
     const currUser = JSON.parse(localStorage.getItem("user")).user;
     getAllUserFiles(currUser.id, setRowsState);
-  }, []); // Pre fetch user files from API
+  }, []); // Pre-fetch user files from API
 
   const renderStatusColor = (status) => {
     let color = "danger";
@@ -64,15 +48,37 @@ export default function InboxTable() {
     }
     return color;
   };
+
+  const sortRows = (rows, criteria) => {
+    return rows.sort((a, b) => {
+      let x = a[criteria]?.toLowerCase() || "";
+      let y = b[criteria]?.toLowerCase() || "";
+      if (x < y) {
+        return -1;
+      }
+      if (x > y) {
+        return 1;
+      }
+      return 0;
+    });
+  };
+
+  useEffect(() => {
+    if (selectedFilter) {
+      const sortedRows = sortRows([...rowsState], selectedFilter);
+      setRowsState(sortedRows);
+    }
+  }, [selectedFilter]);
+
   return (
     <section className="mt-5">
       <div className="rounded-2 overflow-hidden">
         <MDBTable responsive striped>
           <MDBTableHead light>
             <tr>
-              <th>Document Title</th>
-              <th>Date of Request</th>
-              <th>Current Status</th>
+              <th onClick={() => setRowsState(sortRows([...rowsState], "title"))}>Document Title</th>
+              <th onClick={() => setRowsState(sortRows([...rowsState], "createdAt"))}>Date of Request</th>
+              <th onClick={() => setRowsState(sortRows([...rowsState], "status"))}>Current Status</th>
               <th></th>
             </tr>
           </MDBTableHead>

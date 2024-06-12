@@ -1,4 +1,4 @@
-.container_approval {
+.container_Inbox {
     max-width: 100%;
   }
   .inbox_container{
@@ -6,7 +6,7 @@
     margin-bottom: 75px;
   }
   
-.header_approval {
+.header_Inbox {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -78,7 +78,7 @@ h1 {
 }
 
 
-.approval-table {
+.Inbox-table {
     /* margin: 20px;
     padding: 20px; */
 }
