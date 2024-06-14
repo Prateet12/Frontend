@@ -10,8 +10,8 @@ import Button from "@mui/material/Button";
 import { BASE_URL } from "../utils/baseUrl";
 import logo from "../Components/Assets/logo.png";
 import { getAllRoles, getAllInstitutes } from "../utils/apiUtils";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import "./Registration.css";
 
 const Registration = ({ setLoggedIn }) => {
@@ -190,10 +190,10 @@ const Registration = ({ setLoggedIn }) => {
                                   }}
                                 >
                                   {roleName.toUpperCase()}{" "}
-                                  <FontAwesomeIcon
+                                  {/* <FontAwesomeIcon
                                     icon={faInfoCircle}
                                     className=" Info"
-                                  />
+                                  /> */}
                                 </a>
                               </li>
                             )
