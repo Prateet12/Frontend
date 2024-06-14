@@ -60,20 +60,7 @@ const Home = () => {
               </div>
               <div className="about-text">
                 <p>
-                  UDAY is a comprehensive digital repository for urban research
-                  and knowledge. Just like Shodhganga, we serve as a one-stop
-                  portal for accessing, sharing, and preserving scholarly works
-                  and publications focused on urban studies. Explore a vast
-                  collection of theses, dissertations, and research papers, and
-                  contribute to advancing our understanding of urban
-                  environments. Join us in fostering a vibrant academic
-                  community dedicated to the study of cities and their dynamics.
-                  UDAY stands as a beacon for urban scholars, offering an
-                  inclusive platform where academia converges to drive
-                  innovation and progress in urban studies. Embrace the
-                  opportunity to connect with fellow researchers, collaborate on
-                  groundbreaking projects, and shape the future of urban
-                  discourse together.
+                At the Urban Development Alliance for the Youth (UDAY) platform, we unite the strengths of the quadruple helix: academia, industry, government, and civil society to combat climate change impacts in cities. Our goal is for the youth to inherit a sustainable, robust, and resilient urban India. We recognize that solutions for climate challenges often exist within academia and industry but fail to reach where needed due to communication gaps, lack of collaboration, and inadequate knowledge dissemination. UDAY bridges this gap by aggregating demand and supply, facilitating the flow of innovative solutions to urban environments. By fostering collaboration among diverse stakeholders, we drive impactful climate action and sustainable urban development.
                 </p>
               </div>
             </div>

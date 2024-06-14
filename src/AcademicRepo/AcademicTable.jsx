@@ -30,13 +30,38 @@ function AcademicTable({ searchTerm, selectedFilter }) {
     setExpandedRow((prev) => (prev === index ? null : index));
   };
 
-  const handleSort = (criteria) => {
-    setSortedBy(criteria);
+  const sortRows = (rows, criteria) => {
+    return rows.sort((a, b) => {
+      let x = a[criteria]?.toLowerCase() || "";
+      let y = b[criteria]?.toLowerCase() || "";
+      if (x < y) {
+        return -1;
+      }
+      if (x > y) {
+        return 1;
+      }
+      return 0;
+    });
   };
 
-  const filteredRows = rows.filter((row) =>
-    row.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  useEffect(() => {
+    if (selectedFilter) {
+      console.log("Selected filter:", selectedFilter);
+      setRows((prevRows) => sortRows([...prevRows], selectedFilter));
+    }
+  }, [selectedFilter]);
+
+  const handleSort = (criteria) => {
+    console.log("Sorting by:", criteria);
+    setSortedBy(criteria);
+    setRows((prevRows) => sortRows([...prevRows], criteria));
+  };
+
+  const filteredRows = searchTerm
+    ? rows.filter((row) =>
+        row.title.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : rows;
 
   return (
     <section className="mt-5">
@@ -46,12 +71,16 @@ function AcademicTable({ searchTerm, selectedFilter }) {
             <tr>
               <th onClick={() => handleSort("title")}>Research Title</th>
               <th>Document</th>
-              <th>Author(s)</th>
-              <th>Institution</th>
-              <th>Degree/Program</th>
-              <th>Published on</th>
-              <th>File size (MB)</th>
-              <th>Uploaded on</th>
+              <th onClick={() => handleSort("author")}>Author(s)</th>
+              <th onClick={() => handleSort("institution")}>Institution</th>
+              <th onClick={() => handleSort("degree_program")}>
+                Degree/Program
+              </th>
+              <th onClick={() => handleSort("publication_date")}>
+                Published on
+              </th>
+              <th onClick={() => handleSort("fileSize")}>File size (MB)</th>
+              <th onClick={() => handleSort("uploadDate")}>Uploaded on</th>
               <th></th>
             </tr>
           </thead>
