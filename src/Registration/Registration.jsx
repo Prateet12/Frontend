@@ -10,8 +10,8 @@ import Button from "@mui/material/Button";
 import { BASE_URL } from "../utils/baseUrl";
 import logo from "../Components/Assets/logo.png";
 import { getAllRoles, getAllInstitutes } from "../utils/apiUtils";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import "./Registration.css";
 
 const Registration = ({ setLoggedIn }) => {
@@ -26,6 +26,9 @@ const Registration = ({ setLoggedIn }) => {
     JSON.parse(localStorage.getItem("institutes")) || []
   );
 
+  const [emailError, setEmailError] = useState("");
+
+  const [formValid, setFormValid] = useState(false);
   const navigate = useNavigate();
   const [tellAboutYourself, setTellAboutYourself] = useState("");
   const [error, setError] = useState("");
@@ -52,7 +55,7 @@ const Registration = ({ setLoggedIn }) => {
   }, []);
 
   useEffect(() => {
-    getAllInstitutes(setInstitutes); 
+    getAllInstitutes(setInstitutes);
   }, []);
 
   let roleNames = roles.map((role) => role.role);
@@ -95,18 +98,23 @@ const Registration = ({ setLoggedIn }) => {
       console.error("Registration Error:", error);
     }
   };
-
   const registerCallback = (fields) => {
-    const registrationForm = {
-      name: name,
-      email: email,
-      password: password,
-      role: roles.find((role) => role.role === selectedRole).id,
-      ...fields,
-    };
-
-    register(registrationForm);
+    if (formValid) {
+      const registrationForm = {
+        name: name,
+        email: email,
+        password: password,
+        role: roles.find((role) => role.role === selectedRole).id,
+        ...fields,
+      };
+  
+      register(registrationForm);
+    } else {
+      alert("Please enter a correct Email ID"); // Inform user to correct form errors
+    }
   };
+  
+ 
 
   const [showGraduateOptions, setShowGraduateOptions] = useState(false);
   const [showResearcherOptions, setShowResearcherOptions] = useState(false);
@@ -122,6 +130,17 @@ const Registration = ({ setLoggedIn }) => {
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
+
+  const validateEmail = (email) => {
+    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+      // setEmailError("Please enter a valid email");
+      setFormValid(false); // Set formValid to false if email is invalid
+    } else {
+      setEmailError(""); // Clear error if email is valid
+      setFormValid(true); // Set formValid to true if email is valid
+    }
+  };
+  
 
   const handleRoleChange = (role) => {
     setSelectedRole(role);
@@ -145,158 +164,162 @@ const Registration = ({ setLoggedIn }) => {
 
   return (
     <div className="container landingpage" id="registration">
-     
-          <div className="registration-container">
-            <img src={logo} alt="Logo" className="logo" />
-            <div className="header_main">
-              <div className="text">REGISTER</div>
-            </div>
-            <Button
-              variant="text"
-              color="primary"
-              onClick={redirectToLoginSignup}
-              id="user-btn"
+      <div className="registration-container">
+        <img src={logo} alt="Logo" className="logo" />
+        <div className="header_main">
+          <div className="text">REGISTER</div>
+        </div>
+        <Button
+          variant="text"
+          color="primary"
+          onClick={redirectToLoginSignup}
+          id="user-btn"
+        >
+          Already a user?
+        </Button>
+
+        <div className="form">
+          <div className="form-group">
+            <div
+              className={`dropdown-container ${
+                showDropdown ? "dropdown-open" : ""
+              }`}
             >
-              Already a user?
-            </Button>
-
-            <div className="form">
-              <div className="form-group">
-                <div
-                  className={`dropdown-container ${
-                    showDropdown ? "dropdown-open" : ""
-                  }`}
-                >
-                  <div
-                    className="dropdown-toggle click-dropdown"
-                    onClick={handleDropdownToggle}
-                  >
-                    {selectedRole
-                      ? selectedRole.toUpperCase()
-                      : "Select your role"}
-                  </div>
-                  {showDropdown && (
-                    <div className="dropdown-menu dropdown-bordered">
-                      <ul>
-                        {roleNames.map(
-                          (roleName, index) =>
-                            roleName !== "admin" && (
-                              <li key={index}>
-                                <a
-                                  href="#"
-                                  onClick={() => {
-                                    handleRoleChange(roleName);
-                                    setShowDropdown(false);
-                                  }}
-                                >
-                                  {roleName.toUpperCase()}{" "}
-                                  {/* <FontAwesomeIcon
-                                    icon={faInfoCircle}
-                                    className=" Info"
-                                  /> */}
-                                </a>
-                              </li>
-                            )
-                        )}
-                      </ul>
-                    </div>
-                  )}
+              <div
+                className="dropdown-toggle click-dropdown"
+                onClick={handleDropdownToggle}
+              >
+                {selectedRole ? selectedRole.toUpperCase() : "Select your role"}
+              </div>
+              {showDropdown && (
+                <div className="dropdown-menu dropdown-bordered">
+                  <ul>
+                    {roleNames.map(
+                      (roleName, index) =>
+                        roleName !== "admin" && (
+                          <li key={index}>
+                            <a
+                              href="#"
+                              onClick={() => {
+                                handleRoleChange(roleName);
+                                setShowDropdown(false);
+                              }}
+                            >
+                              {roleName.toUpperCase()}{" "}
+                              <FontAwesomeIcon
+                                icon={faInfoCircle}
+                                className=" Info"
+                              />
+                            </a>
+                          </li>
+                        )
+                    )}
+                  </ul>
                 </div>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="Name">Enter your full name</label>
-                <input
-                  type="text"
-                  placeholder="Name"
-                  value={name}
-                  onChange={handleNameChange}
-                  className="input_field"
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="Email">Enter your Email</label>
-                <input
-                  type="email"
-                  placeholder="Email"
-                  value={email}
-                  onChange={handleEmailChange}
-                  className="input_field"
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="password">Enter your password</label>
-                <input
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={handlePasswordChange}
-                  className="input_field"
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="tellAboutYourself">
-                  Tell me about yourself (max 30 words):
-                </label>
-                <textarea
-                  id="tellAboutYourself"
-                  value={tellAboutYourself}
-                  onChange={handleAboutYourselfChange}
-                  className="input_field"
-                  required
-                />
-                {error && (
-                  <p className="error" style={{ color: "red" }}>
-                    {error}
-                  </p>
-                )}
-              </div>
-
-              {showGraduateOptions && (
-                <GraduateRegistration
-                  registerCallback={registerCallback}
-                  institutes={institutes}
-                />
-              )}
-
-              {showResearcherOptions && (
-                <ResearcherRegistration
-                  registerCallback={registerCallback}
-                  institutes={institutes}
-                />
-              )}
-
-              {showPractitionerOptions && (
-                <PractitionerRegistration registerCallback={registerCallback} />
-              )}
-
-              {showInstituteOptions && (
-                <InstitutesRegistration registerCallback={registerCallback} />
-              )}
-
-              {showAssistantOptions && (
-                <ResearchAssistantRegistration
-                  registerCallback={registerCallback}
-                />
-              )}
-
-              {showProfessorOptions && (
-                <ProfessorRegistration
-                  registerCallback={registerCallback}
-                  institutes={institutes}
-                />
               )}
             </div>
           </div>
-        </div>
-      
 
+          <div className="form-group">
+            <label htmlFor="Name">Enter your full name</label>
+            <input
+              type="text"
+              placeholder="Name"
+              value={name}
+              onChange={handleNameChange}
+              className="input_field"
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="Email">Enter your Email</label>
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                validateEmail(e.target.value); // Call validateEmail on change
+              }}
+              onBlur={(e) => validateEmail(e.target.value)} // Call validateEmail on blur
+              className="input_field"
+              required
+            />
+            {emailError && (
+              <p className="error" style={{ color: "red" }}>
+                {emailError}
+              </p>
+            )}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="password">Enter your password</label>
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={handlePasswordChange}
+              className="input_field"
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="tellAboutYourself">
+              Tell me about yourself (max 30 words):
+            </label>
+            <textarea
+              id="tellAboutYourself"
+              value={tellAboutYourself}
+              onChange={handleAboutYourselfChange}
+              className="input_field"
+              required
+            />
+            {error && (
+              <p className="error" style={{ color: "red" }}>
+                {error}
+              </p>
+            )}
+          </div>
+
+          {showGraduateOptions && (
+            <GraduateRegistration
+              registerCallback={registerCallback}
+              institutes={institutes}
+            />
+          )}
+
+          {showResearcherOptions && (
+            <ResearcherRegistration
+              registerCallback={registerCallback}
+              institutes={institutes}
+            />
+          )}
+
+          {showPractitionerOptions && (
+            <PractitionerRegistration registerCallback={registerCallback} />
+          )}
+
+          {showInstituteOptions && (
+            <InstitutesRegistration registerCallback={registerCallback} />
+          )}
+
+          {showAssistantOptions && (
+            <ResearchAssistantRegistration
+              registerCallback={registerCallback}
+            />
+          )}
+
+          {showProfessorOptions && (
+            <ProfessorRegistration
+              registerCallback={registerCallback}
+              institutes={institutes}
+            />
+          )}
+        </div>
+      </div>
+    </div>
   );
 };
 
