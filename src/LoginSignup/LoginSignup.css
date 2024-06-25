@@ -11,7 +11,16 @@
 
 }
 
+.forgot-password-group {
+  display: flex;
+  align-items: center;
+}
 
+#clickLink {
+  color: blue;
+  cursor: pointer;
+  margin-left: 5px; 
+}
 
 .landingpage {
   margin-top: 75px;
@@ -106,4 +115,23 @@
 .submit:hover {
   background-color: #0056b3;
   border-color: #004a99;
+}
+
+#forgot-password-modal .modal-header {
+  background-color: #f8f9fa;
+}
+
+#forgot-password-modal .modal-footer {
+  background-color: #f8f9fa;
+}
+
+#forgot-password-modal .form-control {
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+}
+
+#forgot-password-modal .errorLabel {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
 }
