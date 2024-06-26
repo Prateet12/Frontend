@@ -129,7 +129,7 @@ function App() {
                     loggedIn ? <Dashboard user={user} /> : <Navigate to="/" />
                   }
                 />
-                 <Route path="/forgot-password" element={<ForgotPassword/>} />
+                 <Route path="/reset-password" element={<ForgotPassword/>} />
 
                 <Route
                   path="/approvals-inbox"
