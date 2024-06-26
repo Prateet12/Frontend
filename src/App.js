@@ -20,6 +20,8 @@ import Inbox from "./inbox/inbox";
 import Home from "./Home/Home";
 import UploadBestPractices from "./BestPractices/UploadBestPractices";
 import BestPractices from "./BestPractices/BestPractices";
+import ForgotPassword from "./ForgotPassword/forgot_password";
+
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(
@@ -124,6 +126,12 @@ function App() {
                   path="/dashboard"
                   element={
                     loggedIn ? <Dashboard user={user} /> : <Navigate to="/" />
+                  }
+                />
+                 <Route
+                  path="/forgot-password"
+                  element={
+                    loggedIn ? <ForgotPassword user={user} /> : <Navigate to="/" />
                   }
                 />
                 <Route
