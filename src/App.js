@@ -129,8 +129,12 @@ function App() {
                     loggedIn ? <Dashboard user={user} /> : <Navigate to="/" />
                   }
                 />
-                 <Route path="/reset-password" element={<ForgotPassword/>} />
-
+                 <Route
+                  path="/forgot-password"
+                  element={
+                     <ForgotPassword user={user} /> 
+                  }
+                />
                 <Route
                   path="/approvals-inbox"
                   element={loggedIn ? <Approval /> : <Navigate to="/" />}
