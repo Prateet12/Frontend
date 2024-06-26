@@ -25,7 +25,7 @@ import ForgotPassword from "./ForgotPassword/forgot_password";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(
-    () => sessionStorage.getItem("loggedIn") || false
+    false
   );
   const [user, setUser] = useState({});
 
@@ -128,12 +128,8 @@ function App() {
                     loggedIn ? <Dashboard user={user} /> : <Navigate to="/" />
                   }
                 />
-                 <Route
-                  path="/forgot-password"
-                  element={
-                    loggedIn ? <ForgotPassword user={user} /> : <Navigate to="/" />
-                  }
-                />
+                 <Route path="/forgot-password" element={<ForgotPassword/>} />
+
                 <Route
                   path="/approvals-inbox"
                   element={loggedIn ? <Approval /> : <Navigate to="/" />}
