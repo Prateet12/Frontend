@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './forgot_password.css'; // Import the CSS file
+import './reset_password.css'; // Import the CSS file
+import logo from "../Components/Assets/logo.png";
 
 const ForgotPassword = () => {
   const [password, setPassword] = useState('');
@@ -44,8 +45,10 @@ const ForgotPassword = () => {
 
   return (
     <div className="container_forgot">
-      <h2 className="header_forgot">Reset Your Password</h2>
+      
       <form onSubmit={handleSubmit} className="forgot_form">
+      <img src={logo} alt="Logo" className="logo" />
+      <h2 className="header_forgot">RESET YOUR PASSWORD</h2>
         <div className="inputGroup">
           <label className="label">New Password:</label>
           <input

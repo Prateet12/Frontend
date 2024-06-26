@@ -20,7 +20,7 @@ import Inbox from "./inbox/inbox";
 import Home from "./Home/Home";
 import UploadBestPractices from "./BestPractices/UploadBestPractices";
 import BestPractices from "./BestPractices/BestPractices";
-import ForgotPassword from "./ForgotPassword/forgot_password";
+import ResetPassword from "./ResetPassword/reset_password";
 
 
 function App() {
@@ -128,7 +128,7 @@ function App() {
                     loggedIn ? <Dashboard user={user} /> : <Navigate to="/" />
                   }
                 />
-                 <Route path="/forgot-password" element={<ForgotPassword/>} />
+                 <Route path="/reset-password" element={<ResetPassword/>} />
 
                 <Route
                   path="/approvals-inbox"

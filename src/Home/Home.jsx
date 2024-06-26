@@ -88,7 +88,7 @@ const Home = () => {
             <div className="footer-info">
               <div className="footer-contact">
                 <h4>Contact Us</h4>
-                <p>Email: info@urbclinder.com</p>
+                <p>Email: information@uday.com</p>
                 <p>Phone: +1 (123) 456-7890</p>
               </div>
               <div className="footer-follow">

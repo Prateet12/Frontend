@@ -292,7 +292,7 @@ body {
 .footer-contact,
 .footer-follow {
   flex: 1; /* Allow both sections to take equal space */
-  margin-right: 10px; /* Add margin between sections */
+  margin-right: 20px; /* Add margin between sections */
 }
 
 .footer-info {

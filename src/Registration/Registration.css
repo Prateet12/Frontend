@@ -160,3 +160,13 @@
   text-align: left;
   color: black;
 }
+
+.modal_content_registration {
+  display: block;
+  width: 300px;
+  background: white;
+  padding: 20px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  margin: 20px auto; /* add this to center the modal horizontally */
+}
