@@ -25,7 +25,7 @@ import ResetPassword from "./ResetPassword/reset_password";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(
-    false
+   false
   );
   const [user, setUser] = useState({});
 
@@ -80,6 +80,7 @@ function App() {
       <AuthProvider store={store}>
         <BrowserRouter>
           <div className="app-container">
+            {loggedIn}
             {loggedIn && (
               <div className="navbar-container">
                 <NavBar setLoggedIn={setLoggedIn} />
