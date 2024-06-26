@@ -108,6 +108,7 @@ const Registration = ({ setLoggedIn }) => {
         name: name,
         email: email,
         password: password,
+        tell_me_about_yourself:tellAboutYourself,
         role: roles.find((role) => role.role === selectedRole).id,
         ...fields,
       };
