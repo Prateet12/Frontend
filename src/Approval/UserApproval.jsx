@@ -223,7 +223,7 @@ const UserApproval = (props) => {
     console.log("adminId and userId: ", adminId + " ", userId);
     try {
       const response = await fetch(
-        "http://localhost:3001/v1/admin/approveRegistration",
+        "${BASE_URL}/v1/admin/approveRegistration",
         {
           method: "POST",
           headers: {
@@ -254,7 +254,7 @@ const UserApproval = (props) => {
     console.log("adminId and userId: ", adminId + " ", userId);
     try {
       const response = await fetch(
-        "http://localhost:3001/v1/admin/rejectRegistration",
+        "${BASE_URL}/v1/admin/rejectRegistration",
         {
           method: "POST",
           headers: {

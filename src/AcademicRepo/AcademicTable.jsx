@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { MDBIcon, MDBCollapse } from "mdb-react-ui-kit";
+import { BASE_URL } from "../utils/baseUrl";
 
 function AcademicTable({ searchTerm, selectedFilter }) {
   const [expandedRow, setExpandedRow] = useState(null);
@@ -10,7 +11,7 @@ function AcademicTable({ searchTerm, selectedFilter }) {
     // Fetch data from your API endpoint or use the existing data source
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3001/v1/file/all");
+        const response = await fetch(`${BASE_URL}/v1/file/all`);
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -171,7 +172,7 @@ function AcademicTable({ searchTerm, selectedFilter }) {
                             <strong>Thesis Document:</strong>{" "}
                             {row.filename && (
                               <a
-                                href={`http://localhost:3001/static/${row.filename}`}
+                                href={`${BASE_URL}/static/${row.filename}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                               >
@@ -184,7 +185,7 @@ function AcademicTable({ searchTerm, selectedFilter }) {
                               <>
                                 <strong>Synopsis Document:</strong>{" "}
                                 <a
-                                  href={`http://localhost:3001/static/${row.synopsisFileName}`}
+                                  href={`${BASE_URL}/static/${row.synopsisFileName}`}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                 >
