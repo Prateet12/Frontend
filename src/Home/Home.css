@@ -313,50 +313,31 @@ body {
 @media (max-width: 768px) {
   .footer-content {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center; /* Center align the items */
+  }
+
+  .footer-logo,
+  .footer-contact,
+  .footer-follow {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px; /* Add margin below sections */
   }
 
   .footer-logo img {
-    margin-bottom: 10px;
-    height: 70px;
+    height: 80px;
     width: 75px;
+    margin-bottom: 10px;
   }
 
-  .footer-contact,
-  .footer-follow {
-    margin-right: 0; /* Remove margin between sections on smaller screens */
-    margin-bottom: 10px; /* Add margin below sections on smaller screens */
-    width: 100%; /* Make sections take full width on smaller screens */
+  .social-icons li {
+    margin-bottom: 10px; /* Add margin below icons */
   }
 
   .social-icons li a img {
     width: 15px;
     height: auto;
     filter: invert();
-}
-}
-
-@media (max-width: 768px) {
-  .top-section {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .logo1, .logo2 {
-    width: 100px; /* Adjust size for smaller screens */
-  }
-
-  .login-btn {
-    width: 50%;
-    margin: 10px 0;
-  }
-
-  .main-text h1 {
-    font-size: 3em;
-  }
-
-  .main-text h4 {
-    font-size: 1.2em;
   }
 
   .about-home {
@@ -365,41 +346,19 @@ body {
 
   .left-section, .right-section {
     width: 100%;
+    padding: 20px; /* Add padding for better spacing */
   }
 
-  .about-heading {
-    font-size: 2em;
-  }
-
-  .about-text p {
-    font-size: 1em;
+  .about-img {
+    order: 2; /* Change order of image section */
   }
 
   .box {
-    width: 150px;
+    width: calc(50% - 40px); /* Adjust width to fit two boxes in one row with margin */
     height: 150px;
     margin: 20px;
-  }
-
-  .footer {
-    padding: 10px 0;
-    font-size: 12px;
-  }
-
-  .footer h3 {
-    font-size: 1.2em;
-  }
-
-  .footer p {
-    font-size: 0.9em;
-  }
-
-  .social-icons li a {
-    font-size: 16px;
-  }
-
-  .bottom-bar p {
-    font-size: 10px;
+    font-size: 20px;
+    padding: 15px;
   }
 }
 
@@ -437,6 +396,8 @@ body {
     width: 120px;
     height: 120px;
     margin: 15px;
+    font-size: 20px;
+    padding: 15px;
   }
 
   .footer {
@@ -458,5 +419,34 @@ body {
 
   .bottom-bar p {
     font-size: 8px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    align-items: center; /* Center align the items */
+  }
+
+  .footer-logo,
+  .footer-contact,
+  .footer-follow {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px; /* Add margin below sections */
+  }
+
+  .footer-logo img {
+    height: 80px;
+    width: 75px;
+    margin-bottom: 10px;
+  }
+
+  .social-icons li {
+    margin-bottom: 10px; /* Add margin below icons */
+  }
+
+  .social-icons li a img {
+    width: 15px;
+    height: auto;
+    filter: invert();
   }
 }

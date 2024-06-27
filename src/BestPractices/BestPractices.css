@@ -19,11 +19,13 @@ body {
 /* Form Container */
 .container.upload-form {
     max-width: 600px;
-    margin: auto;
+    margin: 12px;
     padding: 20px;
     background: #f9f9f9;
     border-radius: 15px;
     margin-top: 150px;
+   
+  
 }
 
 .form-container h2 {
@@ -113,13 +115,12 @@ body {
 }
 
 .photoBestPractices {
-
     overflow: hidden;
 }
 
 .photoBestPractices img {
     width: 100%;
-    height: 100%;
+    height: 210px; /* Change height to auto to maintain aspect ratio */
     object-fit: cover;
     transition: transform 0.3s ease; /* Smooth transition for image transform */
 }
@@ -194,15 +195,63 @@ body {
     margin-right: 7px;
 }
 
-.photoBestPractices img {
-    width: 100%;
-    height: 210px; /* Change height to auto to maintain aspect ratio */
-    object-fit: cover;
-    transition: transform 0.3s ease; /* Smooth transition for image transform */
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .cardsContainerBestPractices {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cardcontainerBestPractices {
+        flex: 0 1 100%;
+        max-width: 100%;
+    }
+    
+    .search-form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .search-form .form-group,
+    .search-form .sort-by {
+        width: 100%;
+    }
 }
 
-.cardcontainerBestPractices:hover > .photoBestPractices img {
-    transform: scale(1.1); /* Increase image size on hover */
+@media (max-width: 425px) {
+    .search-form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .search-form .form-group {
+        width: 100%;
+    }
+
+    .search-form .sort-by {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .search_input, .filter-dropdown {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .search_input {
+        flex: 1;
+        margin-right: 10px;
+    }
+
+    .search_button {
+        padding: 8px 15px;
+        font-size: 14px;
+        width: auto;
+    }
+
+    .filter_label {
+        font-size: 14px;
+    }
 }
-
-

@@ -49,8 +49,10 @@ const UploadResume = () => {
 
   return (
     <div className="uploadResume">
-      <form onSubmit={handleSubmit(onSubmit)} className="upload-document-form">
-        <Card
+    
+      <form onSubmit={handleSubmit(onSubmit)} className="upload-document-form ">
+        
+        <Card className="resume"
           sx={{
             width: "50%",
             margin: "auto",
@@ -92,6 +94,7 @@ const UploadResume = () => {
             </Button>
           </CardActions>
         </Card>
+      
       </form>
     </div>
   );

@@ -16,6 +16,7 @@ import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { getAllRoles } from "../utils/apiUtils";
+import "./UserApproval.css";
 
 // UserDetailsModal component
 function UserDetailsModal({ open, handleClose, user }) {
@@ -142,7 +143,7 @@ function UserDetailsModal({ open, handleClose, user }) {
   }
 
   return (
-    <Modal
+    <Modal className="approval_modal"
       open={open}
       onClose={handleClose}
       aria-labelledby="modal-modal-title"
@@ -322,7 +323,7 @@ const UserApproval = (props) => {
           )}
         </TableBody>
       </Table>
-      <UserDetailsModal
+      <UserDetailsModal className="approval-modal"
         open={open}
         handleClose={handleClose}
         user={selectedUser}

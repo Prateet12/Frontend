@@ -7,7 +7,7 @@
 }
 
 #registration {
-  max-width: 50% !important;
+  max-width: 40% !important;
   border-radius: 10px;
 }
 
@@ -236,7 +236,7 @@
     padding: 1rem;
   }
   #registration {
-    max-width: 70% !important;
+    max-width: 85% !important;
     border-radius: 10px;
   }
 }

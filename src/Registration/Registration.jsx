@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import GraduateRegistration from "./graduate-register";
 import ResearcherRegistration from "./researcher-register";
@@ -33,6 +33,14 @@ const Registration = ({ setLoggedIn }) => {
   const navigate = useNavigate();
   const [tellAboutYourself, setTellAboutYourself] = useState("");
   const [error, setError] = useState("");
+  const dropdownRef = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setShowDropdown(false);
+    }
+  };
+  
 
   // const [showModal, setShowModal] = useState(false);
   // const [modalContent, setModalContent] = useState("");
@@ -63,6 +71,8 @@ const Registration = ({ setLoggedIn }) => {
   }, []);
 
   let roleNames = roles.map((role) => role.role);
+
+  
 
   const register = async (formDetails) => {
     if (
@@ -118,6 +128,8 @@ const Registration = ({ setLoggedIn }) => {
     }
   };
 
+  
+
   const [showGraduateOptions, setShowGraduateOptions] = useState(false);
   const [showResearcherOptions, setShowResearcherOptions] = useState(false);
   const [showPractitionerOptions, setShowPractitionerOptions] = useState(false);
@@ -143,6 +155,16 @@ const Registration = ({ setLoggedIn }) => {
     }
   };
 
+  // const handleRoleChange = (role) => {
+  //   setSelectedRole(role);
+  //   setShowGraduateOptions(role === "graduate");
+  //   setShowResearcherOptions(role === "researcher");
+  //   setShowPractitionerOptions(role === "practitioner");
+  //   setShowInstituteOptions(role === "institution admin");
+  //   setShowAssistantOptions(role === "research assistant");
+  //   setShowProfessorOptions(role === "professor");
+  // };
+
   const handleRoleChange = (role) => {
     setSelectedRole(role);
     setShowGraduateOptions(role === "graduate");
@@ -151,8 +173,9 @@ const Registration = ({ setLoggedIn }) => {
     setShowInstituteOptions(role === "institution admin");
     setShowAssistantOptions(role === "research assistant");
     setShowProfessorOptions(role === "professor");
+    
   };
-
+  
   const [showDropdown, setShowDropdown] = useState(false);
 
   const handleDropdownToggle = () => {
@@ -177,6 +200,18 @@ const Registration = ({ setLoggedIn }) => {
       "Professor: This category consists of individuals engaged in teaching and research activities, including teachers, assistant professors, ad-hoc professors, and full professors.",
   };
 
+  useEffect(() => {
+    if (showDropdown) {
+      document.addEventListener("click", handleClickOutside);
+    } else {
+      document.removeEventListener("click", handleClickOutside);
+    }
+  
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [showDropdown]);
+  
   
 
   return (
@@ -197,11 +232,11 @@ const Registration = ({ setLoggedIn }) => {
 
         <div className="form">
           <div className="form-group">
-            <div
-              className={`dropdown-container ${
-                showDropdown ? "dropdown-open" : ""
-              }`}
-            >
+          <div
+  className={`dropdown-container ${showDropdown ? "dropdown-open" : ""}`}
+  ref={dropdownRef}
+>
+
               <div
                 className="dropdown-toggle click-dropdown"
                 onClick={handleDropdownToggle}

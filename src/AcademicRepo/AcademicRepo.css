@@ -145,3 +145,15 @@
   width: 50%; 
 
 }
+
+@media (max-width: 425px) {
+
+  .about,
+  .upload {
+      margin: 10px 0;
+  }
+
+  .upload_button{
+    margin: 10px 0;
+  }
+}
