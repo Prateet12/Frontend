@@ -156,7 +156,7 @@
   max-width: 100px;
 }
 
-.select{
+.select {
   text-align: left;
   color: black;
 }
@@ -169,4 +169,74 @@
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   margin: 20px auto; /* add this to center the modal horizontally */
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .registration-container {
+    padding: 1rem;
+    max-width: 90%;
+  }
+
+  .registration-container h1 {
+    font-size: 1.5rem;
+  }
+
+  .form-group label {
+    font-size: 0.875rem;
+  }
+
+  .input_field {
+    font-size: 0.875rem;
+  }
+
+  .submit-container {
+    flex-direction: column;
+  }
+
+  .submit {
+    max-width: 100%;
+    margin-bottom: 1rem;
+  }
+  #registration {
+    max-width: 60% !important;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 425px) {
+  .registration-container {
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  .registration-container h1 {
+    font-size: 1.25rem;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .input_field {
+    font-size: 0.75rem;
+  }
+
+  .submit-container {
+    flex-direction: column;
+  }
+
+  .submit {
+    max-width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .modal_content_registration {
+    width: 90%;
+    padding: 1rem;
+  }
+  #registration {
+    max-width: 70% !important;
+    border-radius: 10px;
+  }
 }

@@ -13,17 +13,15 @@ body, html {
 body {
   font-family: Arial, sans-serif;
   overflow-x: hidden;
-
 }
 
-#about{
+#about {
   background-color: aliceblue;
 }
 
 .row {
   display: flex;
   flex-wrap: wrap;
-  
 }
 
 /* Main Section Styles */
@@ -68,12 +66,12 @@ body {
 }
 
 .logo1 {
-  width: 125px; /* Adjust size as needed */
+  width: 125px; 
 }
 
 .logo2 {
-  width: 125px; /* Adjust size as needed */
-  margin-right: 20px;
+  width: 125px; 
+ 
 }
 
 .right {
@@ -86,6 +84,7 @@ body {
   cursor: pointer;
   height: 50px;
   border-radius: 4px;
+  margin-top: 15px;
 }
 
 .main-content {
@@ -116,7 +115,6 @@ body {
   margin: 0 !important;
 }
 
-/* About Section Styles */
 .left-section,
 .right-section {
   flex: 1; /* Ensure both sections take up equal space */
@@ -125,10 +123,8 @@ body {
   flex-direction: column;
   justify-content: center; /* Center content vertically */
   align-items: center; /* Center content horizontally */
-
   box-sizing: border-box; /* Ensure padding is included in width/height */
 }
-
 
 .left-section {
   background-color: aliceblue; /* No background color */
@@ -156,12 +152,12 @@ body {
 }
 
 .login-btn {
-  background-color: #2596be;
-  color: #ffffff;
+  background-color: #e1a02b;
+  color: black;
 }
 
 .login-btn:hover {
-  background-color: rgb(98, 196, 232);
+  background-color: #ebd281;
   color: black;
 }
 
@@ -189,8 +185,6 @@ body {
   flex-wrap: wrap;
   justify-content: center;
 }
-
-
 
 .box {
   width: 175px;
@@ -236,7 +230,6 @@ body {
   margin-right: 50px;
 }
 
-/* Footer Styles */
 /* Footer Styles */
 .footer {
   background-color: navy;
@@ -316,6 +309,7 @@ body {
   filter: invert();
 }
 
+/* Media queries for responsiveness */
 @media (max-width: 768px) {
   .footer-content {
     flex-direction: column;
@@ -324,6 +318,8 @@ body {
 
   .footer-logo img {
     margin-bottom: 10px;
+    height: 70px;
+    width: 75px;
   }
 
   .footer-contact,
@@ -332,8 +328,135 @@ body {
     margin-bottom: 10px; /* Add margin below sections on smaller screens */
     width: 100%; /* Make sections take full width on smaller screens */
   }
+
+  .social-icons li a img {
+    width: 15px;
+    height: auto;
+    filter: invert();
+}
 }
 
+@media (max-width: 768px) {
+  .top-section {
+    flex-direction: column;
+    align-items: center;
+  }
 
+  .logo1, .logo2 {
+    width: 100px; /* Adjust size for smaller screens */
+  }
 
+  .login-btn {
+    width: 50%;
+    margin: 10px 0;
+  }
 
+  .main-text h1 {
+    font-size: 3em;
+  }
+
+  .main-text h4 {
+    font-size: 1.2em;
+  }
+
+  .about-home {
+    flex-direction: column;
+  }
+
+  .left-section, .right-section {
+    width: 100%;
+  }
+
+  .about-heading {
+    font-size: 2em;
+  }
+
+  .about-text p {
+    font-size: 1em;
+  }
+
+  .box {
+    width: 150px;
+    height: 150px;
+    margin: 20px;
+  }
+
+  .footer {
+    padding: 10px 0;
+    font-size: 12px;
+  }
+
+  .footer h3 {
+    font-size: 1.2em;
+  }
+
+  .footer p {
+    font-size: 0.9em;
+  }
+
+  .social-icons li a {
+    font-size: 16px;
+  }
+
+  .bottom-bar p {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 425px) {
+  .top-section {
+    padding: 10px;
+  }
+
+  .logo1, .logo2 {
+    width: 80px;
+  }
+
+  .login-btn {
+    font-size: 14px;
+    height: 40px;
+  }
+
+  .main-text h1 {
+    font-size: 2.5em;
+  }
+
+  .main-text h4 {
+    font-size: 1em;
+  }
+
+  .about-heading {
+    font-size: 1.5em;
+  }
+
+  .about-text p {
+    font-size: 0.9em;
+  }
+
+  .box {
+    width: 120px;
+    height: 120px;
+    margin: 15px;
+  }
+
+  .footer {
+    padding: 5px 0;
+    font-size: 10px;
+  }
+
+  .footer h3 {
+    font-size: 1em;
+  }
+
+  .footer p {
+    font-size: 0.8em;
+  }
+
+  .social-icons li a {
+    font-size: 14px;
+  }
+
+  .bottom-bar p {
+    font-size: 8px;
+  }
+}

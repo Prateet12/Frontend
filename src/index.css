@@ -115,7 +115,8 @@
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: linear-gradient(to top, #c1dfc4 0%, #deecdd 100%);
+  /* background-image: linear-gradient(to top, #c1dfc4 0%, #deecdd 100%); */
+  background-color: aliceblue;
   font-family: "Barlow", sans-serif!important;
   min-height: 100vh;
   overflow-y: auto;

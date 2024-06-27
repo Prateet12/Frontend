@@ -1,3 +1,7 @@
+.root{
+  background-color: aliceblue;
+}
+
 .app-container { 
    height: 100vmin;
   display: flex;
