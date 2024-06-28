@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import GraduateRegistration from "./graduate-register";
 import ResearcherRegistration from "./researcher-register";
@@ -13,6 +13,8 @@ import { getAllRoles, getAllInstitutes } from "../utils/apiUtils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import "./Registration.css";
+import Modal from "@mui/material/Modal";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 const Registration = ({ setLoggedIn }) => {
   const [name, setName] = useState("");
@@ -32,6 +34,22 @@ const Registration = ({ setLoggedIn }) => {
   const navigate = useNavigate();
   const [tellAboutYourself, setTellAboutYourself] = useState("");
   const [error, setError] = useState("");
+  const dropdownRef = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setShowDropdown(false);
+    }
+  };
+
+  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
+
+  const handlePasswordVisibilityToggle = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
+
+  // const [showModal, setShowModal] = useState(false);
+  // const [modalContent, setModalContent] = useState("");
 
   const handleAboutYourselfChange = (e) => {
     const text = e.target.value;
@@ -108,14 +126,12 @@ const Registration = ({ setLoggedIn }) => {
         role: roles.find((role) => role.role === selectedRole).id,
         ...fields,
       };
-  
+
       register(registrationForm);
     } else {
       alert("Please enter a correct Email ID"); // Inform user to correct form errors
     }
   };
-  
- 
 
   const [showGraduateOptions, setShowGraduateOptions] = useState(false);
   const [showResearcherOptions, setShowResearcherOptions] = useState(false);
@@ -141,7 +157,16 @@ const Registration = ({ setLoggedIn }) => {
       setFormValid(true); // Set formValid to true if email is valid
     }
   };
-  
+
+  // const handleRoleChange = (role) => {
+  //   setSelectedRole(role);
+  //   setShowGraduateOptions(role === "graduate");
+  //   setShowResearcherOptions(role === "researcher");
+  //   setShowPractitionerOptions(role === "practitioner");
+  //   setShowInstituteOptions(role === "institution admin");
+  //   setShowAssistantOptions(role === "research assistant");
+  //   setShowProfessorOptions(role === "professor");
+  // };
 
   const handleRoleChange = (role) => {
     setSelectedRole(role);
@@ -162,6 +187,31 @@ const Registration = ({ setLoggedIn }) => {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
+
+  const roleDescriptions = {
+    "institution admin":
+      "Institution Administrator: Government, semi-government, private, autonomous, and deemed universities.",
+    graduate:
+      "Graduate: This category encompasses individuals holding postgraduate degrees such as Master of Science (M.Sc.), Master of Arts (M.A.), Master of Technology (M.Tech.), Doctor of Philosophy (Ph.D.), and postdoctoral researchers.",
+    practitioner:
+      "Practitioner: This category includes all employees of governmental bodies, non-governmental organizations (NGOs), semi-government organizations, self-help groups (SHGs), and cooperatives.",
+    researcher:
+      "Researcher: This category comprises research fellows, research associates, and research scientists.",
+    professor:
+      "Professor: This category consists of individuals engaged in teaching and research activities, including teachers, assistant professors, ad-hoc professors, and full professors.",
+  };
+
+  useEffect(() => {
+    if (showDropdown) {
+      document.addEventListener("click", handleClickOutside);
+    } else {
+      document.removeEventListener("click", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [showDropdown]);
 
   return (
     <div className="container landingpage" id="registration">
@@ -185,6 +235,7 @@ const Registration = ({ setLoggedIn }) => {
               className={`dropdown-container ${
                 showDropdown ? "dropdown-open" : ""
               }`}
+              ref={dropdownRef}
             >
               <div
                 className="dropdown-toggle click-dropdown"
@@ -201,17 +252,25 @@ const Registration = ({ setLoggedIn }) => {
                           <li key={index}>
                             <a
                               href="#"
-                              onClick={() => {
+                              onClick={(e) => {
+                                e.preventDefault();
                                 handleRoleChange(roleName);
-                                setShowDropdown(false);
+                                //setShowDropdown(false);
                               }}
                             >
                               {roleName.toUpperCase()}{" "}
                               <FontAwesomeIcon
                                 icon={faInfoCircle}
-                                className=" Info"
+                                className="Info"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setSelectedRole(roleName);
+                                }}
                               />
                             </a>
+                            {selectedRole === roleName && (
+                              <p>{roleDescriptions[roleName]}</p>
+                            )}
                           </li>
                         )
                     )}
@@ -256,14 +315,21 @@ const Registration = ({ setLoggedIn }) => {
 
           <div className="form-group">
             <label htmlFor="password">Enter your password</label>
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={handlePasswordChange}
-              className="input_field"
-              required
-            />
+            <div className="password-input-container">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="input_field"
+                required
+              />
+              <FontAwesomeIcon
+                icon={showPassword ? faEyeSlash : faEye}
+                onClick={handlePasswordVisibilityToggle}
+                className="password-toggle-icon"
+              />
+            </div>
           </div>
 
           <div className="form-group">

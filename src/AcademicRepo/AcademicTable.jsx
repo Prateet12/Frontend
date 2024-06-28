@@ -1,22 +1,29 @@
 import React, { useState, useEffect } from "react";
+
 import { MDBIcon, MDBCollapse } from "mdb-react-ui-kit";
+
+import { BASE_URL } from "../utils/baseUrl";
 
 function AcademicTable({ searchTerm, selectedFilter }) {
   const [expandedRow, setExpandedRow] = useState(null);
+
   const [sortedBy, setSortedBy] = useState(null);
+
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
     // Fetch data from your API endpoint or use the existing data source
+
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3001/v1/file/all");
+        const response = await fetch(`${BASE_URL}/v1/file/all`);
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         const data = await response.json();
+
         setRows(data);
       } catch (error) {
         console.error("Error:", error);
@@ -33,13 +40,17 @@ function AcademicTable({ searchTerm, selectedFilter }) {
   const sortRows = (rows, criteria) => {
     return rows.sort((a, b) => {
       let x = a[criteria]?.toLowerCase() || "";
+
       let y = b[criteria]?.toLowerCase() || "";
+
       if (x < y) {
         return -1;
       }
+
       if (x > y) {
         return 1;
       }
+
       return 0;
     });
   };
@@ -47,13 +58,16 @@ function AcademicTable({ searchTerm, selectedFilter }) {
   useEffect(() => {
     if (selectedFilter) {
       console.log("Selected filter:", selectedFilter);
+
       setRows((prevRows) => sortRows([...prevRows], selectedFilter));
     }
   }, [selectedFilter]);
 
   const handleSort = (criteria) => {
     console.log("Sorting by:", criteria);
+
     setSortedBy(criteria);
+
     setRows((prevRows) => sortRows([...prevRows], criteria));
   };
 
@@ -70,20 +84,29 @@ function AcademicTable({ searchTerm, selectedFilter }) {
           <thead>
             <tr>
               <th onClick={() => handleSort("title")}>Research Title</th>
+
               <th>Document</th>
+
               <th onClick={() => handleSort("author")}>Author(s)</th>
+
               <th onClick={() => handleSort("institution")}>Institution</th>
+
               <th onClick={() => handleSort("degree_program")}>
                 Degree/Program
               </th>
+
               <th onClick={() => handleSort("publication_date")}>
                 Published on
               </th>
+
               <th onClick={() => handleSort("fileSize")}>File size (MB)</th>
+
               <th onClick={() => handleSort("uploadDate")}>Uploaded on</th>
+
               <th></th>
             </tr>
           </thead>
+
           <tbody>
             {filteredRows.length === 0 ? (
               <tr>
@@ -95,74 +118,92 @@ function AcademicTable({ searchTerm, selectedFilter }) {
               filteredRows.map((row, index) => (
                 <React.Fragment key={index}>
                   <tr>
+                    {row.id}
+
                     <td>
                       <p className="fw-normal mb-1">{row.title}</p>
                     </td>
+
                     <td>
                       <p className="fw-normal mb-1">{row.fileType}</p>
                     </td>
+
                     <td>
                       <p className="fw-normal mb-1">{row.author}</p>
                     </td>
+
                     <td>
                       <p className="fw-normal mb-1">{row.institution}</p>
                     </td>
+
                     <td>
                       <p className="fw-normal mb-0">{row.degree_program}</p>
                     </td>
+
                     <td>
                       <p className="fw-normal mb-0">
                         {new Date(row.publication_date).toDateString()}
                       </p>
                     </td>
+
                     <td>
                       <p className="fw-normal mb-0">{row.fileSize}</p>
                     </td>
+
                     <td>
                       <p className="fw-normal mb-0">
                         {new Date(row.uploadDate).toDateString()}
                       </p>
                     </td>
+
                     <td>
                       <MDBIcon
                         fas
-                        icon={
-                          expandedRow === row.id ? "caret-up" : "caret-down"
-                        }
-                        onClick={() => toggleRowDetails(row.id)}
+                        icon={expandedRow === index ? "caret-up" : "caret-down"}
+                        onClick={() => toggleRowDetails(index)}
                         style={{
                           cursor: "pointer",
+
                           color: "#0d6efd",
+
                           fontSize: "1.5rem",
                         }}
                       />
                     </td>
                   </tr>
+
+                  {/* Add the additional details here */ expandedRow === row.id}
+
                   <tr
                     style={{
-                      display: expandedRow === row.id ? "table-row" : "none",
+                      display: expandedRow === index ? "table-row" : "none",
                     }}
                   >
                     <td colSpan={9}>
-                      <MDBCollapse open={expandedRow === row.id}>
+                      <MDBCollapse open={expandedRow === index}>
                         <div className="p-3">
                           <p>
                             <strong>Title:</strong> {row.title}
                           </p>
+
                           <p>
                             <strong>Authors:</strong> {row.author}
                           </p>
+
                           <p>
                             <strong>Degree/Program:</strong>{" "}
                             {row.degree_program}
                           </p>
+
                           <p>
                             <strong>Publication Date:</strong>{" "}
                             {new Date(row.publication_date).toDateString()}
                           </p>
+
                           <p>
                             <strong>Abstract:</strong> {row.abstract}
                           </p>
+
                           <p>
                             <strong>Keywords:</strong> {row.keywords}
                           </p>
@@ -179,6 +220,7 @@ function AcademicTable({ searchTerm, selectedFilter }) {
                               </a>
                             )}
                           </p>
+
                           <p>
                             {row.synopsisFileName && (
                               <>

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import ApprovalTable from "./ApprovalTable";
 import "./Approval.css";
 import { MDBContainer, MDBBtn, MDBIcon } from "mdb-react-ui-kit";
+import { BASE_URL } from "../utils/baseUrl";
 
 const Approval = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -13,7 +14,7 @@ const Approval = () => {
 
   const getUserRegistrationRequests = async (instituteName) => {
     const response = await fetch(
-      `http://localhost:3001/v1/admin/registrationRequests/${instituteName}`
+      `${BASE_URL}/v1/admin/registrationRequests/${instituteName}`
     );
 
     if (!response.ok) {
@@ -35,7 +36,7 @@ const Approval = () => {
 
   const getUserDocumentRequests = async (instituteName) => {
     const response = await fetch(
-      `http://localhost:3001/v1/admin/uploadRequests/${instituteName}`
+      `${BASE_URL}/v1/admin/uploadRequests/${instituteName}`
     );
     console.log("response",response);
     if (!response.ok) {

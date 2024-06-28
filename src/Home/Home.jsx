@@ -33,9 +33,9 @@ const Home = () => {
                 <img src={logo1} alt="logo" className="logo1" />
                 <div className="right">
                   <img src={logo2} alt="logo2" className="logo2" />
-                  <button className="login-btn" onClick={redirectToLogin}>
+                  {/* <button className="login-btn" onClick={redirectToLogin}>
                     Login/Signup
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>
@@ -46,6 +46,9 @@ const Home = () => {
           <div className="main-text">
             <h1>WELCOME TO UDAY</h1>
             <h4>A one-stop destination for thesis and synopsis.</h4>
+            <button className="login-btn" onClick={redirectToLogin}>
+                   <span> Login  /  </span><span> Signup </span>
+                  </button>
           </div>
         </div>
       </div>
@@ -88,7 +91,7 @@ const Home = () => {
             <div className="footer-info">
               <div className="footer-contact">
                 <h4>Contact Us</h4>
-                <p>Email: info@urbclinder.com</p>
+                <p>Email: information@uday.com</p>
                 <p>Phone: +1 (123) 456-7890</p>
               </div>
               <div className="footer-follow">

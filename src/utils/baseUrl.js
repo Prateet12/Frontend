@@ -1,7 +1,9 @@
 // BASE_URL='https://779375040545.ngrok.io'
 // https://b9fc-73-231-24-45.ngrok.io
 
-export const BASE_URL = "http://localhost:3001";
+// export const BASE_URL = "http://localhost:3001";
+
+export const BASE_URL = "http://13.232.130.129/api";
 
 // export const USERS_ROUTE = "/v1/users";
 
