@@ -1,4 +1,5 @@
 import "./Dashboard.css";
+import { getStats } from "../utils/apiUtils";
 import React, { useEffect, useState } from "react";
 import {
   MDBContainer, 
@@ -19,10 +20,23 @@ import avatar3 from '../Components/Assets/avatars/3.jpg';
 
 const Dashboard = ({ user }) => {
   const [title] = useState("Dashboard");
+  const [stats, setStats] = useState({});
+
+  // http://localhost:3001/v1/stats
+
+ const fetchStats =  (async () => {
+     let stats = await getStats();
+     console.log(stats);
+     setStats((prev) => {
+      return {...stats};
+    });
+  });
 
   useEffect(() => {
     // This will run when the page first loads and whenever the title changes
+
     document.title = title;
+    fetchStats();
   }, [title]);
 
   if (!user) {
@@ -48,10 +62,10 @@ const Dashboard = ({ user }) => {
                   <div className='flex-grow-1 ms-4'>
                     <p className='text-muted mb-1'>Members</p>
                     <h2 className='mb-0'>
-                      42
+                    {stats.members}
                       <span className='text-success' style={{ fontSize: '0.875rem' }}>
-                        <MDBIcon icon='arrow-up' className='ms-1' size='sm' />
-                        <span> 12</span>
+                        {/* <MDBIcon icon='arrow-up' className='ms-1' size='sm' /> */}
+                        {/* <span> </span> */}
                       </span>
                     </h2>
                   </div>
@@ -72,10 +86,10 @@ const Dashboard = ({ user }) => {
                   <div className='flex-grow-1 ms-4'>
                     <p className='text-muted mb-1'>Documents</p>
                     <h2 className='mb-0'>
-                      226
+                    {stats.files}
                       <span className='text-success' style={{ fontSize: '0.875rem' }}>
-                        <MDBIcon icon='arrow-up' className='ms-1' size='sm' />
-                        <span> 45</span>
+                        {/* <MDBIcon icon='arrow-up' className='ms-1' size='sm' /> */}
+                        {/* <span> 45</span> */}
                       </span>
                     </h2>
                   </div>
@@ -96,10 +110,10 @@ const Dashboard = ({ user }) => {
                   <div className='flex-grow-1 ms-4'>
                     <p className='text-muted mb-1'>Institutes</p>
                     <h2 className='mb-0'>
-                      345
+                    {stats.institutes}
                       <span className='text-danger' style={{ fontSize: '0.875rem' }}>
-                        <MDBIcon icon='arrow-down' className='ms-1' size='sm' />
-                        <span> 45</span>
+                        {/* <MDBIcon icon='arrow-down' className='ms-1' size='sm' /> */}
+                        {/* <span> 45</span> */}
                       </span>
                     </h2>
                   </div>
