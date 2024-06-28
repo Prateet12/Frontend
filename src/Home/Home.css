@@ -66,13 +66,11 @@ body {
 }
 
 .logo1 {
-  width: 125px; 
+  width: 125px;
 }
 
 .logo2 {
-  
-  width: 160px; 
- 
+  width: 160px;
 }
 
 .right {
@@ -132,7 +130,7 @@ body {
 }
 
 .right-section {
-  background-image: url('./about_image.jpg'); /* Replace with the correct path to your image */
+  background-image: url("./about_image.jpg"); /* Replace with the correct path to your image */
   background-size: cover;
   background-position: center;
   color: white; /* Ensure text is readable over the background image */
@@ -155,7 +153,6 @@ body {
 .login-btn {
   background-color: #e1a02b;
   color: black;
-
 }
 
 .login-btn:hover {
@@ -312,57 +309,29 @@ body {
 }
 
 /* Media queries for responsiveness */
-@media (max-width: 768px) {
-  .footer-content {
-    flex-direction: column;
-    align-items: center; /* Center align the items */
-  }
-
-  .footer-logo,
-  .footer-contact,
-  .footer-follow {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 10px; /* Add margin below sections */
-  }
-
-  .footer-logo img {
-    height: 80px;
-    width: 75px;
-    margin-bottom: 10px;
-  }
-
-  .social-icons li {
-    margin-bottom: 10px; /* Add margin below icons */
-  }
-
-  .social-icons li a img {
-    width: 15px;
-    height: auto;
-    filter: invert();
-  }
-
+/* @media (max-width: 768px) {
   .about-home {
     flex-direction: column;
   }
 
-  .left-section, .right-section {
+  .left-section,
+  .right-section {
     width: 100%;
     padding: 20px; /* Add padding for better spacing */
-  }
+  /* }
 
   .about-img {
     order: 2; /* Change order of image section */
-  }
+  /* }
 
   .box {
     width: calc(50% - 40px); /* Adjust width to fit two boxes in one row with margin */
-    height: 150px;
+    /* height: 150px;
     margin: 20px;
     font-size: 20px;
     padding: 15px;
   }
-}
+}  */
 
 @media (max-width: 425px) {
   .top-section {
@@ -428,9 +397,146 @@ body {
     align-items: center; /* Center align the items */
   }
 
-  .footer-logo,
-  .footer-contact,
-  .footer-follow {
+  .footer-logo, .footer-contact, .footer-follow {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px; /* Add margin below sections */
+  }
+
+  .footer-logo img {
+    height: 80px;
+    width: 75px;
+    margin-bottom: 10px;
+  }
+
+  .social-icons li {
+    margin-bottom: 10px; /* Add margin below icons */
+  }
+
+  .social-icons li a img {
+    width: 15px;
+    height: auto;
+    filter: invert();
+  }
+}
+
+@media (max-width: 1024px) {
+  /* Adjustments for big mobiles and iPads */
+  .about-home {
+    flex-direction: column;
+  }
+
+  .left-section, .right-section {
+    width: 100%;
+    padding: 20px; /* Add padding for better spacing */
+    flex: none;
+  }
+
+  .about-img {
+    order: 2; /* Change order of image section */
+  }
+
+  .box {
+    width: calc(50% - 40px); /* Adjust width to fit two boxes in one row with margin */
+    height: 150px;
+    margin: 20px;
+    font-size: 20px;
+    padding: 15px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    align-items: center; /* Center align the items */
+  }
+
+  .footer-logo, .footer-contact, .footer-follow {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px; /* Add margin below sections */
+  }
+
+  .footer-logo img {
+    height: 80px;
+    width: 75px;
+    margin-bottom: 10px;
+  }
+
+  .social-icons li {
+    margin-bottom: 10px; /* Add margin below icons */
+  }
+
+  .social-icons li a img {
+    width: 15px;
+    height: auto;
+    filter: invert();
+  }
+}
+
+@media (min-width: 426px) and (max-width: 767px) {
+  .top-section {
+    padding: 10px;
+  }
+
+  .logo1, .logo2 {
+    width: 80px;
+  }
+
+  .login-btn {
+    font-size: 14px;
+    height: 40px;
+  }
+
+  .main-text h1 {
+    font-size: 2.5em;
+  }
+
+  .main-text h4 {
+    font-size: 1em;
+  }
+
+  .about-heading {
+    font-size: 1.5em;
+  }
+
+  .about-text p {
+    font-size: 0.9em;
+  }
+
+  .box {
+    width: 120px;
+    height: 120px;
+    margin: 15px;
+    font-size: 20px;
+    padding: 15px;
+  }
+
+  .footer {
+    padding: 5px 0;
+    font-size: 10px;
+  }
+
+  .footer h3 {
+    font-size: 1em;
+  }
+
+  .footer p {
+    font-size: 0.8em;
+  }
+
+  .social-icons li a {
+    font-size: 14px;
+  }
+
+  .bottom-bar p {
+    font-size: 8px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    align-items: center; /* Center align the items */
+  }
+
+  .footer-logo, .footer-contact, .footer-follow {
     width: 100%;
     text-align: center;
     margin-bottom: 10px; /* Add margin below sections */
