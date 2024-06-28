@@ -10,7 +10,7 @@
 }
 
 .page-container {
-  min-height: 100vh; /* Ensure container extends to at least the height of the viewport */
+  /* min-height: 100vh; Ensure container extends to at least the height of the viewport */
   background-color: aliceblue;
 }
 
