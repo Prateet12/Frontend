@@ -88,6 +88,7 @@ export default function InboxTable({ searchTerm, selectedFilter }) {
           </MDBTableHead>
           <MDBTableBody style={{ verticalAlign: "middle" }}>
             {filteredRows.map((row, index) => (
+             
               <tr key={index}>
                 <td>
                   <p className="fw-normal mb-1">{row.title}</p>
@@ -111,7 +112,17 @@ export default function InboxTable({ searchTerm, selectedFilter }) {
                       color: "#0d6efd",
                       fontSize: "1.5rem",
                     }}
-                    onClick={() => alert("Edit document")}
+
+                   
+                  onClick={() => {
+
+                    console.log(row);
+                    const documentId = row._id; // Assuming there is an 'id' property in the 'row' object
+                   window.location.href = `/edit-document/${documentId}`;
+
+                   
+                  }}
+                   
                   />
                 </td>
               </tr>

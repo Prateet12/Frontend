@@ -21,17 +21,21 @@ import Home from "./Home/Home";
 import UploadBestPractices from "./BestPractices/UploadBestPractices";
 import BestPractices from "./BestPractices/BestPractices";
 import ResetPassword from "./ResetPassword/reset_password";
+import EditDocument from "./UploadDocument/EditDocument";
 
 
 function App() {
+
+   let  sessionValue = JSON.parse(sessionStorage.getItem("loggedIn"));
   const [loggedIn, setLoggedIn] = useState(
-   false
+    sessionValue
   );
   const [user, setUser] = useState({});
 
   useEffect(() => {
     // When loggedIn state changes, update sessionStorage
     sessionStorage.setItem("loggedIn", JSON.stringify(loggedIn));
+    // setLoggedIn(true);
   }, [loggedIn]);
 
   const handleLogout = () => {
@@ -115,6 +119,10 @@ function App() {
                   path="/upload-document"
                   element={loggedIn ? <UploadDocument /> : <Navigate to="/" />}
                 />
+                 <Route
+                  path="/edit-document/:id"
+                  element={loggedIn ? <EditDocument /> : <Navigate to="/" />}
+                />
                 <Route
                   path="/upload-resume"
                   element={loggedIn ? <UploadResume /> : <Navigate to="/" />}
@@ -129,7 +137,7 @@ function App() {
                     loggedIn ? <Dashboard user={user} /> : <Navigate to="/" />
                   }
                 />
-                 <Route path="/reset-password" element={<ForgotPassword/>} />
+                 <Route path="/reset-password" element={<ResetPassword/>} />
 
                 <Route
                   path="/approvals-inbox"

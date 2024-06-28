@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { MDBIcon, MDBCollapse } from "mdb-react-ui-kit";
+import { BASE_URL } from "../utils/baseUrl";
 
 function AcademicTable({ searchTerm, selectedFilter }) {
   const [expandedRow, setExpandedRow] = useState(null);
@@ -10,7 +11,7 @@ function AcademicTable({ searchTerm, selectedFilter }) {
     // Fetch data from your API endpoint or use the existing data source
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3001/v1/file/all");
+        const response = await fetch(`${BASE_URL}/v1/file/all`);
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -93,8 +94,12 @@ function AcademicTable({ searchTerm, selectedFilter }) {
               </tr>
             ) : (
               filteredRows.map((row, index) => (
+
+
                 <React.Fragment key={index}>
                   <tr>
+
+                    {row.id}
                     <td>
                       <p className="fw-normal mb-1">{row.title}</p>
                     </td>
@@ -127,9 +132,9 @@ function AcademicTable({ searchTerm, selectedFilter }) {
                       <MDBIcon
                         fas
                         icon={
-                          expandedRow === row.id ? "caret-up" : "caret-down"
+                          expandedRow === index ? "caret-up" : "caret-down"
                         }
-                        onClick={() => toggleRowDetails(row.id)}
+                        onClick={() => toggleRowDetails(index)}
                         style={{
                           cursor: "pointer",
                           color: "#0d6efd",
@@ -138,13 +143,17 @@ function AcademicTable({ searchTerm, selectedFilter }) {
                       />
                     </td>
                   </tr>
+                  {/* Add the additional details here */ expandedRow === row.id}
                   <tr
                     style={{
-                      display: expandedRow === row.id ? "table-row" : "none",
+                      display: expandedRow === index ? "table-row" : "none",
                     }}
                   >
                     <td colSpan={9}>
-                      <MDBCollapse open={expandedRow === row.id}>
+
+
+
+                      <MDBCollapse open={expandedRow === index}>
                         <div className="p-3">
                           <p>
                             <strong>Title:</strong> {row.title}
