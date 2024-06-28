@@ -48,7 +48,7 @@ const AcademicRepo = () => {
         </section>
         <div className="container_academic">
           <div className="controls m-4 justify-content-between">
-            <div className="d-flex justify-content-between align-content-center">
+           
               <form onSubmit={handleSearchSubmit} className="search_form">
                 <input
                   type="text"
@@ -77,7 +77,7 @@ const AcademicRepo = () => {
                   <option value="institution">Institute</option>
                 </select>
               </div>
-            </div>
+          
             <MDBBtn
               className="upload_button"
               onClick={() => redirectToUpload()}

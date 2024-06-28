@@ -15,6 +15,7 @@ import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
+
 import {
   MDBContainer,
   MDBTable,
@@ -29,6 +30,7 @@ import {
   MDBIcon,
   MDBCardFooter,
 } from "mdb-react-ui-kit";
+import { BASE_URL } from "../utils/baseUrl";
 
 const style = {
   position: "absolute",
@@ -85,7 +87,7 @@ function ViewDetailsModal({ open, handleClose, document }) {
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             <strong>Thesis Document:</strong>{" "}
             <a
-              href={`http://localhost:3001/static/${document.filename}`}
+              href={`${BASE_URL}/static/${document.filename}`}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -97,7 +99,7 @@ function ViewDetailsModal({ open, handleClose, document }) {
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             <strong>Synopsis Document:</strong>{" "}
             <a
-              href={`http://localhost:3001/static/${document.synopsisFileName}`}
+              href={`${BASE_URL}/static/${document.synopsisFileName}`}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -196,7 +198,7 @@ export default function DocumentApproval(props) {
   const handleApprove = async (row) => {
     await handleDocument(
       row,
-      "http://localhost:3001/v1/admin/approveUpload",
+      "${BASE_URL}/v1/admin/approveUpload",
       "Document approved successfully!",
       "Failed to approve document"
     );
@@ -206,7 +208,7 @@ export default function DocumentApproval(props) {
   const handleReject = (row) => {
     handleDocument(
       row,
-      "http://localhost:3001/v1/admin/rejectUpload",
+      "${BASE_URL}/v1/admin/rejectUpload",
       "Document rejected successfully!",
       "Failed to reject document"
     );

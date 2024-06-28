@@ -16,6 +16,7 @@ import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { getAllRoles } from "../utils/apiUtils";
+import "./UserApproval.css";
 
 // UserDetailsModal component
 function UserDetailsModal({ open, handleClose, user }) {
@@ -142,7 +143,7 @@ function UserDetailsModal({ open, handleClose, user }) {
   }
 
   return (
-    <Modal
+    <Modal className="approval_modal"
       open={open}
       onClose={handleClose}
       aria-labelledby="modal-modal-title"
@@ -223,7 +224,7 @@ const UserApproval = (props) => {
     console.log("adminId and userId: ", adminId + " ", userId);
     try {
       const response = await fetch(
-        "http://localhost:3001/v1/admin/approveRegistration",
+        "${BASE_URL}/v1/admin/approveRegistration",
         {
           method: "POST",
           headers: {
@@ -254,7 +255,7 @@ const UserApproval = (props) => {
     console.log("adminId and userId: ", adminId + " ", userId);
     try {
       const response = await fetch(
-        "http://localhost:3001/v1/admin/rejectRegistration",
+        "${BASE_URL}/v1/admin/rejectRegistration",
         {
           method: "POST",
           headers: {
@@ -322,7 +323,7 @@ const UserApproval = (props) => {
           )}
         </TableBody>
       </Table>
-      <UserDetailsModal
+      <UserDetailsModal className="approval-modal"
         open={open}
         handleClose={handleClose}
         user={selectedUser}

@@ -100,7 +100,7 @@ const PractitionersRegistration = ({ registerCallback }) => {
       </div>
       <div className="form-group">
         <div className="submit-container">
-          <MDBBtn className='me-1 submit'>Register</MDBBtn>
+          <MDBBtn className='me-1 submit'>Sign Up</MDBBtn>
         </div>
       </div>
     </form>

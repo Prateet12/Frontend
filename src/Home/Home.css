@@ -13,17 +13,15 @@ body, html {
 body {
   font-family: Arial, sans-serif;
   overflow-x: hidden;
-
 }
 
-#about{
+#about {
   background-color: aliceblue;
 }
 
 .row {
   display: flex;
   flex-wrap: wrap;
-  
 }
 
 /* Main Section Styles */
@@ -68,12 +66,13 @@ body {
 }
 
 .logo1 {
-  width: 125px; /* Adjust size as needed */
+  width: 125px; 
 }
 
 .logo2 {
-  width: 125px; /* Adjust size as needed */
-  margin-right: 20px;
+  
+  width: 160px; 
+ 
 }
 
 .right {
@@ -86,6 +85,7 @@ body {
   cursor: pointer;
   height: 50px;
   border-radius: 4px;
+  margin-top: 15px;
 }
 
 .main-content {
@@ -116,7 +116,6 @@ body {
   margin: 0 !important;
 }
 
-/* About Section Styles */
 .left-section,
 .right-section {
   flex: 1; /* Ensure both sections take up equal space */
@@ -125,10 +124,8 @@ body {
   flex-direction: column;
   justify-content: center; /* Center content vertically */
   align-items: center; /* Center content horizontally */
-
   box-sizing: border-box; /* Ensure padding is included in width/height */
 }
-
 
 .left-section {
   background-color: aliceblue; /* No background color */
@@ -156,12 +153,13 @@ body {
 }
 
 .login-btn {
-  background-color: #2596be;
-  color: #ffffff;
+  background-color: #e1a02b;
+  color: black;
+
 }
 
 .login-btn:hover {
-  background-color: rgb(98, 196, 232);
+  background-color: #ebd281;
   color: black;
 }
 
@@ -189,8 +187,6 @@ body {
   flex-wrap: wrap;
   justify-content: center;
 }
-
-
 
 .box {
   width: 175px;
@@ -236,7 +232,6 @@ body {
   margin-right: 50px;
 }
 
-/* Footer Styles */
 /* Footer Styles */
 .footer {
   background-color: navy;
@@ -316,24 +311,144 @@ body {
   filter: invert();
 }
 
+/* Media queries for responsiveness */
 @media (max-width: 768px) {
   .footer-content {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center; /* Center align the items */
+  }
+
+  .footer-logo,
+  .footer-contact,
+  .footer-follow {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px; /* Add margin below sections */
   }
 
   .footer-logo img {
+    height: 80px;
+    width: 75px;
     margin-bottom: 10px;
   }
 
-  .footer-contact,
-  .footer-follow {
-    margin-right: 0; /* Remove margin between sections on smaller screens */
-    margin-bottom: 10px; /* Add margin below sections on smaller screens */
-    width: 100%; /* Make sections take full width on smaller screens */
+  .social-icons li {
+    margin-bottom: 10px; /* Add margin below icons */
+  }
+
+  .social-icons li a img {
+    width: 15px;
+    height: auto;
+    filter: invert();
+  }
+
+  .about-home {
+    flex-direction: column;
+  }
+
+  .left-section, .right-section {
+    width: 100%;
+    padding: 20px; /* Add padding for better spacing */
+  }
+
+  .about-img {
+    order: 2; /* Change order of image section */
+  }
+
+  .box {
+    width: calc(50% - 40px); /* Adjust width to fit two boxes in one row with margin */
+    height: 150px;
+    margin: 20px;
+    font-size: 20px;
+    padding: 15px;
   }
 }
 
+@media (max-width: 425px) {
+  .top-section {
+    padding: 10px;
+  }
 
+  .logo1, .logo2 {
+    width: 80px;
+  }
 
+  .login-btn {
+    font-size: 14px;
+    height: 40px;
+  }
 
+  .main-text h1 {
+    font-size: 2.5em;
+  }
+
+  .main-text h4 {
+    font-size: 1em;
+  }
+
+  .about-heading {
+    font-size: 1.5em;
+  }
+
+  .about-text p {
+    font-size: 0.9em;
+  }
+
+  .box {
+    width: 120px;
+    height: 120px;
+    margin: 15px;
+    font-size: 20px;
+    padding: 15px;
+  }
+
+  .footer {
+    padding: 5px 0;
+    font-size: 10px;
+  }
+
+  .footer h3 {
+    font-size: 1em;
+  }
+
+  .footer p {
+    font-size: 0.8em;
+  }
+
+  .social-icons li a {
+    font-size: 14px;
+  }
+
+  .bottom-bar p {
+    font-size: 8px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    align-items: center; /* Center align the items */
+  }
+
+  .footer-logo,
+  .footer-contact,
+  .footer-follow {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px; /* Add margin below sections */
+  }
+
+  .footer-logo img {
+    height: 80px;
+    width: 75px;
+    margin-bottom: 10px;
+  }
+
+  .social-icons li {
+    margin-bottom: 10px; /* Add margin below icons */
+  }
+
+  .social-icons li a img {
+    width: 15px;
+    height: auto;
+    filter: invert();
+  }
+}

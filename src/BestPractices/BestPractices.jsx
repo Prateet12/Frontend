@@ -85,14 +85,14 @@ const BestPractices = () => {
           </p>
         </section>
         <div className="container_academic">
-          <div className="controls m-4 justify-content-between">
-            <div className="d-flex justify-content-between align-content-center">
+          <div className="controls m-4 ">
+            
               <form onSubmit={handleSearchSubmit} className="search_form">
                 <input
                   type="text"
                   value={searchTerm}
                   onChange={handleSearchChange}
-                  placeholder="Search for best practices"
+                  placeholder="Search here"
                   className="search_input"
                 />
                 <MDBBtn>
@@ -118,7 +118,7 @@ const BestPractices = () => {
                   <option value="cities">Cities</option>
                 </select>
               </div>
-            </div>
+           
           </div>
         </div>
         {/* Cards Container */}

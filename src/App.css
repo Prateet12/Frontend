@@ -1,3 +1,7 @@
+.root{
+  background-color: aliceblue;
+}
+
 .app-container { 
    height: 100vmin;
   display: flex;
@@ -5,7 +9,8 @@
   background-color: aliceblue;
 }
 
-.page-container{
+.page-container {
+  /* min-height: 100vh; Ensure container extends to at least the height of the viewport */
   background-color: aliceblue;
 }
 

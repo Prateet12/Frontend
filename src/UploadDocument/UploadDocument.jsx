@@ -161,7 +161,7 @@ formData.forEach((item)=>{
       .map((kw) => kw.trim())
       .filter(Boolean);
     if (keywordsArray.length < 5) {
-      return "At least 5 keywords are required";
+      return "At least 5 keywords separated by commas are required";
     }
     return true;
   };
@@ -259,7 +259,7 @@ formData.forEach((item)=>{
               <div className="col-lg-12 col-md-12 col-sm-12 col-12">
                 <div>
                   <label>
-                    Keywords (At least 5 keywords are required){" "}
+                    Keywords (Please provide at least 5 keywords separated by commas){" "}
                     <span className="required-field">*</span>
                   </label>
                   <input

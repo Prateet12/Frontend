@@ -212,7 +212,7 @@ const LoginSignup = (props) => {
           <div className="submit-container">
             <MDBBtn className="me-1 submit" type="submit">Login</MDBBtn>
             <MDBBtn className="me-1 submit" onClick={handleRegisterClick}>
-              Register
+              Sign Up
             </MDBBtn>
           </div>
         </form>
