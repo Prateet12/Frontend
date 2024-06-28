@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 
 import { MDBIcon, MDBCollapse } from "mdb-react-ui-kit";
-
 import { BASE_URL } from "../utils/baseUrl";
+
+
 
 function AcademicTable({ searchTerm, selectedFilter }) {
   const [expandedRow, setExpandedRow] = useState(null);
@@ -116,10 +117,12 @@ function AcademicTable({ searchTerm, selectedFilter }) {
               </tr>
             ) : (
               filteredRows.map((row, index) => (
+
+
                 <React.Fragment key={index}>
                   <tr>
-                    {row.id}
 
+                    {row.id}
                     <td>
                       <p className="fw-normal mb-1">{row.title}</p>
                     </td>
@@ -159,7 +162,9 @@ function AcademicTable({ searchTerm, selectedFilter }) {
                     <td>
                       <MDBIcon
                         fas
-                        icon={expandedRow === index ? "caret-up" : "caret-down"}
+                        icon={
+                          expandedRow === index ? "caret-up" : "caret-down"
+                        }
                         onClick={() => toggleRowDetails(index)}
                         style={{
                           cursor: "pointer",
@@ -171,15 +176,16 @@ function AcademicTable({ searchTerm, selectedFilter }) {
                       />
                     </td>
                   </tr>
-
                   {/* Add the additional details here */ expandedRow === row.id}
-
                   <tr
                     style={{
                       display: expandedRow === index ? "table-row" : "none",
                     }}
                   >
                     <td colSpan={9}>
+
+
+
                       <MDBCollapse open={expandedRow === index}>
                         <div className="p-3">
                           <p>

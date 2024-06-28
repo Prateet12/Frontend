@@ -21,6 +21,28 @@ export const getAllUserFiles = async (userId, setRowsState) => {
   }
 };
 
+
+export const fetchfileById = async (fileId) => {
+  try {
+    const response = await fetch(`${BASE_URL}/v1/file/${fileId}`);
+    if (!response.ok) {
+      const data = await response.json();
+      throw new Error(
+        `HTTP error! status: ${response.status}, message: ${data.error}`
+      );
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Failed to fetch file:", error);
+    // You might want to set an error state here to display the error to the user
+  }
+
+}
+
+
+
+
 export const uploadDocument = async (formData) => {
   try {
     const response = await fetch(`${BASE_URL}/v1/file/upload`, {
@@ -46,6 +68,36 @@ export const uploadDocument = async (formData) => {
     console.error("Error:", error);
   }
 };
+
+export const updateDocument = async (formData,id) => {
+  try {
+    const response = await fetch(`${BASE_URL}/v1/file/upload?id=${id}`, {
+      method: "PATCH",
+      body: formData,
+    });
+
+
+    console.log("Response - -----  - -",response);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    if (response.status === 200) {
+      alert("Document updated successfully!");
+      // Reset state after successful upload (optional)
+      return data;
+    } else {
+      alert("Failed to upload document");
+      console.error("Error:", data.error);
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
 
 export const getAllRoles = async (setRoles) => {
   try {

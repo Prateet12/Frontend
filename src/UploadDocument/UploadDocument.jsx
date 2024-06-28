@@ -30,19 +30,19 @@ const UploadDocument = () => {
     formData.append("title", data.Title);
     formData.append("author", data.author);
     formData.append("abstract", data.abstract);
-    formData.append("degree_program", data.degreeProgram);
+    formData.append("degreeProgram", data.degreeProgram);
     for (let file of files) {
       console.log("File:", file);
       formData.append("files", file);
     }
     // Optional Fields:
     formData.append("keywords", data.keywords);
-    formData.append("publication_date", data.publicationDate);
+    formData.append("publication_date", data.publication_date);
     formData.append("institution", data.institution);
     formData.append("department", data.department);
     console.log("Supervisors:", data.supervisors);
-    formData.append("supervisors", JSON.stringify(data.supervisors));
-    formData.append("funding_sources", data.fundingSources);
+    formData.append("supervisors", data.supervisors);
+    formData.append("fundingSources", data.fundingSources);
     formData.append("acknowledgements", data.acknowledgements);
 formData.forEach((item)=>{
   console.log(item);

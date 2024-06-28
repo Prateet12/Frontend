@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate ,useSearchParams} from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import { BASE_URL, HEADER_DATA } from "../utils/baseUrl";
 import 'react-toastify/dist/ReactToastify.css';
 import './reset_password.css'; // Import the CSS file
 import logo from "../Components/Assets/logo.png";
@@ -9,6 +10,10 @@ const ForgotPassword = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get("token"); // Get the value of the "token" parameter
+  // console.log(token);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -24,11 +29,13 @@ const ForgotPassword = () => {
     } else {
       setError('');
       try {
-        const response = await fetch('/api/reset-password', {
+        const response = await fetch(`${BASE_URL}/v1/auth/reset-password`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ password }),
+          body: JSON.stringify({ password ,token}),
         });
+
+        console.log("Response ",response);
 
         if (response.ok) {
           window.alert('Password has been reset successfully. You will be redirected to the login page.');
