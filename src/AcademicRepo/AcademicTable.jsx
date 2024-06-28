@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { MDBIcon, MDBCollapse } from "mdb-react-ui-kit";
 import { BASE_URL } from "../utils/baseUrl";
 
-import { BASE_URL } from "../utils/baseUrl";
+
 
 function AcademicTable({ searchTerm, selectedFilter }) {
   const [expandedRow, setExpandedRow] = useState(null);
