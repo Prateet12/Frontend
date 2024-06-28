@@ -42,6 +42,26 @@ export const fetchfileById = async (fileId) => {
 
 
 
+export const getStats = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}/v1/stats`);
+    if (!response.ok) {
+      const data = await response.json();
+      throw new Error(
+        `HTTP error! status: ${response.status}, message: ${data.error}`
+      );
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Failed to fetch stats:", error);
+    // You might want to set an error state here to display the error to the user
+  }
+
+}
+
+
+
 
 export const uploadDocument = async (formData) => {
   try {
