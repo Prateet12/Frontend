@@ -171,6 +171,21 @@
   margin: 20px auto; /* add this to center the modal horizontally */
 }
 
+.password-input-container {
+  display: flex;
+  align-items: center;
+}
+
+.password-input-container .input_field {
+  flex: 1;
+}
+
+.password-toggle-icon {
+  margin-left: -30px;
+  cursor: pointer;
+}
+
+
 /* Media queries for responsiveness */
 @media (max-width: 768px) {
   .registration-container {

@@ -70,7 +70,8 @@ body {
 }
 
 .logo2 {
-  width: 125px; 
+  
+  width: 160px; 
  
 }
 
@@ -154,6 +155,7 @@ body {
 .login-btn {
   background-color: #e1a02b;
   color: black;
+
 }
 
 .login-btn:hover {

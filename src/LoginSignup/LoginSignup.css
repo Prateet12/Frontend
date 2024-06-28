@@ -193,6 +193,10 @@
   .login {
     max-width: 85% !important;
   }
+
+  .login-btn{
+    padding: 20px;
+  }
 }
 
 /* Media query for larger screens */

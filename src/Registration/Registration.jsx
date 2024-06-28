@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import "./Registration.css";
 import Modal from "@mui/material/Modal";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 const Registration = ({ setLoggedIn }) => {
   const [name, setName] = useState("");
@@ -40,7 +41,12 @@ const Registration = ({ setLoggedIn }) => {
       setShowDropdown(false);
     }
   };
-  
+
+  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
+
+  const handlePasswordVisibilityToggle = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
 
   // const [showModal, setShowModal] = useState(false);
   // const [modalContent, setModalContent] = useState("");
@@ -71,8 +77,6 @@ const Registration = ({ setLoggedIn }) => {
   }, []);
 
   let roleNames = roles.map((role) => role.role);
-
-  
 
   const register = async (formDetails) => {
     if (
@@ -128,8 +132,6 @@ const Registration = ({ setLoggedIn }) => {
     }
   };
 
-  
-
   const [showGraduateOptions, setShowGraduateOptions] = useState(false);
   const [showResearcherOptions, setShowResearcherOptions] = useState(false);
   const [showPractitionerOptions, setShowPractitionerOptions] = useState(false);
@@ -173,9 +175,8 @@ const Registration = ({ setLoggedIn }) => {
     setShowInstituteOptions(role === "institution admin");
     setShowAssistantOptions(role === "research assistant");
     setShowProfessorOptions(role === "professor");
-    
   };
-  
+
   const [showDropdown, setShowDropdown] = useState(false);
 
   const handleDropdownToggle = () => {
@@ -185,7 +186,6 @@ const Registration = ({ setLoggedIn }) => {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
-
 
   const roleDescriptions = {
     "institution admin":
@@ -206,13 +206,11 @@ const Registration = ({ setLoggedIn }) => {
     } else {
       document.removeEventListener("click", handleClickOutside);
     }
-  
+
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, [showDropdown]);
-  
-  
 
   return (
     <div className="container landingpage" id="registration">
@@ -232,11 +230,12 @@ const Registration = ({ setLoggedIn }) => {
 
         <div className="form">
           <div className="form-group">
-          <div
-  className={`dropdown-container ${showDropdown ? "dropdown-open" : ""}`}
-  ref={dropdownRef}
->
-
+            <div
+              className={`dropdown-container ${
+                showDropdown ? "dropdown-open" : ""
+              }`}
+              ref={dropdownRef}
+            >
               <div
                 className="dropdown-toggle click-dropdown"
                 onClick={handleDropdownToggle}
@@ -253,7 +252,7 @@ const Registration = ({ setLoggedIn }) => {
                             <a
                               href="#"
                               onClick={(e) => {
-                                e.preventDefault()
+                                e.preventDefault();
                                 handleRoleChange(roleName);
                                 //setShowDropdown(false);
                               }}
@@ -269,8 +268,8 @@ const Registration = ({ setLoggedIn }) => {
                               />
                             </a>
                             {selectedRole === roleName && (
-                            <p>{roleDescriptions[roleName]}</p>
-                          )}
+                              <p>{roleDescriptions[roleName]}</p>
+                            )}
                           </li>
                         )
                     )}
@@ -279,9 +278,6 @@ const Registration = ({ setLoggedIn }) => {
               )}
             </div>
           </div>
-
-
-          
 
           <div className="form-group">
             <label htmlFor="Name">Enter your full name</label>
@@ -318,14 +314,21 @@ const Registration = ({ setLoggedIn }) => {
 
           <div className="form-group">
             <label htmlFor="password">Enter your password</label>
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={handlePasswordChange}
-              className="input_field"
-              required
-            />
+            <div className="password-input-container">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="input_field"
+                required
+              />
+              <FontAwesomeIcon
+                icon={showPassword ? faEyeSlash : faEye}
+                onClick={handlePasswordVisibilityToggle}
+                className="password-toggle-icon"
+              />
+            </div>
           </div>
 
           <div className="form-group">
@@ -382,7 +385,6 @@ const Registration = ({ setLoggedIn }) => {
           )}
         </div>
       </div>
-
     </div>
   );
 };

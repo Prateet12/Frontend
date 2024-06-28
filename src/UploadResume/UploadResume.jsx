@@ -89,7 +89,7 @@ const UploadResume = () => {
             </Box>
           </CardContent>
           <CardActions sx={{ justifyContent: "center" }}>
-            <Button size="small" variant="contained" type="submit">
+            <Button size="small" variant="contained" type="submit" className="resume_submit">
               Submit
             </Button>
           </CardActions>

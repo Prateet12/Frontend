@@ -75,7 +75,7 @@ const UploadBestPractices = () => {
   const [allFieldsFilled, setAllFieldsFilled] = useState(false);
   const [sector, setSector] = useState("");
   const [keywordMessage, setKeywordMessage] = useState(
-    "At least 5 keywords are required"
+    "At least 5 keywords separated by commas are required"
   );
 
   const validateKeywords = (value) => {
@@ -84,7 +84,7 @@ const UploadBestPractices = () => {
       .map((kw) => kw.trim())
       .filter(Boolean);
     if (keywordsArray.length < 5) {
-      setKeywordMessage("At least 5 keywords are required");
+      setKeywordMessage("At least 5 keywords separated by commas are required");
       return false;
     } else {
       setKeywordMessage("");
@@ -120,7 +120,7 @@ const UploadBestPractices = () => {
     e.preventDefault();
 
     if (!validateKeywords(keywords)) {
-      alert("At least 5 keywords are required.");
+      alert("At least 5 keywords separated by commas are required.");
       return;
     }
 
@@ -250,7 +250,7 @@ const UploadBestPractices = () => {
           </div>
           <div className="form-group">
             <label htmlFor="keywords">
-              Keywords (At least 5 keywords required){" "}
+              Keywords (Please provide at least 5 keywords separated by commas){" "}
               <span className="required">*</span>
             </label>
             <input

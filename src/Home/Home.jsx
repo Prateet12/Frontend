@@ -47,7 +47,7 @@ const Home = () => {
             <h1>WELCOME TO UDAY</h1>
             <h4>A one-stop destination for thesis and synopsis.</h4>
             <button className="login-btn" onClick={redirectToLogin}>
-                    Login/Signup
+                   <span> Login  /  </span><span> Signup </span>
                   </button>
           </div>
         </div>
