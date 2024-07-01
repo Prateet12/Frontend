@@ -17,6 +17,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { getAllRoles } from "../utils/apiUtils";
 import "./UserApproval.css";
+import { BASE_URL } from "../utils/baseUrl";
 
 // UserDetailsModal component
 function UserDetailsModal({ open, handleClose, user }) {
@@ -224,7 +225,7 @@ const UserApproval = (props) => {
     console.log("adminId and userId: ", adminId + " ", userId);
     try {
       const response = await fetch(
-        "${BASE_URL}/v1/admin/approveRegistration",
+        `${BASE_URL}/v1/admin/approveRegistration`,
         {
           method: "POST",
           headers: {
@@ -255,7 +256,7 @@ const UserApproval = (props) => {
     console.log("adminId and userId: ", adminId + " ", userId);
     try {
       const response = await fetch(
-        "${BASE_URL}/v1/admin/rejectRegistration",
+         `${BASE_URL}/v1/admin/rejectRegistration`,
         {
           method: "POST",
           headers: {

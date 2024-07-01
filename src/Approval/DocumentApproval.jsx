@@ -14,6 +14,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import { BASE_URL } from "../utils/baseUrl";
 
 
 import {
@@ -30,7 +31,7 @@ import {
   MDBIcon,
   MDBCardFooter,
 } from "mdb-react-ui-kit";
-import { BASE_URL } from "../utils/baseUrl";
+
 
 const style = {
   position: "absolute",
@@ -198,7 +199,7 @@ export default function DocumentApproval(props) {
   const handleApprove = async (row) => {
     await handleDocument(
       row,
-      "${BASE_URL}/v1/admin/approveUpload",
+      `${BASE_URL}/v1/admin/approveUpload`,
       "Document approved successfully!",
       "Failed to approve document"
     );
@@ -208,7 +209,7 @@ export default function DocumentApproval(props) {
   const handleReject = (row) => {
     handleDocument(
       row,
-      "${BASE_URL}/v1/admin/rejectUpload",
+      `${BASE_URL}/v1/admin/rejectUpload`,
       "Document rejected successfully!",
       "Failed to reject document"
     );
