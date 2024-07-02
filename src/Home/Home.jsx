@@ -91,8 +91,11 @@ const Home = () => {
             <div className="footer-info">
               <div className="footer-contact">
                 <h4>Contact Us</h4>
-                <p>Email: information@uday.com</p>
-                <p>Phone: +1 (123) 456-7890</p>
+                <span className="footer_details">Email:</span>uday@gmail.com
+                <div>
+                <span className="footer_details">Phone:</span> 12345-67890
+                </div>
+               
               </div>
               <div className="footer-follow">
                 <h4>Follow Us</h4>

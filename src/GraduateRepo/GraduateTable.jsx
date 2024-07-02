@@ -96,7 +96,7 @@ export default function GraduateTable({ searchTerm, selectedFilter }) {
             <tr>
               <th onClick={() => handleSort("name")}>Name</th>
               <th onClick={() => handleSort("institution_name")}>Organization</th>
-              <th onClick={() => handleSort("role")}>Position</th>
+              <th onClick={() => handleSort("role")}>Role</th>
               <th onClick={() => handleSort("field_of_study")}>Specialization</th>
               <th onClick={() => handleSort("joinDate")}>Date of Joining</th>
               <th></th>
