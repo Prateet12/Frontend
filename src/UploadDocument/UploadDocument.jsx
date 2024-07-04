@@ -37,7 +37,7 @@ const UploadDocument = () => {
     }
     // Optional Fields:
     formData.append("keywords", data.keywords);
-    formData.append("publication_date", data.publication_date);
+    formData.append("publication_date", data.publicationDate);
     formData.append("institution", data.institution);
     formData.append("department", data.department);
     console.log("Supervisors:", data.supervisors);
