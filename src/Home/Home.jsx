@@ -80,12 +80,13 @@ const Home = () => {
 
             <div className="right-section col-lg-6">
               <div className="about-img">
-                <div className="box box1" onClick={redirectToAcademicRepo}>Thesis: 33</div>
-                <div className="box box2" onClick={redirectToAcademicRepo}>Synopsis: 45</div>
+                <div className="box box1" onClick={redirectToAcademicRepo}>Thesis:33</div>
+                <div className="box box2" onClick={redirectToAcademicRepo}>Synopsis:45</div>
               </div>
               <div className="about-img">
-                <div className="box box3" onClick={redirectToAcademicRepo}>Institutes: 15</div>
-                <div className="box box4" onClick={redirectToBestPractices}>Best Practices: 3</div>
+                <div className="box box3" onClick={redirectToAcademicRepo}>Institutes:15</div>
+                <div className="box box4" onClick={redirectToBestPractices}>
+                  <div className="best_center">Best Practices:3</div></div>
               </div>
             </div>
           </div>

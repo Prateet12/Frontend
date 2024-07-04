@@ -186,8 +186,8 @@ body {
 }
 
 .box {
-  width: 175px;
-  height: 175px;
+  width: 185px;
+  height: 185px;
   background-color: #f9f9f9;
   display: flex;
   align-items: center;
@@ -216,7 +216,26 @@ body {
 .box4 {
   background-color: #c1dfc4;
   border: 7px solid rgb(5, 133, 5);
+  margin-right: 50px;
+  margin-bottom: 40px;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    text-align: center;
+  
+  
+  
 }
+
+/* .best_center{
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+} */
+
 
 .box2 {
   background-color: aliceblue;
