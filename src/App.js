@@ -108,8 +108,7 @@ function App() {
                 />
                 <Route
                   path="/academic-repo"
-                  element={loggedIn ? <AcademicRepo /> : <Navigate to="/" />}
-                />
+                  element={ <AcademicRepo /> }  />
                 <Route path="/registration" element={<Registration />} />
                 <Route
                   path="/graduate-repo"
@@ -154,12 +153,9 @@ function App() {
                   }
                 />
 
-                <Route
-                  path="/bestPractices"
-                  element={
-                    loggedIn ? <BestPractices /> : <Navigate to="/" />
-                  }
-                />
+                <Route path="/bestPractices" element={<BestPractices />}   />
+                  
+               
 
                 <Route
                   path="/logout"

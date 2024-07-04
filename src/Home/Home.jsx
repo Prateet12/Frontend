@@ -16,6 +16,16 @@ const Home = () => {
     navigate("/login-signup");
   };
 
+  const redirectToAcademicRepo = () => {
+    console.log("hello from academic repository");
+    navigate("/academic-repo");
+  };
+
+  const redirectToBestPractices = () => {
+    console.log("Hello from best practices")
+    navigate("/bestPractices");
+  };
+
   return (
     <div>
       <div className="main" id="home">
@@ -47,8 +57,8 @@ const Home = () => {
             <h1>WELCOME TO UDAY</h1>
             <h4>A one-stop destination for thesis and synopsis.</h4>
             <button className="login-btn" onClick={redirectToLogin}>
-                   <span> Login  /  </span><span> Signup </span>
-                  </button>
+              <span>Login /</span> <span>Signup</span>
+            </button>
           </div>
         </div>
       </div>
@@ -56,26 +66,26 @@ const Home = () => {
       {/* About Section */}
       <div className="about-home" id="about">
         <div className="container-fluid">
-          <div className="row align-items-center ">
+          <div className="row align-items-center">
             <div className="left-section col-lg-6">
               <div className="education-header text-left">
                 <h2 className="about_heading">ABOUT US</h2>
               </div>
               <div className="about-text">
                 <p>
-                At the Urban Development Alliance for the Youth (UDAY) platform, we unite the strengths of the quadruple helix: academia, industry, government, and civil society to combat climate change impacts in cities. Our goal is for the youth to inherit a sustainable, robust, and resilient urban India. We recognize that solutions for climate challenges often exist within academia and industry but fail to reach where needed due to communication gaps, lack of collaboration, and inadequate knowledge dissemination. UDAY bridges this gap by aggregating demand and supply, facilitating the flow of innovative solutions to urban environments. By fostering collaboration among diverse stakeholders, we drive impactful climate action and sustainable urban development.
+                  At the Urban Development Alliance for the Youth (UDAY) platform, we unite the strengths of the quadruple helix: academia, industry, government, and civil society to combat climate change impacts in cities. Our goal is for the youth to inherit a sustainable, robust, and resilient urban India. We recognize that solutions for climate challenges often exist within academia and industry but fail to reach where needed due to communication gaps, lack of collaboration, and inadequate knowledge dissemination. UDAY bridges this gap by aggregating demand and supply, facilitating the flow of innovative solutions to urban environments. By fostering collaboration among diverse stakeholders, we drive impactful climate action and sustainable urban development.
                 </p>
               </div>
             </div>
 
             <div className="right-section col-lg-6">
               <div className="about-img">
-                <div className="box box1">Thesis: 33</div>
-                <div className="box box2">Synopsis: 45</div>
+                <div className="box box1" onClick={redirectToAcademicRepo}>Thesis: 33</div>
+                <div className="box box2" onClick={redirectToAcademicRepo}>Synopsis: 45</div>
               </div>
               <div className="about-img">
-                <div className="box box3">Institutes: 15</div>
-                <div className="box box4">Members: 60</div>
+                <div className="box box3" onClick={redirectToAcademicRepo}>Institutes: 15</div>
+                <div className="box box4" onClick={redirectToBestPractices}>Best Practices: 3</div>
               </div>
             </div>
           </div>
@@ -93,9 +103,8 @@ const Home = () => {
                 <h4>Contact Us</h4>
                 <span className="footer_details">Email:</span>uday@gmail.com
                 <div>
-                <span className="footer_details">Phone:</span> 12345-67890
+                  <span className="footer_details">Phone:</span> 12345-67890
                 </div>
-               
               </div>
               <div className="footer-follow">
                 <h4>Follow Us</h4>
