@@ -22,6 +22,9 @@ import UploadBestPractices from "./BestPractices/UploadBestPractices";
 import BestPractices from "./BestPractices/BestPractices";
 import ResetPassword from "./ResetPassword/reset_password";
 import EditDocument from "./UploadDocument/EditDocument";
+import ThesisPage from "./landingPages/thesis.jsx";
+import InstitutePage from "./landingPages/institute.jsx";
+import SynopsisPage from "./landingPages/synopsis.jsx"
 
 
 function App() {
@@ -154,8 +157,10 @@ function App() {
                 />
 
                 <Route path="/bestPractices" element={<BestPractices />}   />
-                  
-               
+
+                <Route path="/thesis-page" element={<ThesisPage />}   />
+                <Route path="/institute-page" element={<InstitutePage />}   />
+                <Route path="/synopsis-page" element={<SynopsisPage/>}   />
 
                 <Route
                   path="/logout"

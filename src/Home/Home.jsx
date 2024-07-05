@@ -21,6 +21,10 @@ const Home = () => {
     navigate("/academic-repo");
   };
 
+  const redirectToInstitute=()=>{
+    navigate("/institute-page");
+  }
+
   const redirectToBestPractices = () => {
     console.log("Hello from best practices")
     navigate("/bestPractices");
@@ -84,7 +88,7 @@ const Home = () => {
                 <div className="box box2" onClick={redirectToAcademicRepo}>Synopsis:45</div>
               </div>
               <div className="about-img">
-                <div className="box box3" onClick={redirectToAcademicRepo}>Institutes:15</div>
+                <div className="box box3" onClick={redirectToInstitute}>Institutes:15</div>
                 <div className="box box4" onClick={redirectToBestPractices}>
                   <div className="best_center">Best Practices:3</div></div>
               </div>
