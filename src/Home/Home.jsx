@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { getStats } from "../utils/apiUtils";
 import "./Home.css"; // Importing CSS for styling
 import dummyVideo from "./dummy_video.mp4"; // Importing the video file
 import logo1 from "./logo1.png";
 import logo2 from "./idfcLogo.png";
-import { useNavigate } from "react-router-dom";
 import twitter from "./twitter.png";
 import facebook from "./facebook.png";
 import youtube from "./youtube.png";
@@ -11,22 +12,30 @@ import instagram from "./instagram.png";
 
 const Home = () => {
   const navigate = useNavigate();
+  const [stats, setStats] = useState({});
+
+  const fetchStats = async () => {
+    const stats = await getStats();
+    setStats(stats);
+  };
+
+  useEffect(() => {
+    fetchStats();
+  }, []);
 
   const redirectToLogin = () => {
     navigate("/login-signup");
   };
 
   const redirectToAcademicRepo = () => {
-    console.log("hello from academic repository");
     navigate("/academic-repo");
   };
 
-  const redirectToInstitute=()=>{
+  const redirectToInstitute = () => {
     navigate("/institute-page");
-  }
+  };
 
   const redirectToBestPractices = () => {
-    console.log("Hello from best practices")
     navigate("/bestPractices");
   };
 
@@ -42,14 +51,11 @@ const Home = () => {
 
         <div className="top-section">
           <div className="container-fluid">
-            <div className="row align-items-center justify-content-between ">
+            <div className="row align-items-center justify-content-between">
               <div className="d-flex align-items-center">
                 <img src={logo1} alt="logo" className="logo1" />
                 <div className="right">
                   <img src={logo2} alt="logo2" className="logo2" />
-                  {/* <button className="login-btn" onClick={redirectToLogin}>
-                    Login/Signup
-                  </button> */}
                 </div>
               </div>
             </div>
@@ -88,9 +94,10 @@ const Home = () => {
                 <div className="box box2" onClick={redirectToAcademicRepo}>Synopsis:45</div>
               </div>
               <div className="about-img">
-                <div className="box box3" onClick={redirectToInstitute}>Institutes:15</div>
+                <div className="box box3" onClick={redirectToInstitute}>Institutes:{stats.institutes}</div>
                 <div className="box box4" onClick={redirectToBestPractices}>
-                  <div className="best_center">Best Practices:3</div></div>
+                  <div className="best_center">Best Practices:3</div>
+                </div>
               </div>
             </div>
           </div>

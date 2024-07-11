@@ -104,11 +104,11 @@ const Institute = () => {
               </MDBBtn>
             </form>
             <MDBBtn className="upload_button" onClick={redirectToRegister}>
-              Login-Signup
+              Login / Signup
             </MDBBtn>
           </div>
-        </div>
-        <section className="mt-5">
+    
+        <section className="mt-5 ">
           <div className="rounded-2 overflow-hidden">
             <table className="table table-striped">
               <thead>
@@ -140,6 +140,7 @@ const Institute = () => {
             </table>
           </div>
         </section>
+        </div>
       </MDBContainer>
     </div>
   );
